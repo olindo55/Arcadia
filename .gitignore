@@ -1,0 +1,7 @@
+# Ignorer tous les fichiers .log
+*.log
+
+# Ignorer ces dossiers :
+/Design
+/Documentation
+/ECF
