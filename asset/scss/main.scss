@@ -1,2 +1,205 @@
 @import url("../../node_modules/bootstrap-icons/font/bootstrap-icons.css");
 @import 'custom';
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+header {
+    width: 100%;
+    
+    background-color: $primary;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    // padding: 3px 13px;
+    color: $light;
+    a{
+        text-decoration: none;
+        color: $light;
+    }
+}
+.main-nav{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#logo {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    // color: $light;
+    img{
+        width: 42px;
+        height: 42px;
+    }
+    h1 {
+        margin-top: 7px;
+        padding-left: 5px;
+        font-size: 16px;
+    }
+    h2 {
+        margin-top: -10px ;
+        padding-left: 11px;
+        font-size: 11px;
+        text-shadow: 0px 4px 4px #00000025;
+    }
+}
+
+nav ul {
+    color: $light;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    .active{
+        border-bottom: 3px solid $light;
+    }
+}
+nav li {
+    // margin: 0px 20px;
+    padding: 20px;
+
+
+}
+#nav-buttons {
+    display: flex;
+    align-items: center;
+    display: none;
+    white-space: nowrap;
+}
+
+#button-login{
+    background-color: $light;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#button-login:hover{
+    background-color: $dark;
+    i {
+        color: $light !important;
+    }
+    transition: all 0.3s;
+}
+
+.my-burger-button{
+    padding-right: 10px;
+}
+
+.my-burger-menu{
+    width: 100%;
+    height: 0;
+    background-color: $primary;
+    opacity: 80%;
+    // backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: height 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    
+    li {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+    li:hover{
+        background-color: $secondary;
+        border-radius: 3px;
+        transition: all 0.3s;
+    }
+    li:hover a {
+        color: $dark;
+        transition: all 0.3s;
+    }
+    ul {
+        padding-bottom: 15px;
+        padding-left: 0px;
+    }
+    ul .active{
+        text-decoration: underline;
+    }
+    .my-divider{
+        border-top: $light solid 1px;
+        width: 40%;
+        margin: 25px auto;
+    } 
+    // button {
+    //     height:50px
+    // }
+}
+.my-burger-menu.open{
+    height: 350px; 
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+nav {
+    display: none;
+}
+
+// @media (min-width: 993px) {  //(min-width: 993px)
+//     header {
+//         height: 120px;
+//     }
+//     .my-burger-menu{
+//         display: none;
+//     }
+//     #logo {
+//         flex-wrap: nowrap;
+//         img{
+//             width: 100px;
+//             height: 100px;
+//         }
+//         h1 {
+//             padding-left: 5px;
+//             font-size: 36px;
+//         }
+//         h2 {
+//             padding-left: 24px;
+//             font-size: 24px;
+//             white-space: nowrap;
+//         }
+//     }
+//     nav{
+//         display: flex;
+//         ul{
+//             margin: 20px;
+//         }
+//         li {
+//             display: flex;
+//             text-align: center;
+//             align-items: center;
+//             padding: 10px;
+//         }
+//         li:hover{
+//             background-color: $secondary;
+//             border-radius: 3px;
+//             transition: all 0.3s;
+//         }
+//         li:hover a {
+//             color: $dark;
+//             transition: all 0.3s;
+//         }
+
+//     }
+//     .bi-list{
+//         display: none;
+//     }
+//     #nav-buttons{
+//         display: flex;
+//     }
+// }
+
