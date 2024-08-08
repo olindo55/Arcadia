@@ -3,21 +3,20 @@
 *{
     margin: 0;
     padding: 0;
-    text-decoration: none;
+    // text-decoration: none;
     list-style-type: none;
 }
 
+// Header
 header {
     width: 100%;
-    
     background-color: $primary;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    // padding: 3px 13px;
     color: $light;
-    a{
+    a {
         text-decoration: none;
         color: $light;
     }
@@ -27,13 +26,13 @@ header {
     height: 50px;
     display: flex;
     justify-content: space-between;
+    padding-right: 20px;
+    padding-left: 15px;
 }
 
 #logo {
     display: flex;
     align-items: center;
-    padding-left: 10px;
-    // color: $light;
     img{
         width: 42px;
         height: 42px;
@@ -62,10 +61,7 @@ nav ul {
     }
 }
 nav li {
-    // margin: 0px 20px;
     padding: 20px;
-
-
 }
 #nav-buttons {
     display: flex;
@@ -76,8 +72,8 @@ nav li {
 
 #button-login{
     background-color: $light;
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -100,7 +96,6 @@ nav li {
     height: 0;
     background-color: $primary;
     opacity: 80%;
-    // backdrop-filter: blur(10px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -136,9 +131,6 @@ nav li {
         width: 40%;
         margin: 25px auto;
     } 
-    // button {
-    //     height:50px
-    // }
 }
 .my-burger-menu.open{
     height: 350px; 
@@ -150,56 +142,183 @@ nav {
     display: none;
 }
 
-// @media (min-width: 993px) {  //(min-width: 993px)
-//     header {
-//         height: 120px;
-//     }
-//     .my-burger-menu{
-//         display: none;
-//     }
-//     #logo {
-//         flex-wrap: nowrap;
-//         img{
-//             width: 100px;
-//             height: 100px;
-//         }
-//         h1 {
-//             padding-left: 5px;
-//             font-size: 36px;
-//         }
-//         h2 {
-//             padding-left: 24px;
-//             font-size: 24px;
-//             white-space: nowrap;
-//         }
-//     }
-//     nav{
-//         display: flex;
-//         ul{
-//             margin: 20px;
-//         }
-//         li {
-//             display: flex;
-//             text-align: center;
-//             align-items: center;
-//             padding: 10px;
-//         }
-//         li:hover{
-//             background-color: $secondary;
-//             border-radius: 3px;
-//             transition: all 0.3s;
-//         }
-//         li:hover a {
-//             color: $dark;
-//             transition: all 0.3s;
-//         }
+// Footer
+footer{
+    display: flex;
+    flex-direction: column;
+    background-color: $dark;
+    color: $light;
+    padding-top: 30px;
 
-//     }
-//     .bi-list{
-//         display: none;
-//     }
-//     #nav-buttons{
-//         display: flex;
-//     }
-// }
+    #my-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+        #opening-title{
+            text-align: center;
+            font-size: 20px;
+            padding-bottom: 10px;
+        }
+        #opening-time{
+            display: flex;
+            justify-content: center;
+            padding-bottom: 60px;
+            font-family: $font-content;
+            #day, #opening-hours {
+                display: flex;
+                flex-direction: column;
+                padding: 0 5px
+            }
+            #day{
+                text-align: right;
+            }
+        }
+    
+        address{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            h3{
+                font-size: 24px;
+            }
+            #adress{
+                text-align: center;
+                padding-bottom: 20px;
+                font-family: $font-content;
+            }
+    
+            .btn{
+                margin-bottom: 25px;
+                font-family: $font-content;
+            }
+    
+        }
+        #social-network{
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 30px;
+            #title-social{
+                text-align: center;
+                font-weight: 600;
+            }
+    
+            #icons-social{
+                display: flex;
+                justify-content: space-evenly;
+                i{
+                    font-size: 30px;
+                    color: $light;
+                }
+                i:hover{
+                    color: $secondary;
+                }
+            }
+
+        }
+    }
+    
+    #copyright{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 20px;
+        font-family: $font-content;
+        a{
+            color: $light;
+        }
+    }
+}
+
+// Responsive 
+@media (min-width: 769px) { 
+    //header
+    header{
+        .main-nav {
+            height: 120px;
+        }    
+        .my-burger-menu{
+            display: none;
+        }
+        .my-burger-button{
+            display: none;
+        }
+    
+        #logo {
+            flex-wrap: nowrap;
+            img{
+                width: 100px;
+                height: 100px;
+            }
+            h1 {
+                padding-left: 5px;
+                font-size: 36px;
+            }
+            h2 {
+                padding-left: 24px;
+                font-size: 24px;
+                white-space: nowrap;
+            }
+        }
+        nav{
+            display: flex;
+            align-items: center;
+            ul{
+                // margin: 20px;
+                height: 40px;
+            }
+            li {
+                display: flex;
+                text-align: center;
+                align-items: center;
+                padding: 8px;
+    
+            }
+            li:hover {
+                background-color: $secondary;
+                border-radius: 3px;
+                transition: all 0.3s;
+            }
+            li:hover a {
+                color: $dark;
+                transition: all 0.3s;
+            }
+    
+        }
+        .bi-list{
+            display: none;
+        }
+        #nav-buttons{
+            display: flex;
+            gap: 20px;
+        }
+    }
+    
+    //footer
+    footer{
+        #my-container{
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: start;
+
+            #opening-time{
+                padding-bottom: 10px;
+            }
+
+            #adress div{
+                padding-bottom: 10px;
+            }
+
+            #social-network{
+                align-self: center;
+            }
+        } 
+
+        #copyright{
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 0 20px;
+        }
+    }   
+}
 
