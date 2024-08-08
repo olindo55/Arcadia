@@ -14,20 +14,48 @@
 </head>
 <body>
     <header>
-        <div id="logo">
-            <a href="./asset/images/logo/print_primary.png" alt="Logo du Zoo Arcadia représentant une empreinte de mammifère"></a>
-            <h1>Zoo Arcadia</h1>
-            <h2>pour la Faune, par Nature</h2>
+        <div class="main-nav">
+            <div id="logo">
+                <img src="./asset/images/logo/print_dark.png" alt="Logo du Zoo Arcadia représentant une empreinte de mammifère"></img>
+                <div>
+                    <h1>Zoo Arcadia</h1>
+                    <h2>pour la Faune, par Nature</h2>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active"><a href="#">Accueil</a></li>
+                    <li><a href="#">Nos animaux et leurs habitats</a></li>
+                    <li><a href="#">Services</a></li>
+                </ul>
+            </nav>
+            <div id="nav-buttons">
+                <button class="btn btn-secondary rounded-5"><i class="bi bi-envelope"></i> Contactez-nous</button>
+                <div id="button-login">
+                    <i class="bi bi-person text-dark" style="font-size: 45px"></i>
+                </div>   
+            </div>
+            <div class="my-burger-button">
+                <i class="bi bi-list text-light" style="font-size: 33px"></i> <!-- burger icon -->
+            </div>
         </div>
-        <nav>
+        
+        <!-- start burger menu-->
+        <div class="my-burger-menu">
             <ul>
-                <li>Accueil</li>
-                <li>Nos animaux et leurs habitats</li>
-                <li>Services</li>
+                <li class="active"><a href="#">Accueil</a></li>
+                <li><a href="#">Nos animaux et leurs habitats</a></li>
+                <li><a href="#">Services</a></li>
             </ul>
-        </nav>
-        <button class="btn btn-secondary"><i class="bi bi-envelope"></i> Contactez-nous</button>
-        <i class="bi bi-person-circle"></i>
+            <button class="btn btn-secondary rounded-5 d-flex align-items-center justify-content-center">
+                <i class="bi bi-envelope me-2"></i> Contactez-nous
+            </button>
+            <div class="my-divider"></div>
+            <div id="button-login">
+                <i class="bi bi-person text-dark" style="font-size: 45px"></i>
+            </div> 
+        </div>
+        <!-- end burger menu-->
     </header>
 
     <main id="main-page">
@@ -35,66 +63,71 @@
     </main>
 
     <footer>
-        <div id="opening">
-            <div id="opening-title">Horaires d'ouverture</div>
-            <div class="day">
-                <p>Lundi :</p>
-                <p>Fermeture</p>
+        <div id="my-container">
+            <div id="opening">
+                <div id="opening-title">Horaires d'ouverture</div>
+                <div id="opening-time">
+                    <div id="day">
+                        <div>Lundi :</div>
+                        <div>Mardi :</div>
+                        <div>Mercredi :</div>
+                        <div>Jeudi :</div>
+                        <div>vendredi :</div>
+                        <div>Samedi :</div>
+                        <div>Dimanche :</div>
+                    </div>
+                    <div id="opening-hours">
+                        <div>Fermeture</div>
+                        <div>09h00 - 18h00</div>
+                        <div>09h00 - 18h00</div>
+                        <div>09h00 - 18h00</div>
+                        <div>09h00 - 18h00</div>
+                        <div>09h00 - 18h00</div>
+                        <div>09h00 - 18h00</div>
+                    </div>
+                </div>
             </div>
-            <div class="day">
-                <p>Mardi :</p>
-                <p>09h00 - 18h00</p>
-            </div>
-            <div class="day">
-                <p>Mercredi :</p>
-                <p>09h00 - 18h00</p>
-            </div>
-            <div class="day">
-                <p>Jeudi :</p>
-                <p>09h00 - 18h00</p>
-            </div>
-            <div class="day">
-                <p>Vendredi :</p>
-                <p>09h00 - 18h00</p>
-            </div>
-            <div class="day">
-                <p>Samedi :</p>
-                <p>09h00 - 18h00</p>
-            </div>
-            <div class="day">
-                <p>Dimanche :</p>
-                <p>09h00 - 18h00</p>
-            </div>
-        </div>
-        
-        <address>
-            <p>Zoo Arcadia</p>
-            <div id="adress">
-                <p>18, route de Merlin l’enchanteur</p>
-                <p>Forêt de Brocéliande</p>
-                <p>35380 Paimpont, France</p>
-            </div>
-            <button class="btn btn-secondary"><i class="bi bi-envelope"></i> Contactez-nous</button>
-        </address>
-
-        <div id="social-network">
-            <div id="title-social">Retrouvez nous aussi sur :</div>
-            <div id="icons-social">
-                <i class="bi bi-facebook"></i>
-                <i class="bi bi-snapchat"></i>
-                <i class="bi bi-instagram"></i>
+            
+            <address>
+                <h3>Zoo Arcadia</h3>
+                <div id="adress">
+                    <div>18, route de Merlin l’enchanteur</div>
+                    <div>Forêt de Brocéliande</div>
+                    <div>35380 Paimpont, France</div>
+                </div>
+                <button class="btn btn-secondary rounded-5 d-flex align-items-center justify-content-center">
+                    <i class="bi bi-envelope me-2"></i> Contactez-nous
+                </button>
+            </address>
+    
+            <div id="social-network">
+                <div id="title-social">Retrouvez nous aussi sur :</div>
+                <div id="icons-social">
+                    <a href="http://facebook.com/" target="_blank"><i class="bi bi-facebook"></i></a>
+                    <a href="http://snapchat.com/" target="_blank"><i class="bi bi-snapchat"></i></a>
+                    <a href="http://instagram.com/" target="_blank"><i class="bi bi-instagram"></i></a>
+                </div>
             </div>
         </div>
 
-        <div class="copyright">
-            <p>© Zoo Arcadia 2024</p>
-            <p>Politique de gestion des cookies</p>
-
-
+        <div id="copyright">
+            <div>© Zoo Arcadia 2024</div>
+            <a href="#">Politique de gestion des cookies</a>
         </div>
     </footer>
     
     <!-- Bootstrap -->
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Burger Menu -->
+    <script>
+        const burgerMenuButton = document.querySelector('.my-burger-button')
+        const burgerMenuButtonIcon = document.querySelector('.my-burger-button i')
+        const burgerMenu = document.querySelector('.my-burger-menu')
+        burgerMenuButton.onclick = function(){
+            burgerMenu.classList.toggle('open')
+            const isOpen = burgerMenu.classList.contains('open')
+            burgerMenuButtonIcon.classList = isOpen ? 'bi bi-x text-light' : 'bi bi-list text-light'
+        }
+    </script>
 </body>
 </html>

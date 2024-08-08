@@ -1,2 +1,324 @@
 @import url("../../node_modules/bootstrap-icons/font/bootstrap-icons.css");
 @import 'custom';
+*{
+    margin: 0;
+    padding: 0;
+    // text-decoration: none;
+    list-style-type: none;
+}
+
+// Header
+header {
+    width: 100%;
+    background-color: $primary;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    color: $light;
+    a {
+        text-decoration: none;
+        color: $light;
+    }
+}
+.main-nav{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+    padding-left: 15px;
+}
+
+#logo {
+    display: flex;
+    align-items: center;
+    img{
+        width: 42px;
+        height: 42px;
+    }
+    h1 {
+        margin-top: 7px;
+        padding-left: 5px;
+        font-size: 16px;
+    }
+    h2 {
+        margin-top: -10px ;
+        padding-left: 11px;
+        font-size: 11px;
+        text-shadow: 0px 4px 4px #00000025;
+    }
+}
+
+nav ul {
+    color: $light;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    .active{
+        border-bottom: 3px solid $light;
+    }
+}
+nav li {
+    padding: 20px;
+}
+#nav-buttons {
+    display: flex;
+    align-items: center;
+    display: none;
+    white-space: nowrap;
+}
+
+#button-login{
+    background-color: $light;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#button-login:hover{
+    background-color: $dark;
+    i {
+        color: $light !important;
+    }
+    transition: all 0.3s;
+}
+
+.my-burger-button{
+    padding-right: 10px;
+}
+
+.my-burger-menu{
+    width: 100%;
+    height: 0;
+    background-color: $primary;
+    opacity: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: height 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    
+    li {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+    li:hover{
+        background-color: $secondary;
+        border-radius: 3px;
+        transition: all 0.3s;
+    }
+    li:hover a {
+        color: $dark;
+        transition: all 0.3s;
+    }
+    ul {
+        padding-bottom: 15px;
+        padding-left: 0px;
+    }
+    ul .active{
+        text-decoration: underline;
+    }
+    .my-divider{
+        border-top: $light solid 1px;
+        width: 40%;
+        margin: 25px auto;
+    } 
+}
+.my-burger-menu.open{
+    height: 350px; 
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+nav {
+    display: none;
+}
+
+// Footer
+footer{
+    display: flex;
+    flex-direction: column;
+    background-color: $dark;
+    color: $light;
+    padding-top: 30px;
+
+    #my-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+        #opening-title{
+            text-align: center;
+            font-size: 20px;
+            padding-bottom: 10px;
+        }
+        #opening-time{
+            display: flex;
+            justify-content: center;
+            padding-bottom: 60px;
+            font-family: $font-content;
+            #day, #opening-hours {
+                display: flex;
+                flex-direction: column;
+                padding: 0 5px
+            }
+            #day{
+                text-align: right;
+            }
+        }
+    
+        address{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            h3{
+                font-size: 24px;
+            }
+            #adress{
+                text-align: center;
+                padding-bottom: 20px;
+                font-family: $font-content;
+            }
+    
+            .btn{
+                margin-bottom: 25px;
+                font-family: $font-content;
+            }
+    
+        }
+        #social-network{
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 30px;
+            #title-social{
+                text-align: center;
+                font-weight: 600;
+            }
+    
+            #icons-social{
+                display: flex;
+                justify-content: space-evenly;
+                i{
+                    font-size: 30px;
+                    color: $light;
+                }
+                i:hover{
+                    color: $secondary;
+                }
+            }
+
+        }
+    }
+    
+    #copyright{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 20px;
+        font-family: $font-content;
+        a{
+            color: $light;
+        }
+    }
+}
+
+// Responsive 
+@media (min-width: 769px) { 
+    //header
+    header{
+        .main-nav {
+            height: 120px;
+        }    
+        .my-burger-menu{
+            display: none;
+        }
+        .my-burger-button{
+            display: none;
+        }
+    
+        #logo {
+            flex-wrap: nowrap;
+            img{
+                width: 100px;
+                height: 100px;
+            }
+            h1 {
+                padding-left: 5px;
+                font-size: 36px;
+            }
+            h2 {
+                padding-left: 24px;
+                font-size: 24px;
+                white-space: nowrap;
+            }
+        }
+        nav{
+            display: flex;
+            align-items: center;
+            ul{
+                // margin: 20px;
+                height: 40px;
+            }
+            li {
+                display: flex;
+                text-align: center;
+                align-items: center;
+                padding: 8px;
+    
+            }
+            li:hover {
+                background-color: $secondary;
+                border-radius: 3px;
+                transition: all 0.3s;
+            }
+            li:hover a {
+                color: $dark;
+                transition: all 0.3s;
+            }
+    
+        }
+        .bi-list{
+            display: none;
+        }
+        #nav-buttons{
+            display: flex;
+            gap: 20px;
+        }
+    }
+    
+    //footer
+    footer{
+        #my-container{
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: start;
+
+            #opening-time{
+                padding-bottom: 10px;
+            }
+
+            #adress div{
+                padding-bottom: 10px;
+            }
+
+            #social-network{
+                align-self: center;
+            }
+        } 
+
+        #copyright{
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 0 20px;
+        }
+    }   
+}
+
