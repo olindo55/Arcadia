@@ -12028,6 +12028,7 @@ textarea.form-control-lg {
   border-radius: 30px;
   margin: 10px;
   padding: 15px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1450980392);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12037,12 +12038,14 @@ textarea.form-control-lg {
   background-size: cover;
   opacity: 1.3;
   overflow: hidden;
+  transition: all 0.5s ease;
 }
 #biome-home .card-biome h3, #biome-home .card-biome .h3 {
   position: absolute;
   text-transform: uppercase;
   font-size: 1.5rem;
   font-weight: 600;
+  transition: transform 0.5s ease;
 }
 #biome-home .card-biome p {
   position: absolute;
@@ -12053,6 +12056,7 @@ textarea.form-control-lg {
   letter-spacing: -0.1px;
   line-height: 120%;
   transform: translateY(220px);
+  transition: transform 0.5s ease;
 }
 #biome-home .card-biome img {
   position: absolute;
@@ -12061,23 +12065,45 @@ textarea.form-control-lg {
   -o-object-fit: cover;
      object-fit: cover;
   filter: brightness(0.7);
+  transition: all 0.5s ease;
 }
 #biome-home .card-biome:hover {
   height: 300px;
-  transition: all 0.5s;
 }
 #biome-home .card-biome:hover h3, #biome-home .card-biome:hover .h3 {
   transform: translateY(-100px);
-  transition: transform 0.5s;
 }
 #biome-home .card-biome:hover img {
-  filter: brightness(0.3);
+  filter: brightness(0.2);
 }
 #biome-home .card-biome:hover p {
   transform: translateY(30px);
-  transition: transform 0.5s;
 }
 
+@media (min-width: 993px) {
+  .card-biome {
+    width: 316px !important;
+    height: 316px !important;
+  }
+  .card-biome h3, .card-biome .h3 {
+    font-size: 2rem !important;
+  }
+  .card-biome p {
+    font-size: 1rem !important;
+    top: 130px;
+    transform: translateX(300px) !important;
+  }
+  .card-biome:hover {
+    width: 630px !important;
+  }
+  .card-biome:hover h3, .card-biome:hover .h3 {
+    transform: translateX(-150px) !important;
+  }
+  .card-biome:hover p {
+    width: 370px;
+    transform: translateX(100px) !important;
+  }
+}
 * {
   margin: 0;
   padding: 0;
