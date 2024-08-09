@@ -1,6 +1,7 @@
 @import url("../../node_modules/bootstrap-icons/font/bootstrap-icons.css");
 @import 'custom';
 @import './css/404';
+@import './css/home';
 
 *{
     margin: 0;
@@ -9,6 +10,16 @@
     list-style-type: none;
 }
 
+// html{
+//     position: relative;
+//     min-height: 100%;
+// }
+
+// body{
+//     display: flex;
+//     flex-direction: column;
+//     min-height: 100vh;
+// }
 
 // Header
 //--------
@@ -148,11 +159,15 @@ header {
     
 }
 
-
 // Footer
 //--------
 
 footer{
+    // footer stay in bottom
+    // position: absolute;
+    // bottom: 0;
+    // width: 100%;
+
     display: flex;
     flex-direction: column;
     background-color: $dark;
