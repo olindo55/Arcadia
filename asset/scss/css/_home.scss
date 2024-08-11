@@ -37,6 +37,11 @@
     }
     .point{
         color: $primary;
+        animation: colorChange 3s infinite;
+    }
+    #my-carousel-biome-home{
+        display: flex;
+        flex-direction: column;
     }
     .card-biome{
         position: relative;
@@ -102,6 +107,7 @@
             transform: translateY(30px);
         }
     }
+
     // //carousel
     // .carousel-inner{
     //     padding: 1em;
@@ -120,6 +126,9 @@
 //-------------
 
 @media (min-width: 768px) {
+    #my-carousel-biome-home{
+        flex-direction: row !important;
+    }
     .card-biome{
         width: 316px !important;
         height: 316px !important;
@@ -146,5 +155,19 @@
             transform: translateX(100px) !important;
             
         }
+    }
+}
+
+// Animations
+// ------------
+@keyframes colorChange {
+    0% {
+        color: $primary;
+    }
+    50% {
+        color: $secondary; 
+    }
+    100% {
+        color: $primary; 
     }
 }

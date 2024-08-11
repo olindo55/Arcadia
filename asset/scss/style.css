@@ -12020,6 +12020,11 @@ textarea.form-control-lg {
 }
 #biome-home .point {
   color: #4e7a27;
+  animation: colorChange 3s infinite;
+}
+#biome-home #my-carousel-biome-home {
+  display: flex;
+  flex-direction: column;
 }
 #biome-home .card-biome {
   position: relative;
@@ -12089,6 +12094,9 @@ textarea.form-control-lg {
 }
 
 @media (min-width: 768px) {
+  #my-carousel-biome-home {
+    flex-direction: row !important;
+  }
   .card-biome {
     width: 316px !important;
     height: 316px !important;
@@ -12111,42 +12119,16 @@ textarea.form-control-lg {
     width: 370px;
     transform: translateX(100px) !important;
   }
-  /* display 4 */
 }
-@media (min-width: 768px) and (max-width: 768px) {
-  .carousel-inner .carousel-item > div {
-    display: none;
+@keyframes colorChange {
+  0% {
+    color: #4e7a27;
   }
-  .carousel-inner .carousel-item > div:first-child {
-    display: block;
+  50% {
+    color: #f8c172;
   }
-}
-@media (min-width: 768px) {
-  .carousel-inner .carousel-item.active,
-  .carousel-inner .carousel-item-start,
-  .carousel-inner .carousel-item-next,
-  .carousel-inner .carousel-item-prev {
-    display: flex;
-  }
-}
-@media (min-width: 768px) and (min-width: 768px) {
-  .carousel-inner .carousel-item-right.active,
-  .carousel-inner .carousel-item-next,
-  .carousel-item-next:not(.carousel-item-start) {
-    transform: translateX(25%) !important;
-  }
-  .carousel-inner .carousel-item-left.active,
-  .carousel-item-prev:not(.carousel-item-end),
-  .active.carousel-item-start,
-  .carousel-item-prev:not(.carousel-item-end) {
-    transform: translateX(-25%) !important;
-  }
-  .carousel-item-next.carousel-item-start, .active.carousel-item-end {
-    transform: translateX(0) !important;
-  }
-  .carousel-inner .carousel-item-prev,
-  .carousel-item-prev:not(.carousel-item-end) {
-    transform: translateX(-25%) !important;
+  100% {
+    color: #4e7a27;
   }
 }
 * {
