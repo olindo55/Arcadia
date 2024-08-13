@@ -29,6 +29,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    background-color: $light;
+    padding-bottom: 20px;
+    box-shadow: 0px 4px 4px #00000025;
 
     h2{
         margin: 20px 0;
@@ -107,18 +110,61 @@
             transform: translateY(30px);
         }
     }
+}
 
-    // //carousel
-    // .carousel-inner{
-    //     padding: 1em;
-    // }
-    .carousel-control-prev, .carousel-control-next{
-        background-color: #e1e1e1;
-        width: 6vh;
-        height: 6vh;
-        border-radius: 50%;
-        top: 50%;
-        transform: translateY(-50%);
+#service-home{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+
+    #service-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        #text-service{
+            display: flex;
+            text-align: justify;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px;
+
+            .my-button-desktop{
+                align-self: end;
+                display: none;
+            }
+        } 
+        .my-accordion{
+            display: flex;
+            flex-direction: column;
+            align-items: center;           
+        } 
+        #my-carrousel-service{
+            display: none;
+        }
+    }
+
+    .card-service, .accordion-body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    
+        img{
+            width: 210px;
+            height: 210px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 4px #00000025;
+        }
+        h4{
+            font-size: 24px;
+        }
+        p{
+            padding: 15px !important;
+            text-align: justify;
+        }
     }
 }
 
@@ -154,6 +200,32 @@
             width: 370px;
             transform: translateX(100px) !important;
             
+        }
+    }
+    .my-button-desktop{
+        display: block !important;
+    }
+    .my-accordion{
+        display: none !important;
+    }
+    
+    #service-container{
+        flex-direction: row !important;
+
+        #text-service{
+            width: 30% !important;
+        }
+    }
+    #my-carrousel-service{
+        width: 70% !important;
+        margin-left: 20px !important;
+        display: flex !important;
+        justify-content: space-evenly !important;
+        flex-wrap: nowrap !important;
+    }
+    #service-home{
+        h2{
+            margin-right: 70%;
         }
     }
 }
