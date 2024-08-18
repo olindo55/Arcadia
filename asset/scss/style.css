@@ -12200,6 +12200,222 @@ textarea.form-control-lg {
     color: #4e7a27;
   }
 }
+#scene-home {
+  width: 100%;
+  height: 220px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url(/asset/images/jeremy-bishop-EwKXn5CapA4-unsplash.jpg);
+  background-position: center;
+  background-size: cover;
+  opacity: 1.3;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#scene-home h1, #scene-home .h1 {
+  font-weight: 700;
+  font-size: 3rem;
+  padding-right: 10%;
+}
+#scene-home h2, #scene-home .h2 {
+  font-size: 1.5rem;
+  padding-left: 10%;
+}
+
+#biome-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #eaece0;
+  padding-bottom: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1450980392);
+}
+#biome-home h2, #biome-home .h2 {
+  margin: 20px 0;
+  text-align: center;
+  font-weight: 700;
+}
+#biome-home .point {
+  color: #4e7a27;
+  animation: colorChange 3s infinite;
+}
+#biome-home #my-carousel-biome-home {
+  display: flex;
+  flex-direction: column;
+}
+#biome-home .card-biome {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  border-radius: 30px;
+  margin: 10px;
+  padding: 15px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1450980392);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-position: center;
+  background-size: cover;
+  opacity: 1.3;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+#biome-home .card-biome h3, #biome-home .card-biome .h3 {
+  position: absolute;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 600;
+  transition: transform 0.5s ease;
+}
+#biome-home .card-biome p {
+  position: absolute;
+  padding: 20px;
+  text-align: justify;
+  font-family: "Quicksand", sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: -0.1px;
+  line-height: 120%;
+  transform: translateY(220px);
+  transition: transform 0.5s ease;
+}
+#biome-home .card-biome img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  filter: brightness(0.7);
+  transition: all 0.5s ease;
+}
+#biome-home .card-biome:hover {
+  height: 300px;
+}
+#biome-home .card-biome:hover h3, #biome-home .card-biome:hover .h3 {
+  transform: translateY(-100px);
+}
+#biome-home .card-biome:hover img {
+  filter: brightness(0.2);
+}
+#biome-home .card-biome:hover p {
+  transform: translateY(30px);
+}
+
+#service-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+#service-home #service-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#service-home #service-container #text-service {
+  display: flex;
+  text-align: justify;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+#service-home #service-container #text-service .my-button-desktop {
+  align-self: end;
+  display: none;
+}
+#service-home #service-container .my-accordion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#service-home #service-container #my-carrousel-service {
+  display: none;
+}
+#service-home .card-service, #service-home .accordion-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#service-home .card-service img, #service-home .accordion-body img {
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1450980392);
+}
+#service-home .card-service h4, #service-home .card-service .h4, #service-home .accordion-body h4, #service-home .accordion-body .h4 {
+  font-size: 24px;
+}
+#service-home .card-service p, #service-home .accordion-body p {
+  padding: 15px !important;
+  text-align: justify;
+}
+
+@media (min-width: 768px) {
+  #my-carousel-biome-home {
+    flex-direction: row !important;
+  }
+  .card-biome {
+    width: 316px !important;
+    height: 316px !important;
+  }
+  .card-biome h3, .card-biome .h3 {
+    font-size: 2rem !important;
+  }
+  .card-biome p {
+    font-size: 1rem !important;
+    top: 130px;
+    transform: translateX(300px) !important;
+  }
+  .card-biome:hover {
+    width: 630px !important;
+  }
+  .card-biome:hover h3, .card-biome:hover .h3 {
+    transform: translateX(-150px) !important;
+  }
+  .card-biome:hover p {
+    width: 370px;
+    transform: translateX(100px) !important;
+  }
+  .my-button-desktop {
+    display: block !important;
+  }
+  .my-accordion {
+    display: none !important;
+  }
+  #service-container {
+    flex-direction: row !important;
+  }
+  #service-container #text-service {
+    width: 30% !important;
+  }
+  #my-carrousel-service {
+    width: 70% !important;
+    margin-left: 20px !important;
+    display: flex !important;
+    justify-content: space-evenly !important;
+    flex-wrap: nowrap !important;
+  }
+  #service-home h2, #service-home .h2 {
+    margin-right: 70%;
+  }
+}
+@keyframes colorChange {
+  0% {
+    color: #4e7a27;
+  }
+  50% {
+    color: #f8c172;
+  }
+  100% {
+    color: #4e7a27;
+  }
+}
 * {
   margin: 0;
   padding: 0;
