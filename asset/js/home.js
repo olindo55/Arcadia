@@ -65,7 +65,7 @@ function replaceCardSequentially() {
     currentCardIndex = (currentCardIndex + 1) % cards.length;
 }
 
-setInterval(replaceCardSequentially, 7000);
+// setInterval(replaceCardSequentially, 7000);
 
 
 

@@ -11990,12 +11990,33 @@ textarea.form-control-lg {
 }
 
 #scene-home {
+  position: relative;
   width: 100%;
   height: 220px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url(/asset/images/jeremy-bishop-EwKXn5CapA4-unsplash.jpg);
-  background-position: center;
-  background-size: cover;
-  opacity: 1.3;
+}
+#scene-home .carousel-item img {
+  height: 220px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+}
+#scene-home .carousel-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+#scene-home .title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
   color: white;
   text-align: center;
   display: flex;
