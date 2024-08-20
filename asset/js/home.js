@@ -36,8 +36,6 @@ const swiperComment = new Swiper('.swiperComment', {
   
 
 
-// alert("test ok");
-
 // Randomize card-service
 
 const cardData = [ // à recuperer sur la BDD
