@@ -11,7 +11,7 @@ const swiperService = new Swiper('.swiperService', {
             slidesPerView: 2,
             spaceBetween: 10,
         },
-        1240: {
+        1200: {
             slidesPerView: 3,
             spaceBetween: 40,
         },

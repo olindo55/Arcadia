@@ -12328,12 +12328,24 @@ textarea.form-control-lg {
     height: 425px;
     border-radius: 0 30px 30px 0;
     padding: 0 50px;
-    gap: 25px;
     box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.1450980392);
   }
   #comments-home #comments .comment-card {
     height: 90%;
     margin-bottom: 0;
+  }
+  #comments-home #comments .comment-card .header-comment {
+    margin-top: 40px;
+    margin-bottom: -120px;
+  }
+  #comments-home #comments .comment-card .header-comment h4, #comments-home #comments .comment-card .header-comment .h4 {
+    margin-left: 60px;
+  }
+  #comments-home #comments .comment-card .header-comment h5, #comments-home #comments .comment-card .header-comment .h5 {
+    margin-right: 60px;
+  }
+  #comments-home #comments .comment-card p {
+    margin: 100px;
   }
   #comments-home #form-comment {
     padding-top: 20px;
