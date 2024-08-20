@@ -27,12 +27,12 @@
             <nav>
                 <ul>
                     <li class="active"><a href="/">Accueil</a></li>
-                    <li><a href="/contact">Nos animaux et leurs habitats</a></li>
+                    <li><a href="#">Nos animaux et leurs habitats</a></li>
                     <li><a href="#">Services</a></li>
                 </ul>
             </nav>
             <div id="nav-buttons">
-                <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href = '/contact'"><i class="bi bi-envelope"></i> Contactez-nous</button>
+                <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href ='/contact'"><i class="bi bi-envelope"></i> Contactez-nous</button>
                 <div id="button-login">
                     <i class="bi bi-person text-dark" style="font-size: 45px"></i>
                 </div>   
@@ -45,13 +45,15 @@
         <!-- start burger menu-->
         <div class="my-burger-menu">
             <ul>
-                <li class="active"><a href="#">Accueil</a></li>
+                <li class="active"><a href="/">Accueil</a></li>
                 <li><a href="#">Nos animaux et leurs habitats</a></li>
                 <li><a href="#">Services</a></li>
             </ul>
-            <button class="btn btn-secondary rounded-5 d-flex align-items-center justify-content-center">
+            <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href ='/contact'"><i class="bi bi-envelope"></i> Contactez-nous</button>
+            
+            <!-- <button class="btn btn-secondary rounded-5 d-flex align-items-center justify-content-center">
                 <i class="bi bi-envelope me-2"></i> Contactez-nous
-            </button>
+            </button> -->
             <div class="my-divider"></div>
             <div id="button-login">
                 <i class="bi bi-person text-dark" style="font-size: 45px"></i>
@@ -98,9 +100,7 @@
                     <div>Forêt de Brocéliande</div>
                     <div>35380 Paimpont, France</div>
                 </div>
-                <button class="btn btn-secondary rounded-5 d-flex align-items-center justify-content-center">
-                    <i class="bi bi-envelope me-2"></i> Contactez-nous
-                </button>
+                <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href = '/contact'"><i class="bi bi-envelope"></i> Contactez-nous</button>
             </address>
     
             <div id="social-network">
@@ -118,8 +118,7 @@
             <a href="#">Politique de gestion des cookies</a>
         </div>
     </footer>
-    <!-- Router -->
-     <script type="module" src="/router/router.js"></script>
+
     <!-- Bootstrap -->
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Burger Menu -->
@@ -133,7 +132,8 @@
             burgerMenuButtonIcon.classList = isOpen ? 'bi bi-x text-light' : 'bi bi-list text-light'
         }
     </script>
-    c
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Router -->
+    <script type="module" src="/router/router.js"></script>
 </body>
 </html>

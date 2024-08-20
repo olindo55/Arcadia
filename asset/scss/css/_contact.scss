@@ -1,0 +1,12 @@
+.needs-validation{
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    background-color: $light;
+    border-radius: 30px;
+}

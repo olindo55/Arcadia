@@ -12363,12 +12363,31 @@ textarea.form-control-lg {
     color: #4e7a27;
   }
 }
+.needs-validation {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #eaece0;
+  border-radius: 30px;
+}
+
 * {
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
 
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
 body p {
   font-family: "Quicksand", sans-serif;
 }
