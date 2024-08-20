@@ -12189,24 +12189,17 @@ textarea.form-control-lg {
   align-items: center;
   justify-content: center;
 }
-#comments-home #comments .comments-swiper {
+#comments-home #comments .swiper {
   width: 80%;
   height: 90%;
 }
-#comments-home #comments .comments-swiper .swiper-wrapper {
+#comments-home #comments .swiper .swiper-wrapper {
   padding: 10px;
 }
-#comments-home #comments .comments-swiper .swiper-slide {
+#comments-home #comments .swiper .swiper-slide {
   border-radius: 30px;
 }
-#comments-home #comments .comments-swiper .swiper-button-next, #comments-home #comments .comments-swiper .swiper-button-prev {
-  color: #ffffff;
-  background-color: rgba(86, 86, 86, 0.2666666667);
-  height: 60px;
-  width: 60px;
-  border-radius: 50%;
-}
-#comments-home #comments .comments-swiper .comment-card {
+#comments-home #comments .swiper .comment-card {
   background-color: #ffffff;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1450980392);
   border-radius: 30px;
@@ -12217,27 +12210,27 @@ textarea.form-control-lg {
   justify-content: space-between;
   overflow: hidden;
 }
-#comments-home #comments .comments-swiper .comment-card .header-comment {
+#comments-home #comments .swiper .comment-card .header-comment {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
 }
-#comments-home #comments .comments-swiper .comment-card .header-comment h5, #comments-home #comments .comments-swiper .comment-card .header-comment .h5 {
+#comments-home #comments .swiper .comment-card .header-comment h5, #comments-home #comments .swiper .comment-card .header-comment .h5 {
   font-style: italic;
 }
-#comments-home #comments .comments-swiper .comment-card p {
+#comments-home #comments .swiper .comment-card p {
   text-align: justify;
   padding-bottom: 0;
   margin-bottom: 0;
 }
-#comments-home #comments .comments-swiper .comment-card .stars {
+#comments-home #comments .swiper .comment-card .stars {
   align-self: self-end;
   font-size: 25px;
   padding-right: 20px;
 }
-#comments-home #comments .comments-swiper .comment-card .stars .bi-star-fill {
+#comments-home #comments .swiper .comment-card .stars .bi-star-fill {
   background-color: #565656;
   color: transparent;
   text-shadow: 0px 1px 1px #fff500;
