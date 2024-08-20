@@ -12121,7 +12121,9 @@ textarea.form-control-lg {
   font-weight: 700;
 }
 #service-home #service-container {
+  width: 100%;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
 }
@@ -12136,13 +12138,28 @@ textarea.form-control-lg {
   align-self: end;
   display: none;
 }
-#service-home #service-container .my-accordion {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+#service-home #service-container .swiperService {
+  width: 60%;
+  height: 100%;
 }
-#service-home #service-container #my-carrousel-service {
+#service-home #service-container .swiperService .swiper-button-next,
+#service-home #service-container .swiperService .swiper-button-prev {
+  color: #4e7a27;
+}
+#service-home #service-container .swiperService .swiper-button-next img,
+#service-home #service-container .swiperService .swiper-button-prev img {
+  width: 40px;
+  height: auto;
+}
+#service-home #service-container .swiperService .swiper-button-prev::after,
+#service-home #service-container .swiperService .swiper-button-next::after {
   display: none;
+}
+#service-home #service-container .swiperService .swiper-button-prev img {
+  transform: rotate(-45deg);
+}
+#service-home #service-container .swiperService .swiper-button-next img {
+  transform: rotate(45deg);
 }
 #service-home .card-service, #service-home .accordion-body {
   display: flex;
@@ -12189,17 +12206,17 @@ textarea.form-control-lg {
   align-items: center;
   justify-content: center;
 }
-#comments-home #comments .swiper {
+#comments-home #comments .swiperComment {
   width: 80%;
   height: 90%;
 }
-#comments-home #comments .swiper .swiper-wrapper {
+#comments-home #comments .swiperComment .swiper-wrapper {
   padding: 10px;
 }
-#comments-home #comments .swiper .swiper-slide {
+#comments-home #comments .swiperComment .swiper-slide {
   border-radius: 30px;
 }
-#comments-home #comments .swiper .comment-card {
+#comments-home #comments .swiperComment .comment-card {
   background-color: #ffffff;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1450980392);
   border-radius: 30px;
@@ -12210,27 +12227,27 @@ textarea.form-control-lg {
   justify-content: space-between;
   overflow: hidden;
 }
-#comments-home #comments .swiper .comment-card .header-comment {
+#comments-home #comments .swiperComment .comment-card .header-comment {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
 }
-#comments-home #comments .swiper .comment-card .header-comment h5, #comments-home #comments .swiper .comment-card .header-comment .h5 {
+#comments-home #comments .swiperComment .comment-card .header-comment h5, #comments-home #comments .swiperComment .comment-card .header-comment .h5 {
   font-style: italic;
 }
-#comments-home #comments .swiper .comment-card p {
+#comments-home #comments .swiperComment .comment-card p {
   text-align: justify;
   padding-bottom: 0;
   margin-bottom: 0;
 }
-#comments-home #comments .swiper .comment-card .stars {
+#comments-home #comments .swiperComment .comment-card .stars {
   align-self: self-end;
   font-size: 25px;
   padding-right: 20px;
 }
-#comments-home #comments .swiper .comment-card .stars .bi-star-fill {
+#comments-home #comments .swiperComment .comment-card .stars .bi-star-fill {
   background-color: #565656;
   color: transparent;
   text-shadow: 0px 1px 1px #fff500;
@@ -12298,13 +12315,6 @@ textarea.form-control-lg {
   }
   #service-container #text-service {
     width: 30% !important;
-  }
-  #my-carrousel-service {
-    width: 70% !important;
-    margin-left: 20px !important;
-    display: flex !important;
-    justify-content: space-evenly !important;
-    flex-wrap: nowrap !important;
   }
   #service-home h2, #service-home .h2 {
     margin-right: 70%;

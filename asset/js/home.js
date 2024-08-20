@@ -1,34 +1,30 @@
-// const swiperService = new Swiper('.service-swiper', {
-//     loop: true,
-//     slidesPerView: 3,
-//     spaceBetween: 20,
-//     autoplayDisableOnInteraction: true,
-//     breakpoints: {
-//         640: {
-//             direction: 'vertical',
-//             slidesPerView: 3,
-//             spaceBetween: 10,
-//         },
-//         768: {
-//             direction: 'vertical',
-//             slidesPerView: 2,
-//             spaceBetween: 20,
-//         },
-//         1024: {
-//             direction: 'horizontal',
-//             slidesPerView: 3,
-//             spaceBetween: 40,
-//         },
-//     },
+const swiperService = new Swiper('.swiperService', {
+    loop: true,
+    slidesPerView: 1,
+    spaceBetween: 20,
+    breakpoints: {
+        640: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+        },
+        768: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+        },
+        1240: {
+            slidesPerView: 3,
+            spaceBetween: 40,
+        },
+    },
   
-//     // Navigation arrows
-//     navigation: {
-//       nextEl: '.swiper-button-next',
-//       prevEl: '.swiper-button-prev',
-//     },
-//   });
+    // Navigation arrows
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
 
-const swiper = new Swiper('.swiper', {
+const swiperComment = new Swiper('.swiperComment', {
     effect: "cards",
     slideShadows: false,
     grabCursor: true,
@@ -77,7 +73,7 @@ const cardData = [ // à recuperer sur la BDD
   },
   {
       src: "../../asset/images/services/butterfly-biodiversity-two-column.jpg.thumb.768.768.jpg",
-      alt: "Différent papillons",
+      alt: "Différent papillonsDifférent papillons",
       title: "Expositions"
   }
 ]; 

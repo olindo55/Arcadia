@@ -151,7 +151,9 @@
     }
 
     #service-container{
+        width: 100%;
         display: flex;
+        justify-content: center;
         flex-direction: column;
         align-items: center;
 
@@ -167,14 +169,40 @@
                 display: none;
             }
         } 
-        .my-accordion{
-            display: flex;
-            flex-direction: column;
-            align-items: center;           
-        } 
-        #my-carrousel-service{
-            display: none;
+
+        .swiperService{
+            width: 60%;
+            height: 100%;
+            
+            .swiper-button-next,
+            .swiper-button-prev{
+                color:$primary;
+                img{
+                    width: 40px;
+                    height: auto;
+                    // object-fit: contain;
+                }
+            }
+            .swiper-button-prev::after,
+            .swiper-button-next::after {
+                display: none;
+            }
+            .swiper-button-prev img {
+                transform: rotate(-45deg);
+            }
+            .swiper-button-next img {
+            transform: rotate(45deg);
+            }
         }
+
+        // .my-accordion{
+        //     display: flex;
+        //     flex-direction: column;
+        //     align-items: center;           
+        // } 
+        // #my-carrousel-service{
+        //     display: none;
+        // }
     }
 
     .card-service, .accordion-body{
@@ -224,7 +252,7 @@
         justify-content: center;
         // flex-direction: column;
 
-        .swiper {
+        .swiperComment {
             width: 80%;
             height: 90%;
 
@@ -353,18 +381,22 @@
             width: 30% !important;
         }
     }
-    #my-carrousel-service{
-        width: 70% !important;
-        margin-left: 20px !important;
-        display: flex !important;
-        justify-content: space-evenly !important;
-        flex-wrap: nowrap !important;
-    }
+
+
+
+    // #my-carrousel-service{
+    //     width: 70% !important;
+    //     margin-left: 20px !important;
+    //     display: flex !important;
+    //     justify-content: space-evenly !important;
+    //     flex-wrap: nowrap !important;
+    // }
     #service-home{
         h2{
             margin-right: 70%;
         }
     }
+    
     #comments-home{
         flex-direction: row;
         justify-content: space-between;
