@@ -12307,8 +12307,8 @@ textarea.form-control-lg {
   .my-button-desktop {
     display: block !important;
   }
-  .my-accordion {
-    display: none !important;
+  .my-button-phone {
+    display: none;
   }
   #service-container {
     flex-direction: row !important;
