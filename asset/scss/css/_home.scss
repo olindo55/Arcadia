@@ -180,7 +180,6 @@
                 img{
                     width: 40px;
                     height: auto;
-                    // object-fit: contain;
                 }
             }
             .swiper-button-prev::after,
@@ -194,15 +193,6 @@
             transform: rotate(45deg);
             }
         }
-
-        // .my-accordion{
-        //     display: flex;
-        //     flex-direction: column;
-        //     align-items: center;           
-        // } 
-        // #my-carrousel-service{
-        //     display: none;
-        // }
     }
 
     .card-service, .accordion-body{
@@ -250,7 +240,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        // flex-direction: column;
 
         .swiperComment {
             width: 80%;
@@ -351,27 +340,23 @@
             font-size: 1rem!important;
             top : 130px;
             transform: translateX(300px)!important;
-            // display: none;
         }
     }
     .card-biome:hover{
         width: 630px !important;
         h3{
             transform: translateX(-150px) !important;
-            // transform: translateY(-50px) !important;
         }
         p{
-            // display: block;
             width: 370px;
             transform: translateX(100px) !important;
-            
         }
     }
     .my-button-desktop{
         display: block !important;
     }
-    .my-accordion{
-        display: none !important;
+    .my-button-phone{
+        display: none;
     }
     
     #service-container{
@@ -382,15 +367,6 @@
         }
     }
 
-
-
-    // #my-carrousel-service{
-    //     width: 70% !important;
-    //     margin-left: 20px !important;
-    //     display: flex !important;
-    //     justify-content: space-evenly !important;
-    //     flex-wrap: nowrap !important;
-    // }
     #service-home{
         h2{
             margin-right: 70%;
