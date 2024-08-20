@@ -1,34 +1,34 @@
-const swiperService = new Swiper('.service-swiper', {
-    loop: true,
-    slidesPerView: 3,
-    spaceBetween: 20,
-    autoplayDisableOnInteraction: true,
-    breakpoints: {
-        640: {
-            direction: 'vertical',
-            slidesPerView: 3,
-            spaceBetween: 10,
-        },
-        768: {
-            direction: 'vertical',
-            slidesPerView: 2,
-            spaceBetween: 20,
-        },
-        1024: {
-            direction: 'horizontal',
-            slidesPerView: 3,
-            spaceBetween: 40,
-        },
-    },
+// const swiperService = new Swiper('.service-swiper', {
+//     loop: true,
+//     slidesPerView: 3,
+//     spaceBetween: 20,
+//     autoplayDisableOnInteraction: true,
+//     breakpoints: {
+//         640: {
+//             direction: 'vertical',
+//             slidesPerView: 3,
+//             spaceBetween: 10,
+//         },
+//         768: {
+//             direction: 'vertical',
+//             slidesPerView: 2,
+//             spaceBetween: 20,
+//         },
+//         1024: {
+//             direction: 'horizontal',
+//             slidesPerView: 3,
+//             spaceBetween: 40,
+//         },
+//     },
   
-    // Navigation arrows
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-  });
+//     // Navigation arrows
+//     navigation: {
+//       nextEl: '.swiper-button-next',
+//       prevEl: '.swiper-button-prev',
+//     },
+//   });
 
-const swiperComments = new Swiper('.comments-swiper', {
+const swiper = new Swiper('.swiper', {
     effect: "cards",
     slideShadows: false,
     grabCursor: true,
