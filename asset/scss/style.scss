@@ -2,6 +2,7 @@
 @import 'custom';
 @import './css/404';
 @import './css/home';
+@import './css/contact';
 
 *{
     margin: 0;
@@ -16,12 +17,15 @@
 // }
 
 body{
+    height: 100%;
     p{
         font-family: $font-content;
+        // position: relative;
     }
-//     display: flex;
-//     flex-direction: column;
-//     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
 }
 
 // Header
