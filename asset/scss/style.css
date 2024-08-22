@@ -12394,6 +12394,49 @@ textarea.form-control-lg {
   border-radius: 30px;
 }
 
+.service-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 20px 20%;
+}
+
+.all-services {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 20%;
+}
+.all-services article {
+  display: flex;
+  border-top: solid 1px #2e353a;
+}
+.all-services article figure {
+  margin: 0;
+  align-self: center;
+}
+.all-services article img {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3137254902);
+  margin: 10px 10px 10px 30px;
+}
+.all-services article .text-services {
+  margin: 20px 10px 20px 30px;
+}
+.all-services .left-card {
+  flex-direction: row-reverse;
+}
+.all-services .left-card img {
+  margin: 10px 30px 10px 10px;
+}
+.all-services .left-card .text-services {
+  margin: 20px 30px 20px 10px;
+}
+
 * {
   margin: 0;
   padding: 0;
