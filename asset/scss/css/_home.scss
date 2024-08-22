@@ -3,7 +3,6 @@
     animation: colorChange 3s infinite;
 }
 
-
 #scene-home{
     position: relative;
     width: 100%;
@@ -230,6 +229,22 @@
         font-weight: 700;
     }
 
+    .star {
+        font-size: 40px;
+        cursor: pointer;
+        background-color: #565656;
+        color: transparent;
+        text-shadow: 0px 1px 1px #fffdba;
+        -webkit-background-clip: text;
+           -moz-background-clip: text;
+                background-clip: text;
+        transition: color 0.1s ease-in-out
+    }
+    .star.selected{
+        color: #fff500;
+        text-shadow: 0px 1px 1px #565656;
+    }
+
     #comments{
         width: 100%;
         padding: 20px;
@@ -282,18 +297,10 @@
                     align-self: self-end;
                     font-size: 25px;
                     padding-right: 20px;
-                    .bi-star-fill{
-                        background-color: #565656;
-                        color: transparent;
-                        text-shadow: 0px 1px 1px #fff500;
-                        -webkit-background-clip: text;
-                           -moz-background-clip: text;
-                                background-clip: text;
-                    }
                 }
             }
           }  
-
+    }
         
     }
 
@@ -307,17 +314,16 @@
             align-items: center;
             .my-stars{
                 align-self: self-end;
-                font-size: 30px;
+                display: flex;
+                flex-direction: row-reverse;
                 padding-right: 20px;
-                .bi-star{
-                    background-color: #565656;
-                    color: transparent;
-                    text-shadow: 0px 1px 1px #fff500;
-                    -webkit-background-clip: text;
-                       -moz-background-clip: text;
-                            background-clip: text;
+
+                .star.selected,
+                .star:hover,
+                .star:hover ~ .star {
+                    color: #fff500;
+                    text-shadow: 0px 1px 1px #565656;
                 }
-            }
         }
     }
 }

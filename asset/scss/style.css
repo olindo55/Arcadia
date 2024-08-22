@@ -12195,6 +12195,21 @@ textarea.form-control-lg {
   text-align: center;
   font-weight: 700;
 }
+#comments-home .star {
+  font-size: 40px;
+  cursor: pointer;
+  background-color: #565656;
+  color: transparent;
+  text-shadow: 0px 1px 1px #fffdba;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  transition: color 0.1s ease-in-out;
+}
+#comments-home .star.selected {
+  color: #fff500;
+  text-shadow: 0px 1px 1px #565656;
+}
 #comments-home #comments {
   width: 100%;
   padding: 20px;
@@ -12247,35 +12262,27 @@ textarea.form-control-lg {
   font-size: 25px;
   padding-right: 20px;
 }
-#comments-home #comments .swiperComment .comment-card .stars .bi-star-fill {
-  background-color: #565656;
-  color: transparent;
-  text-shadow: 0px 1px 1px #fff500;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  background-clip: text;
-}
-#comments-home #form-comment {
+
+#form-comment {
   margin: 0 20px;
   padding-bottom: 20px;
 }
-#comments-home #form-comment #footer-comment {
+#form-comment #footer-comment {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-#comments-home #form-comment #footer-comment .my-stars {
+#form-comment #footer-comment .my-stars {
   align-self: self-end;
-  font-size: 30px;
+  display: flex;
+  flex-direction: row-reverse;
   padding-right: 20px;
 }
-#comments-home #form-comment #footer-comment .my-stars .bi-star {
-  background-color: #565656;
-  color: transparent;
-  text-shadow: 0px 1px 1px #fff500;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  background-clip: text;
+#form-comment #footer-comment .my-stars .star.selected,
+#form-comment #footer-comment .my-stars .star:hover,
+#form-comment #footer-comment .my-stars .star:hover ~ .star {
+  color: #fff500;
+  text-shadow: 0px 1px 1px #565656;
 }
 
 @media (min-width: 768px) {

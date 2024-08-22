@@ -1,5 +1,5 @@
 // Swiper for carousel
-
+//--------------------
 const swiperService = new Swiper('.swiperService', {
     loop: true,
     slidesPerView: 1,
@@ -37,68 +37,75 @@ const swiperComment = new Swiper('.swiperComment', {
   });
   
 
+// select stars
+//--------------
+  const stars = document.querySelectorAll('.star');
+  const ratingValue = document.getElementById('ratingValue');
 
-// // Randomize card-service
+  stars.forEach(star => {
+      star.addEventListener('click', function() {
+          ratingValue.value = this.getAttribute('data-value');
+          highlightStars(ratingValue.value);
+          validateForm();
+      });
+  });
 
-// const cardData = [ // à recuperer sur la BDD
-//   {
-//       src: "../../asset/images/services/visites_guidees.png",
-//       alt: "Un guide explique le zoo aux visiteurs",
-//       title: "Visites guidées"
-//   },
-//   {
-//       src: "../../asset/images/services/kristof-korody-udN5SKlmtqg-unsplash.jpg",
-//       alt: "Une assiette d'un plat servis dans notre restaurant",
-//       title: "Restauration"
-//   },
-//   {
-//       src: "../../asset/images/services/casey-horner-p69o_a7XqDM-unsplash.jpg",
-//       alt: "Le petit train sort du biome Jungle",
-//       title: "Petit train"
-//   },
-//   {
-//       src: "../../asset/images/services/daiga-ellaby-p-vf1RhLzsc-unsplash.jpg",
-//       alt: "Un soigneur nourrissant les animaux",
-//       title: "Nourrissage"
-//   },
-//   {
-//       src: "../../asset/images/services/ankush-minda-Bsxv_Nbs-VY-unsplash.jpg",
-//       alt: "Un spectacle de perroquet",
-//       title: "Spectacles"
-//   },
-//   {
-//       src: "../../asset/images/services/atelier-enfants.png",
-//       alt: "Atelier éducatif pour les enfants",
-//       title: "Ateliers éducatifs"
-//   },
-//   {
-//       src: "../../asset/images/services/butterfly-biodiversity-two-column.jpg.thumb.768.768.jpg",
-//       alt: "Différent papillonsDifférent papillons",
-//       title: "Expositions"
-//   }
-// ]; 
-// const cards = document.querySelectorAll('.card-service');
-// let currentCardIndex = 0;
-// let cardUsed = [1, 2, 3];
+  function highlightStars(rating) {
+      stars.forEach(star => {
+          star.classList.remove('selected');
+          if (star.getAttribute('data-value') <= rating) {
+              star.classList.add('selected');
+          }
+      });
+  }
 
-// function replaceSingleCard(card) {
-//   let randomIndex;  
-//   do {
-//       randomIndex = Math.floor(Math.random() * cardData.length);
-//     } while (cardUsed.includes(randomIndex));
+// validation comment
+//-------------------
+// get the inputs
+const inputPseudo = document.getElementById('pseudo');
+const inputComment = document.getElementById('comment');
 
-//     card.style.opacity = 0;
-//     setTimeout(() => {
-//       const newCardData = cardData[randomIndex];
-//       card.querySelector('img').src = newCardData.src;
-//       card.querySelector('img').alt = newCardData.alt;
-//       card.querySelector('h4').textContent = newCardData.title;
-//       card.style.opacity = 1;
-//     }, 1000);
-//     cardUsed[currentCardIndex] = randomIndex;
-// }
+// listener the inputs
+inputPseudo.addEventListener('keyup',validateForm);
+inputComment.addEventListener('keyup',validateForm);
 
-// function replaceCardSequentially() {
-//     replaceSingleCard(cards[currentCardIndex]);
-//     currentCardIndex = (currentCardIndex + 1) % cards.length;
-// }
+
+function validateForm(){
+  const pseudoValid = validateRequired(inputPseudo);
+  const commentValid = validateRequired(inputComment);
+  const starsValid = validateStars(ratingValue);
+  
+  const formButton = document.getElementById('btnForm');
+  if (pseudoValid && commentValid && starsValid){
+    formButton.disabled = false;
+  }
+  else {
+    formButton.disabled = true;
+  }
+}
+
+function validateRequired(input){
+  if (input.value == ''){
+    input.classList.remove('is-valid');
+    input.classList.add('is-invalid');
+    return false;
+  }
+  else {
+    input.classList.add('is-valid');
+    input.classList.remove('is-invalid');
+    return true;
+  }
+}
+
+function validateStars(input){
+  if (input.value == '0'){
+    input.classList.remove('is-valid');
+    input.classList.add('is-invalid');
+    return false;
+  }
+  else {
+    input.classList.add('is-valid');
+    input.classList.remove('is-invalid');
+    return true;
+  }
+}
