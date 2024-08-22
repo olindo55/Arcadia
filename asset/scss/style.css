@@ -12363,7 +12363,19 @@ textarea.form-control-lg {
     color: #4e7a27;
   }
 }
-.needs-validation {
+.contact-form {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #eaece0;
+  border-radius: 30px;
+}
+
+#signin-form {
   height: auto;
   display: flex;
   flex-direction: column;
