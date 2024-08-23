@@ -39,7 +39,7 @@ const swiperComment = new Swiper('.swiperComment', {
 
 // select stars
 //--------------
-  const stars = document.querySelectorAll('.star');
+  const stars = document.querySelectorAll('.my-star');
   const ratingValue = document.getElementById('ratingValue');
 
   stars.forEach(star => {

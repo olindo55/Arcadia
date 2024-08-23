@@ -12195,7 +12195,7 @@ textarea.form-control-lg {
   text-align: center;
   font-weight: 700;
 }
-#comments-home .star {
+#comments-home .star, #comments-home .my-star {
   font-size: 40px;
   cursor: pointer;
   background-color: #565656;
@@ -12206,7 +12206,7 @@ textarea.form-control-lg {
   background-clip: text;
   transition: color 0.1s ease-in-out;
 }
-#comments-home .star.selected {
+#comments-home .star.selected, #comments-home .my-star.selected {
   color: #fff500;
   text-shadow: 0px 1px 1px #565656;
 }
@@ -12278,9 +12278,9 @@ textarea.form-control-lg {
   flex-direction: row-reverse;
   padding-right: 20px;
 }
-#form-comment #footer-comment .my-stars .star.selected,
-#form-comment #footer-comment .my-stars .star:hover,
-#form-comment #footer-comment .my-stars .star:hover ~ .star {
+#form-comment #footer-comment .my-stars .my-star.selected,
+#form-comment #footer-comment .my-stars .my-star:hover,
+#form-comment #footer-comment .my-stars .my-star:hover ~ .my-star {
   color: #fff500;
   text-shadow: 0px 1px 1px #565656;
 }
@@ -12462,6 +12462,7 @@ header {
   justify-content: space-between;
   align-items: center;
   color: #eaece0;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3137254902);
 }
 header a {
   text-decoration: none;
@@ -12478,10 +12479,16 @@ header .main-nav {
 header #logo {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 header #logo img {
   width: 42px;
   height: 42px;
+  background-color: #2e353a;
+}
+header #logo img:hover {
+  background-color: #f8c172;
+  animation: bounce-in 0.3s ease;
 }
 header #logo h1, header #logo .h1 {
   margin-top: 7px;
@@ -12733,5 +12740,21 @@ footer #copyright a {
     flex-direction: row;
     justify-content: space-between;
     margin: 0 20px;
+  }
+}
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
   }
 }/*# sourceMappingURL=style.css.map */
