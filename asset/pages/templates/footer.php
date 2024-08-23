@@ -47,7 +47,7 @@
 
         <div id="copyright">
             <div>© Zoo Arcadia 2024</div>
-            <a href="#">Politique de gestion des cookies</a>
+            <a href="/cookie">Politique de gestion des cookies</a>
         </div>
     </footer>
 
