@@ -229,7 +229,7 @@
         font-weight: 700;
     }
 
-    .star {
+    .star, .my-star {
         font-size: 40px;
         cursor: pointer;
         background-color: #565656;
@@ -240,7 +240,7 @@
                 background-clip: text;
         transition: color 0.1s ease-in-out
     }
-    .star.selected{
+    .star.selected, .my-star.selected {
         color: #fff500;
         text-shadow: 0px 1px 1px #565656;
     }
@@ -318,9 +318,9 @@
                 flex-direction: row-reverse;
                 padding-right: 20px;
 
-                .star.selected,
-                .star:hover,
-                .star:hover ~ .star {
+                .my-star.selected,
+                .my-star:hover,
+                .my-star:hover ~ .my-star {
                     color: #fff500;
                     text-shadow: 0px 1px 1px #565656;
                 }

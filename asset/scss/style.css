@@ -12195,7 +12195,7 @@ textarea.form-control-lg {
   text-align: center;
   font-weight: 700;
 }
-#comments-home .star {
+#comments-home .star, #comments-home .my-star {
   font-size: 40px;
   cursor: pointer;
   background-color: #565656;
@@ -12206,7 +12206,7 @@ textarea.form-control-lg {
   background-clip: text;
   transition: color 0.1s ease-in-out;
 }
-#comments-home .star.selected {
+#comments-home .star.selected, #comments-home .my-star.selected {
   color: #fff500;
   text-shadow: 0px 1px 1px #565656;
 }
@@ -12278,9 +12278,9 @@ textarea.form-control-lg {
   flex-direction: row-reverse;
   padding-right: 20px;
 }
-#form-comment #footer-comment .my-stars .star.selected,
-#form-comment #footer-comment .my-stars .star:hover,
-#form-comment #footer-comment .my-stars .star:hover ~ .star {
+#form-comment #footer-comment .my-stars .my-star.selected,
+#form-comment #footer-comment .my-stars .my-star:hover,
+#form-comment #footer-comment .my-stars .my-star:hover ~ .my-star {
   color: #fff500;
   text-shadow: 0px 1px 1px #565656;
 }
