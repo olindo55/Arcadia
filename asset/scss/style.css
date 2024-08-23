@@ -12437,6 +12437,22 @@ textarea.form-control-lg {
   margin: 20px 30px 20px 10px;
 }
 
+#cookie {
+  margin: 50px 20%;
+  text-align: justify;
+}
+#cookie h1, #cookie .h1 {
+  text-align: center;
+  font-weight: x-large;
+  padding-bottom: 30px;
+}
+#cookie h2, #cookie .h2 {
+  padding-top: 40px;
+}
+#cookie h3, #cookie .h3 {
+  font-size: 1.2rem;
+}
+
 * {
   margin: 0;
   padding: 0;
