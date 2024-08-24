@@ -276,7 +276,7 @@ footer{
 // Responsive 
 //------------
 
-@media (min-width: 768px) { 
+@media (min-width: 850px) { 
     //header
     header{
         .main-nav {
@@ -365,6 +365,49 @@ footer{
             margin: 0 20px;
         }
     }   
+}
+@media (min-width: 768px) and (max-width: 1000px) { 
+    //header
+    header{
+            .main-nav {
+                height: 120px;
+            }    
+            .my-burger-menu{
+                display: none;
+            }
+            .my-burger-button{
+                display: none;
+            }
+        
+            #logo {
+                flex-wrap: nowrap;
+                img{
+                    width: 75px;
+                    height: 75px;
+                }
+                h1 {
+                    padding-left: 5px;
+                    font-size: 28px;
+                }
+                h2 {
+                    padding-left: 24px;
+                    font-size: 14px;
+                    white-space: nowrap;
+                }
+                #button-login{
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+            nav{
+                li {
+                    display: flex;
+                    text-align: center;
+                    align-items: center;
+                    padding: 4px;
+            }
+        }
+    }
 }
 
 // animation 

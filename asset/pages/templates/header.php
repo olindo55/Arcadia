@@ -11,7 +11,7 @@
             <nav>
                 <ul>
                     <li class="active"><a href="/">Accueil</a></li>
-                    <li><a href="/biome">Nos animaux et leurs habitats</a></li>
+                    <li><a href="/biome">Le zoo</a></li>
                     <li><a href="/service">Services</a></li>
                 </ul>
             </nav>
@@ -32,7 +32,7 @@
         <div class="my-burger-menu">
             <ul>
                 <li class="active"><a href="/">Accueil</a></li>
-                <li><a href="/biome">Nos animaux et leurs habitats</a></li>
+                <li><a href="/biome">Le zoo</a></li>
                 <li><a href="/service">Services</a></li>
             </ul>
             <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href ='/contact'"><i class="bi bi-envelope"></i> Contactez-nous</button>

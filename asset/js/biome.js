@@ -1,3 +1,6 @@
+// Cards click
+//--------------------
+
 const biomeCards = document.querySelectorAll('.accordion-biome-card');
 
 biomeCards.forEach(myBiomeCard => {
@@ -6,11 +9,27 @@ biomeCards.forEach(myBiomeCard => {
     });
 });
 
-const animalCards = document.querySelectorAll('.carrousel-animal-card');
 
-animalCards.forEach(myAnimalCard => {
-    myAnimalCard.addEventListener("click", function() {
-        myAnimalCard.classList.toggle('clicked');
-    });
-});
+// Swiper for carousel
+//--------------------
+const swiperAnimal = new Swiper('.swiperAnimal', {
+    // loop: false,
+    slidesPerView: 3,
+    spaceBetween: 10,
+    // breakpoints: {
+    //     768: {
+    //         slidesPerView: 2,
+    //         spaceBetween: 10,
+    //     },
+    //     1000: {
+    //         slidesPerView: 3,
+    //         spaceBetween: 10,
+    //     },
+    // },
+    // Navigation arrows
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
 

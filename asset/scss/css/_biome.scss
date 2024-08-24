@@ -49,17 +49,33 @@
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
     }
-
+}
+// animation
+.accordion-biome-item.clicked{
+    .accordion-biome-card{
+        img{
+            filter: brightness(0.2);
+        }
+        p{
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .accordion{
+        display: block;
+        opacity: 1;
+        // transform: translateY(0);
+    }
 }
 
 // Accordion animal
 .accordion{
     display: none;
+    opacity: 0;    
     top: 100%;
     margin: 0 0px 20px 0px;
 
-    display: none;
-    opacity: 0;
     transform: translateY(-20px);
     transition: transform 0.3s ease, opacity 0.3s ease; 
 
@@ -87,99 +103,129 @@
         font-weight: 600;
     }
 }
-    // animation
-    .accordion-biome-item.clicked{
-        .accordion-biome-card{
-            img{
-                filter: brightness(0.2);
-            }
-            p{
-                display: block;
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .accordion{
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
 
 // carousel animal
-.carousel{
-    width: 100%;
-    height: 640px;
+
+.swiperAnimal{
     display: none;
-    .carrousel-animal-card{
-        position: relative;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 320px;
-        transition: height .5s ease;
-        img{
-            height: 320px;
-            width: 320px;
+    opacity: 0;
+    margin: 20px 10% 20px 10%;
+    .swiper-wrapper{
+        height: 640px;
+    }
+    .swiper-button-next, .swiper-button-prev{
+        top: 160px;
+    }
+    .swiper-slide{
+            height: 200px;
+            width: 200px;
             border-radius: 50%;
             object-fit: cover;
-            filter: brightness(.6);
-            transition: height .2s ease, border-radius .2s ease, filter .2s ease;
-            box-shadow: 2px 5px 5px #00000025;
-        }
-        .report{
-            position: absolute;
+        // position: relative;
+        .carrousel-animal-card{
+            position: relative;
+            cursor: pointer;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-around;
-            color: white;
-
-        }
-        ul{
-            display: none;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-    }   
-
-    // animation
-    .carrousel-animal-card.clicked{
-        height: 640px;
-        img{
-            position: absolute;
-            height: 640px;
-            width: 320px;
-            border-radius: 200px 50px 200px 50px;
-            object-fit: cover;
-            filter: brightness(0.4);
-        }
-        .report{
-            ul{
-                // position: absolute;
-                display: block;
-                opacity: 1;
+            justify-content: center;
+            // width: 320px;
+            height: 320px;
+            transition: height .5s ease;
+            img{
+                height: 200px;
+                width: 200px;
+                border-radius: 50%;
+                object-fit: cover;
+                filter: brightness(.6);
+                transition: height .2s ease, border-radius .2s ease, filter .2s ease;
+                box-shadow: 2px 5px 5px #00000025;
+            }
+            img:hover{
+                filter: brightness(.4);
+                            transition: filter .2s ease;
+            }
+            .report{
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-around;
                 color: white;
-                font-weight: 600;
-                width: 320px;
-                padding: 32px;
+    
+            }
+            ul{
+                display: none;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: transform 0.3s ease, opacity 0.3s ease;
             }
         }
-    } 
+    }   
+    // display: none;
+
+    // animation
+
+    .swiper-slide-next{
+        .carrousel-animal-card{
+            height: 640px;
+            img{
+                position: absolute;
+                height: 640px;
+                width: 320px;
+                border-radius: 160px 160px 160px 160px;
+                object-fit: cover;
+                filter: brightness(0.4);
+            }
+            .report{
+                ul{
+                    // position: absolute;
+                    display: block;
+                    opacity: 1;
+                    color: white;
+                    font-weight: 600;
+                    width: 320px;
+                    padding: 32px;
+                }
+            }
+        } 
+    }
 }
 
 // Responsive 
 //------------
-
-@media (min-width: 768px) { 
+@media (min-width: 1000px) {
+    .swiper-slide{
+        height: 320px;
+        width: 320px;
+        .carrousel-animal-card{
+            img{
+                height: 320px;
+                width: 320px;
+            }
+        }
+    }
+    .accordion-biome-item.clicked > .accordion{
+        display: none;
+    }
+    .accordion-biome-item.clicked > .swiperAnimal{
+        display: block;
+        opacity: 1;
+    }
+    .carousel{
+        display: block;
+    }
+}
+@media (min-width: 768px) and (max-width: 1000px){ 
     .title-biome-card p{
         font-size: 16px !important;
     }
     .accordion-biome-item.clicked > .accordion{
         display: none;
+    }
+    .accordion-biome-item.clicked > .swiperAnimal{
+        display: block;
+        opacity: 1;
     }
     .carousel{
         display: block;
