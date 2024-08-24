@@ -7,10 +7,6 @@
     position: relative;
     width: 100%;
     height: 220px;
-    // background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url(/asset/images/jeremy-bishop-EwKXn5CapA4-unsplash.jpg);
-    // background-position: center;
-    // background-size: cover ;
-    // opacity: 1.3;
 
     .carousel-item img {
         height: 220px;
@@ -102,9 +98,7 @@
         }
         p{
             position: absolute;
-            // display: none;
             padding: 20px;
-            // bottom: -300px;
             text-align: justify;
             font-family: $font-content;
             font-size: .9rem;

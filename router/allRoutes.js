@@ -6,7 +6,7 @@ export const allRoutes = [
     new Route("/contact", "Contact", "/asset/pages/contact.php", "/asset/js/contact.js"),
     new Route("/service", "Service", "/asset/pages/service.php", "/asset/js/service.js"),
     new Route("/cookie", "Cookie", "/asset/pages/cookie.php",),
-    new Route("/biome", "Les animaux et leurs habitats", "/asset/pages/biome.php",),
+    new Route("/biome", "Les animaux et leurs habitats", "/asset/pages/biome.php","/asset/js/biome.js"),
     new Route("/signin", "Connexion", "/asset/pages/admin/signin.php", "/asset/js/signin.js"),
     new Route("/admin/animal", "Admin - Animaux", "/asset/pages/admin/animal.php",),
     new Route("/admin/biome", "Admin - Habitats", "/asset/pages/admin/biome.php",),
