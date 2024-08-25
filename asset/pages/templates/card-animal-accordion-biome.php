@@ -19,11 +19,12 @@
                             <li><p>Notre vétérinaire l’a visité ce matin.</p></li>
                             <li><p>Etat de santé : </p></li>
                             <li class="hearts">
-                                <i class="bi bi-heart-fill"></i>
-                                <i class="bi bi-heart-fill"></i>
-                                <i class="bi bi-heart-fill"></i>
-                                <i class="bi bi-heart-fill"></i>
-                                <i class="bi bi-heart"></i>
+                            <?php for ($i = 0; $i < $animal['health']; $i++){ ?>
+                            <i class="bi bi-heart-fill"></i>
+                            <?php } ?>
+                            <?php for ($i = $animal['health']; $i < 5; $i++){ ?>
+                            <i class="bi bi-heart"></i>
+                            <?php } ?>
                             </li>
                         </ul>
                     </div>
