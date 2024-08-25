@@ -1,3 +1,4 @@
+<?php include_once 'connection/pdo.php'; ?>
 <section id="scene-home">
     <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade my-carousel" data-bs-ride="carousel">
       <div class="carousel-inner">
@@ -22,12 +23,12 @@
   <div class="title">
       <h2>Découvrez l'univers de nos animaux<span class="point">.</span></h2>
   </div>
+  <!-- cards biome - start -->
   <div id="my-carousel-biome-home">
-    <!-- card-biome -->
-    <!-- implementer la boucle selon data base, 3 biomes seulement (aleatoire ?) -->
     <?php include 'templates/card-biome-home.php';?>
   </div>
-  <button type="button" class="btn btn-secondary btn-lg shadow-sm mt-2 my-button-desktop">Découvrir +</button>
+  <!-- cards biome - stop -->
+  <button type="button" onclick="window.location.href ='/biome'" class="btn btn-secondary btn-lg shadow-sm mt-2 my-button-desktop">Découvrir +</button>
 </section>
 
 <section id="service-home">
