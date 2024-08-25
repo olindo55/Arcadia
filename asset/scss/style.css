@@ -12461,7 +12461,7 @@ textarea.form-control-lg {
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1450980392);
 }
 
-.accordion-biome-card {
+.accordion-biome-item .accordion-biome-card {
   cursor: pointer;
   position: relative;
   display: flex;
@@ -12469,10 +12469,10 @@ textarea.form-control-lg {
   align-items: center;
   justify-content: start;
 }
-.accordion-biome-card picture {
+.accordion-biome-item .accordion-biome-card picture {
   width: 100%;
 }
-.accordion-biome-card img {
+.accordion-biome-item .accordion-biome-card img {
   width: 100%;
   height: 150px;
   -o-object-fit: cover;
@@ -12480,7 +12480,7 @@ textarea.form-control-lg {
   filter: brightness(1);
   transition: filter 0.3s ease;
 }
-.accordion-biome-card .title-biome-card {
+.accordion-biome-item .accordion-biome-card .title-biome-card {
   width: 100%;
   height: 150px;
   position: absolute;
@@ -12489,12 +12489,12 @@ textarea.form-control-lg {
   align-items: center;
   justify-content: space-around;
 }
-.accordion-biome-card .title-biome-card h1, .accordion-biome-card .title-biome-card .h1, .accordion-biome-card .title-biome-card p {
+.accordion-biome-item .accordion-biome-card .title-biome-card h1, .accordion-biome-item .accordion-biome-card .title-biome-card .h1, .accordion-biome-item .accordion-biome-card .title-biome-card p {
   color: white;
   padding: 0;
   margin: 0 10;
 }
-.accordion-biome-card .title-biome-card p {
+.accordion-biome-item .accordion-biome-card .title-biome-card p {
   margin: -40px 20px 0 20px;
   text-align: center;
   font-size: 11px;
@@ -12503,6 +12503,10 @@ textarea.form-control-lg {
   opacity: 0;
   transform: translateY(20px);
   transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.accordion-biome-item .swiper {
+  display: none;
+  opacity: 0;
 }
 
 .accordion-biome-item.clicked .accordion-biome-card img {
@@ -12520,6 +12524,10 @@ textarea.form-control-lg {
   display: block;
   opacity: 1;
 }
+.accordion-biome-item.clicked .swiper {
+  display: none;
+  opacity: 0;
+}
 
 .accordion {
   display: none;
@@ -12528,6 +12536,9 @@ textarea.form-control-lg {
   margin: 0 0px 20px 0px;
   transform: translateY(-20px);
   transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.accordion .accordion-item {
+  border: none !important;
 }
 .accordion .accordion-header {
   border-bottom: 1px solid #2e353a;

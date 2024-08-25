@@ -13,7 +13,7 @@ biomeCards.forEach(myBiomeCard => {
 // Swiper for carousel
 //--------------------
 const swiperAnimal = new Swiper('.swiperAnimal', {
-    // loop: false,
+    loop: true,
     slidesPerView: 3,
     // spaceBetween: 10,
     // breakpoints: {

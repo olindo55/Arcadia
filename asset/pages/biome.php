@@ -1,4 +1,5 @@
 <div id="accordion-biome">
+    <!-- php ou pas pour item biome? -->
     <div class="accordion-biome-item">
         <div class="accordion-biome-card">
             <picture>
@@ -12,133 +13,20 @@
         </div>
         <!-- accordion of animals max-width 767px-->
         <div class="accordion accordion-flush" id="accordionFlush">
-            <!-- card animal -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-heading1">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        Linux
-                    </button>
-                </h2>
-                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-heading1" data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">
-                        <img src="/asset/images/animals/marais/damon-on-road-xgMicu8jw64-unsplash.jpg" alt="Un crocodile dans l'eau">
-                        <ul>
-                            <li><p>Race: Alligator du Mississippi</p></li>
-                            <li><p>Habitats : Marais</p></li>
-                            <li><p>Son dernier repas à ete servi hier, il a eu 1kg de viande de boeuf</p></li>
-                            <li><p>Notre vétérinaire l’a visité ce matin.</p></li>
-                            <li><p>Etat de santé : </p></li>
-                            <li class="hearts">
-                                <i class="bi bi-heart-fill"></i>
-                                <i class="bi bi-heart-fill"></i>
-                                <i class="bi bi-heart-fill"></i>
-                                <i class="bi bi-heart-fill"></i>
-                                <i class="bi bi-heart"></i>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <!-- cards animal -->
+            <?php include 'templates/card-animal-accordion-biome.php';?>
         </div>
         <!-- carrousel of animals min-width 768px-->
         <div class="swiper swiperAnimal">
             <div class="swiper-wrapper">
-                <!-- Slide start -->
-                <div class="swiper-slide">
-                    <div class="carrousel-animal-card">
-                        <img src="/asset/images/animals/jungle/slava-abramovitch-A1v5Pq1D6Ng-unsplash.jpg" alt="Un gorille assis sur l'herbe">
-                        <div class="report">
-                            <h2>Linux</h2>
-                            <ul>
-                                <li><p>Race: Alligator du Mississippi</p></li>
-                                <li><p>Habitats : Marais</p></li>
-                                <li><p>Son dernier repas à ete servi hier, il a eu 1kg de viande de boeuf</p></li>
-                                <li><p>Notre vétérinaire l’a visité ce matin.</p></li>
-                                <li><p>Etat de santé : </p></li>
-                                <li class="hearts">
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart"></i>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Slide start -->
-                <div class="swiper-slide">
-                    <div class="carrousel-animal-card">
-                        <img src="/asset/images/animals/jungle/slava-abramovitch-A1v5Pq1D6Ng-unsplash.jpg" alt="Un gorille assis sur l'herbe">
-                        <div class="report">
-                            <h2>Linux</h2>
-                            <ul>
-                                <li><p>Race: Alligator du Mississippi</p></li>
-                                <li><p>Habitats : Marais</p></li>
-                                <li><p>Son dernier repas à ete servi hier, il a eu 1kg de viande de boeuf</p></li>
-                                <li><p>Notre vétérinaire l’a visité ce matin.</p></li>
-                                <li><p>Etat de santé : </p></li>
-                                <li class="hearts">
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart"></i>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Slide start -->
-                <div class="swiper-slide">
-                    <div class="carrousel-animal-card">
-                        <img src="/asset/images/animals/jungle/slava-abramovitch-A1v5Pq1D6Ng-unsplash.jpg" alt="Un gorille assis sur l'herbe">
-                        <div class="report">
-                            <h2>Linux</h2>
-                            <ul>
-                                <li><p>Race: Alligator du Mississippi</p></li>
-                                <li><p>Habitats : Marais</p></li>
-                                <li><p>Son dernier repas à ete servi hier, il a eu 1kg de viande de boeuf</p></li>
-                                <li><p>Notre vétérinaire l’a visité ce matin.</p></li>
-                                <li><p>Etat de santé : </p></li>
-                                <li class="hearts">
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart"></i>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Slide start -->
-                <div class="swiper-slide">
-                    <div class="carrousel-animal-card">
-                        <img src="/asset/images/animals/jungle/slava-abramovitch-A1v5Pq1D6Ng-unsplash.jpg" alt="Un gorille assis sur l'herbe">
-                        <div class="report">
-                            <h2>Linux</h2>
-                            <ul>
-                                <li><p>Race: Alligator du Mississippi</p></li>
-                                <li><p>Habitats : Marais</p></li>
-                                <li><p>Son dernier repas à ete servi hier, il a eu 1kg de viande de boeuf</p></li>
-                                <li><p>Notre vétérinaire l’a visité ce matin.</p></li>
-                                <li><p>Etat de santé : </p></li>
-                                <li class="hearts">
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart"></i>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Slides end -->
+                <!-- Cards animal -->
+                <?php include 'templates/card-animal-carousel-biome.php';?>
+                <?php include 'templates/card-animal-carousel-biome.php';?>
+                <?php include 'templates/card-animal-carousel-biome.php';?>
+                <?php include 'templates/card-animal-carousel-biome.php';?>
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
-        </div>  
+        </div> 
     </div>
 </div>
