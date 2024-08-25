@@ -15,7 +15,7 @@
                         <ul>
                             <li><p>Race: <?php echo $animal['breed'] ?></p></li>
                             <li><p>Habitats : <?php echo $biome['name'] ?></p></li>
-                            <li><p>Pour son repas, nos soigneurs lui ont servi, <?php echo $animal['feeding_quantity'] ?> grammes de viande de <?php echo $animal['feeding_type'] ?></p></li>
+                            <li><p>Pour son repas, nos soigneurs lui ont servi, <?php echo $animal['feeding_quantity'] ?> grammes de <?php echo $animal['feeding_type'] ?></p></li>
                             <li><p>Notre vétérinaire l’a visité ce matin.</p></li>
                             <li><p>Etat de santé : </p></li>
                             <li class="hearts">
