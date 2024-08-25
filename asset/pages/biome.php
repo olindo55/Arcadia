@@ -1,8 +1,10 @@
 <?php include_once 'connection/pdo.php'; ?>
 
 <?php
-$query = $pdo->query('SELECT * FROM biome');
-$biomes = $query->fetchAll(PDO::FETCH_ASSOC);
+$queryBiomes = $pdo->query('SELECT * FROM biomes');
+$biomes = $queryBiomes->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
 
 
@@ -22,7 +24,15 @@ $biomes = $query->fetchAll(PDO::FETCH_ASSOC);
         <!-- accordion of animals max-width 767px-->
         <div class="accordion accordion-flush" id="accordionFlush">
             <!-- cards animal -->
-            <?php include 'templates/card-animal-accordion-biome.php';?>
+            <?php 
+                $queryAnimals = $pdo->prepare('SELECT * FROM animals WHERE biome_id = (SELECT id FROM biomes WHERE name = :biome_name)');
+                $queryAnimals->bindParam(':biome_name', $biome['name']);
+                $queryAnimals->execute();
+                $animals = $queryAnimals->fetchAll(PDO::FETCH_ASSOC);
+
+                include 'templates/card-animal-accordion-biome.php';
+                
+            ?>
         </div>
         <!-- carrousel of animals min-width 768px-->
         <div class="swiper swiperAnimal">
