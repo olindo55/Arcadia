@@ -29,19 +29,16 @@ $biomes = $queryBiomes->fetchAll(PDO::FETCH_ASSOC);
                 $queryAnimals->bindParam(':biome_name', $biome['name']);
                 $queryAnimals->execute();
                 $animals = $queryAnimals->fetchAll(PDO::FETCH_ASSOC);
-
                 include 'templates/card-animal-accordion-biome.php';
-                
             ?>
         </div>
         <!-- carrousel of animals min-width 768px-->
         <div class="swiper swiperAnimal">
             <div class="swiper-wrapper">
                 <!-- Cards animal -->
-                <?php include 'templates/card-animal-carousel-biome.php';?>
-                <?php include 'templates/card-animal-carousel-biome.php';?>
-                <?php include 'templates/card-animal-carousel-biome.php';?>
-                <?php include 'templates/card-animal-carousel-biome.php';?>
+                <?php 
+                    include 'templates/card-animal-carousel-biome.php';
+                ?>
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
