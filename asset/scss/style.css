@@ -12491,12 +12491,13 @@ textarea.form-control-lg {
 }
 .accordion-biome-card .title-biome-card h1, .accordion-biome-card .title-biome-card .h1, .accordion-biome-card .title-biome-card p {
   color: white;
+  padding: 0;
+  margin: 0 10;
 }
 .accordion-biome-card .title-biome-card p {
-  margin: 0 20px;
-  padding-bottom: 10px;
+  margin: -40px 20px 0 20px;
   text-align: center;
-  font-size: 12px;
+  font-size: 11px;
   display: none;
   display: none;
   opacity: 0;
@@ -12506,6 +12507,9 @@ textarea.form-control-lg {
 
 .accordion-biome-item.clicked .accordion-biome-card img {
   filter: brightness(0.2);
+}
+.accordion-biome-item.clicked .accordion-biome-card h1, .accordion-biome-item.clicked .accordion-biome-card .h1 {
+  margin: -20px 20px 0 20px;
 }
 .accordion-biome-item.clicked .accordion-biome-card p {
   display: block;
@@ -12535,8 +12539,8 @@ textarea.form-control-lg {
 }
 .accordion .accordion-body img {
   align-self: center;
-  width: 125px;
-  height: 125px;
+  width: 200px;
+  height: 200px;
   margin: -10px 0 12px 0;
   border-radius: 50%;
   -o-object-fit: cover;
@@ -12573,7 +12577,6 @@ textarea.form-control-lg {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 320px;
   transition: height 0.5s ease;
 }
 .swiperAnimal .swiper-slide .carrousel-animal-card img {
@@ -12626,13 +12629,19 @@ textarea.form-control-lg {
 }
 
 @media (min-width: 1000px) {
-  .swiper-slide {
-    height: 320px;
-    width: 320px;
+  .title-biome-card p {
+    font-size: 16px !important;
   }
   .swiper-slide .carrousel-animal-card img {
-    height: 320px;
-    width: 320px;
+    height: 320px !important;
+    width: 320px !important;
+  }
+  .swiper-slide-next .carrousel-animal-card {
+    height: 640px !important;
+  }
+  .swiper-slide-next .carrousel-animal-card img {
+    height: 640px !important;
+    width: 320px !important;
   }
   .accordion-biome-item.clicked > .accordion {
     display: none;
@@ -12890,7 +12899,7 @@ footer #copyright a {
   color: #eaece0;
 }
 
-@media (min-width: 850px) {
+@media (min-width: 1000px) {
   header .main-nav {
     height: 120px;
   }
@@ -12965,7 +12974,7 @@ footer #copyright a {
     margin: 0 20px;
   }
 }
-@media (min-width: 768px) and (max-width: 1000px) {
+@media (min-width: 768px) and (max-width: 999px) {
   header .main-nav {
     height: 120px;
   }
@@ -12974,6 +12983,35 @@ footer #copyright a {
   }
   header .my-burger-button {
     display: none;
+  }
+  header nav {
+    display: flex;
+    align-items: center;
+  }
+  header nav ul {
+    height: 40px;
+  }
+  header nav li {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    padding: 8px;
+  }
+  header nav li:hover {
+    background-color: #f8c172;
+    border-radius: 3px;
+    transition: all 0.3s;
+  }
+  header nav li:hover a {
+    color: #2e353a;
+    transition: all 0.3s;
+  }
+  header .bi-list {
+    display: none;
+  }
+  header #nav-buttons {
+    display: flex;
+    gap: 20px;
   }
   header #logo {
     flex-wrap: nowrap;
