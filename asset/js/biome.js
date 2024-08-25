@@ -5,7 +5,10 @@ const biomeCards = document.querySelectorAll('.accordion-biome-card');
 
 biomeCards.forEach(myBiomeCard => {
     myBiomeCard.addEventListener("click", function() {
-        myBiomeCard.parentElement.classList.toggle('clicked');
+      biomeCards.forEach(card => {
+        card.parentElement.classList.remove('clicked');
+      });
+      myBiomeCard.parentElement.classList.toggle('clicked');
     });
 });
 
