@@ -6,6 +6,7 @@
 @import './css/signin';
 @import "./css/service";
 @import "./css/cookie";
+@import "./css/biome";
 
 *{
     margin: 0;
@@ -27,7 +28,7 @@ body{
     }
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: start;
     min-height: 100vh;
 }
 
@@ -275,7 +276,7 @@ footer{
 // Responsive 
 //------------
 
-@media (min-width: 768px) { 
+@media (min-width: 1000px) { 
     //header
     header{
         .main-nav {
@@ -364,6 +365,81 @@ footer{
             margin: 0 20px;
         }
     }   
+}
+@media (min-width: 768px) and (max-width: 999px) { 
+    //header
+    header{
+            .main-nav {
+                height: 120px;
+            }    
+            .my-burger-menu{
+                display: none;
+            }
+            .my-burger-button{
+                display: none;
+            }
+            nav{
+                display: flex;
+                align-items: center;
+                ul{
+                    // margin: 20px;
+                    height: 40px;
+                }
+                li {
+                    display: flex;
+                    text-align: center;
+                    align-items: center;
+                    padding: 8px;
+        
+                }
+                li:hover {
+                    background-color: $secondary;
+                    border-radius: 3px;
+                    transition: all 0.3s;
+                }
+                li:hover a {
+                    color: $dark;
+                    transition: all 0.3s;
+                }
+        
+            }
+            .bi-list{
+                display: none;
+            }
+            #nav-buttons{
+                display: flex;
+                gap: 20px;
+            }
+        
+            #logo {
+                flex-wrap: nowrap;
+                img{
+                    width: 75px;
+                    height: 75px;
+                }
+                h1 {
+                    padding-left: 5px;
+                    font-size: 28px;
+                }
+                h2 {
+                    padding-left: 24px;
+                    font-size: 14px;
+                    white-space: nowrap;
+                }
+                #button-login{
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+            nav{
+                li {
+                    display: flex;
+                    text-align: center;
+                    align-items: center;
+                    padding: 4px;
+            }
+        }
+    }
 }
 
 // animation 

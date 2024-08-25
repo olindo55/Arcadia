@@ -25,7 +25,7 @@
   <div id="my-carousel-biome-home">
     <!-- card-biome -->
     <!-- implementer la boucle selon data base, 3 biomes seulement (aleatoire ?) -->
-    <?php include 'templates/card-biome.php';?>
+    <?php include 'templates/card-biome-home.php';?>
   </div>
   <button type="button" class="btn btn-secondary btn-lg shadow-sm mt-2 my-button-desktop">Découvrir +</button>
 </section>
