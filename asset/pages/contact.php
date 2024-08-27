@@ -1,4 +1,4 @@
-<form class="container-fluid col-10 col-md-4 py-3 contact-form">
+<form class="container-fluid col-10 col-md-4 py-3 contact-form" >
     <div class="col-10 pb-3">
         <label for="email" class="form-label">Votre email</label>
         <div class="input-group has-validation">
