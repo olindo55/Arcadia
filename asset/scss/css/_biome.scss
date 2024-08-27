@@ -76,7 +76,7 @@
     .accordion{
         display: block;
         opacity: 1;
-        // transform: translateY(0);
+        transform: translateY(0);
     }
     .swiper{
         display: none;
@@ -88,11 +88,11 @@
 .accordion{
     display: none;
     opacity: 0;    
-    top: 100%;
     margin: 0 0px 20px 0px;
-
-    transform: translateY(-20px);
-    transition: transform 0.3s ease, opacity 0.3s ease; 
+    width: 100%;
+    height: 100%;
+    transform: translateY(-100%);
+    transition: transform 2s ease, opacity 0.5s ease; 
 
     .accordion-item {
         border: none !important;

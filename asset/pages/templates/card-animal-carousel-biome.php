@@ -1,23 +1,25 @@
-<!-- implementer une boucle selon data base --> 
-                <div class="swiper-slide">
-                    <div class="carrousel-animal-card">
-                        <img src="/asset/images/animals/jungle/slava-abramovitch-A1v5Pq1D6Ng-unsplash.jpg" alt="Un gorille assis sur l'herbe">
-                        <div class="report">
-                            <h2>Linux</h2>
-                            <ul>
-                                <li><p>Race: Alligator du Mississippi</p></li>
-                                <li><p>Habitats : Marais</p></li>
-                                <li><p>Son dernier repas à ete servi hier, il a eu 1kg de viande de boeuf</p></li>
-                                <li><p>Notre vétérinaire l’a visité ce matin.</p></li>
-                                <li><p>Etat de santé : </p></li>
-                                <li class="hearts">
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart-fill"></i>
-                                    <i class="bi bi-heart"></i>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+<?php foreach ($animals as $animal) { ?>
+    <div class="swiper-slide">
+        <div class="carrousel-animal-card">
+            <img src=<?php echo $animal['image_url'] ?> alt=<?php echo $animal['image_alt'] ?>>
+            <div class="report">
+                <h2><?php echo $animal['name'] ?></h2>
+                <ul>
+                    <li><p>Race: <?php echo $animal['breed'] ?></p></li>
+                    <li><p>Habitats : <?php echo $biome['name'] ?></p></li>
+                    <li><p>Pour son repas, nos soigneurs lui ont servi, <?php echo $animal['feeding_quantity'] ?> grammes de <?php echo $animal['feeding_type'] ?></p></li>
+                    <li><p>Notre vétérinaire l’a visité ce matin.</p></li>
+                    <li><p>Etat de santé : </p></li>
+                    <li class="hearts">
+                        <?php for ($i = 0; $i < $animal['health']; $i++){ ?>
+                            <i class="bi bi-heart-fill"></i>
+                        <?php } ?>
+                        <?php for ($i = $animal['health']; $i < 5; $i++){ ?>
+                            <i class="bi bi-heart"></i>
+                        <?php } ?>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<?php } ?>

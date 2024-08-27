@@ -1,7 +1,5 @@
 <?php
-// include_once __DIR__.'/asset/pages/connection/pdo.php';
-
-$query = $pdo->query('SELECT * FROM biome');
+$query = $pdo->query('SELECT * FROM biomes');
 $biomes = $query->fetchAll(PDO::FETCH_ASSOC);
 $threeFirstBiomes = array_slice($biomes, 0, 3);
 ?>
