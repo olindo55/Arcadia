@@ -1,9 +1,16 @@
+
+
+
+
+
+
+
 <form class="container-fluid col-10 col-md-4 py-3" id="signin-form">
     <div class="col-10 pb-3">
-        <label for="login" class="form-label">Votre identifiant</label>
+        <label for="username" class="form-label">Votre identifiant</label>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend">@</span>
-          <input type="email" class="form-control" id="login" aria-describedby="inputGroupPrepend" required="">
+          <input type="email" class="form-control" id="username" aria-describedby="inputGroupPrepend" required="">
           <div class="valid-feedback">
               ok!
           </div>

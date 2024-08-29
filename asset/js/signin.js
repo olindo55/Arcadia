@@ -1,7 +1,7 @@
 // import { forEach } from "@splidejs/splide/src/js/utils";
 
 // get the inputs
-const inputLogin = document.getElementById('login');
+const inputLogin = document.getElementById('username');
 const inputPassword = document.getElementById('password');
 const btnSignin = document.getElementById('btnForm');
 
