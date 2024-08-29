@@ -1,3 +1,7 @@
+<?php
+require_once 'C:/Env/Workspace/Arcadia/asset/pages/config/config.php';
+?>
+
 <body>
     <header>
         <div class="main-nav" >
@@ -22,6 +26,7 @@
                         <i class="bi bi-person text-dark" style="font-size: 45px"></i>
                     </a>
                 </div>   
+                <p><?php echo (isset($_SESSION['user']['forename']) ? $_SESSION['user']['forename'] : 'Visiteur');?></p>
             </div>
             <div class="my-burger-button">
                 <i class="bi bi-list text-light" style="font-size: 33px"></i> <!-- burger icon -->
@@ -45,6 +50,7 @@
                 <a href="/signin">
                     <i class="bi bi-person text-dark" style="font-size: 45px"></i>
                 </a>
+                <p><?php echo $_SESSION['user']['forename']?></p>
             </div> 
         </div>
         <!-- end burger menu-->

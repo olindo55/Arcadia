@@ -1,6 +1,9 @@
 # Ignorer tous les fichiers .log
 *.log
 
+#Ignorer le fichier .env
+.env
+
 # Ignorer ces dossiers :
 /Design
 /Documentation
