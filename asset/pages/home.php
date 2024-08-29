@@ -1,4 +1,5 @@
-<?php include_once 'connection/pdo.php'; ?>
+<?php require_once 'config/config.php'; ?>
+
 <section id="scene-home">
     <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade my-carousel" data-bs-ride="carousel">
       <div class="carousel-inner">

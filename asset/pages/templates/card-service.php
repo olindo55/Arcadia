@@ -1,5 +1,5 @@
 <?php
-$query = $pdo->query('SELECT * FROM service');
+$query = DbConnection::getPdo()->query('SELECT * FROM service');
 $services = $query->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($services as $service) { ?>

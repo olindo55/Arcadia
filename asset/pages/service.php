@@ -1,11 +1,12 @@
-<?php include_once 'connection/pdo.php'; ?>
+<?php require_once 'config/config.php'; ?>
+
 <section class="service-hero">
     <h1>Nos services<span class="point">.</span></h1>
     <p>Bienvenue au Zoo Arcadia, un lieu dédié à la découverte et à la protection de la faune sauvage. Situé au cœur d’un environnement naturel exceptionnel, la forêt de Brocéliande,  notre zoo offre une multitude de services conçus pour rendre votre visite non seulement agréable, mais aussi éducative et inspirante. Que vous soyez un passionné de la nature, un amateur d'animaux ou une famille en quête d'aventures, nos services sont pensés pour répondre à vos besoins et surpasser vos attentes.</p>
 </section>
 <section class="all-services">
     <?php
-    $query = $pdo->query('SELECT * FROM service');
+    $query = DbConnection::getPdo()->query('SELECT * FROM service');
     $services = $query->fetchAll(PDO::FETCH_ASSOC);
     $i = 0;
     foreach ($services as $service) { ?>
