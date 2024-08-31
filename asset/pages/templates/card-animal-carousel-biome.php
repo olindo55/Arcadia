@@ -1,5 +1,5 @@
 <?php 
-use App\DbUtils;
+use App\Database\DbUtils;
 
 foreach ($animals as $animal) { ?>
     <div class="swiper-slide">

@@ -1,9 +1,18 @@
 <?php
-    require_once __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/vendor/autoload.php';
 
-    $pageName = $_GET['page'] ?? 'home';
-    $page = 'asset/pages/'.$pageName.'.php';
+$pageName = $_GET['page'] ?? 'home';
+$page = 'asset/pages/'.$pageName.'.php';
 
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $controllerName = 'App\\Controller\\'.ucfirst($pageName);
+    $controller = new $controllerName;
+    $result = $controller->managePostForm($_POST);
+    if ($result != ""){
+        $error = $result;
+    }
+}
+    
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -39,9 +48,9 @@
                     </ul>
                 </nav>
                 <div id="nav-buttons">
-                    <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href ='/contact'"><i class="bi bi-envelope"></i> Contactez-nous</button>
+                    <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href ='index.php?page=contact'"><i class="bi bi-envelope"></i> Contactez-nous</button>
                     <div id="button-login">
-                        <a href="/signin">
+                        <a href="index.php?page=signin">
                             <i class="bi bi-person text-dark" style="font-size: 45px"></i>
                         </a>
                     </div>   

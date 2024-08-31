@@ -1,5 +1,5 @@
 <?php
-use App\DbUtils;
+use App\Database\DbUtils;
 
 $query = DbUtils::getPdo()->query('SELECT * FROM biome');
 $biomes = $query->fetchAll(PDO::FETCH_ASSOC);

@@ -1,5 +1,5 @@
 <?php require_once 'src/config/config.php';
-use App\DbUtils;
+use App\Database\DbUtils;
 ?>
 
 <?php

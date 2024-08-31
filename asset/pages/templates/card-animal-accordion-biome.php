@@ -1,5 +1,5 @@
 <?php 
-    use App\DbUtils;
+   use App\Database\DbUtils;
 
     $i=0;    
     foreach ($animals as $animal) { 
