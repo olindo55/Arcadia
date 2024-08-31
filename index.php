@@ -134,7 +134,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             <div id="copyright">
                 <div>© Zoo Arcadia 2024</div>
-                <a href="index.php">Politique de gestion des cookies</a>
+                <a href="index.php?page=cookie">Politique de gestion des cookies</a>
             </div>
         </footer>
 
