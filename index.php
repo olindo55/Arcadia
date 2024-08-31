@@ -5,13 +5,14 @@ $pageName = $_GET['page'] ?? 'home';
 $page = 'app/Views/'.$pageName.'.php';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $controllerName = 'App\\Controller\\'.ucfirst($pageName);
+    $controllerName = 'App\\Controllers\\'.ucfirst($pageName);
     $controller = new $controllerName;
     $result = $controller->managePostForm($_POST);
     if ($result != ""){
         $error = $result;
     }
 }
+
     
 ?>
 <!DOCTYPE html>
@@ -145,8 +146,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <!-- <script type="module" src="/router/router.js"></script> -->
     <!-- Management of script's page -->
      <?php 
-    $jsFile = 'asset/js/'.$pageName.'.js';
-    echo '<script type="module" src="'.$jsFile.'"></script>' ;  
+        $jsFile = 'asset/js/'.$pageName.'.js';
+        echo '<script type="module" src="'.$jsFile.'"></script>' ;  
      ?>
 </body>
 </html>

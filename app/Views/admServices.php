@@ -1,6 +1,5 @@
 <?php
-require_once '../config/config.php';
-?>
+require_once 'app/config/config.php' ?>
 
 <div class="container-fluid col-8">
     <h1>Gestion des services</h1>
@@ -46,23 +45,13 @@ require_once '../config/config.php';
         </thead>
         <tbody >
             <!--injection via php--> 
-        <?php
-            $query = DbConnection::getPdo()->query('SELECT * FROM service');
-            $services = $query->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($services as $service) { ?>
-            <tr>
-                <td><?php echo $service['name'] ?></td>
-                <td><?php echo $service['description'] ?></td>
-                <td><?php echo $service['image_url'] ?></td>
-                <td><?php echo $service['image_alt'] ?></td>
-                <td>
-                    <i class="bi bi-pencil-square"></i>
-                    <i class="bi bi-trash"></i>
-                </td>
-            </tr>
-            <?php 
-            } ?>
-            
+            <?php
+                $pageName = $_GET['page'] ?? 'home';
+                $controllerName = 'App\\Controllers\\'.ucfirst($pageName);
+                $controller = new $controllerName;
+                $result = $controller->injection();
+                echo $rresult->injection();
+            ?>
         </tbody>
     </table>
 </div>
