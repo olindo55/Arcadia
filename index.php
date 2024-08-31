@@ -7,7 +7,13 @@ $page = 'app/Views/'.$pageName.'.php';
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $controllerName = 'App\\Controllers\\'.ucfirst($pageName);
     $controller = new $controllerName;
-    $result = $controller->managePostForm($_POST);
+    if(isset($_FILES)){
+        $result = $controller->managePostForm($_POST, $_FILES);
+    }
+    else {
+        $result = $controller->managePostForm($_POST);
+    }
+    
     if ($result != ""){
         $error = $result;
     }

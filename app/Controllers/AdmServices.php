@@ -26,33 +26,49 @@ class AdmServices
         return $html;
     }
 
-    public function managePostForm($post)
+    public function managePostForm($post, $files)
     {
         if (isset($post['name']) ||
             isset($post['description']) ||
-            // isset($_FILE['upload']) ||
+            isset($_FILE['upload']) ||
             isset($post['alt'])) 
             {
-                $query = DbUtils::getPdo()->prepare('INSERT INTO service
-                    (name, description/*, image_url*/, image_alt)
-                    VALUES (
-                        :name,
-                        :description,
-                        -- :upload,
-                        :alt
-                    )
-                ');
+                $uploadDir = 'asset/uploads/'; 
+                $uploadFile = $uploadDir . basename($files['upload']['name']);
+
+                $imageFileType = strtolower(pathinfo($uploadFile, PATHINFO_EXTENSION));
+                $check = getimagesize($files['upload']['tmp_name']);
+
+                if($check) {
+                    if (move_uploaded_file($files['upload']['tmp_name'], $uploadFile)) {
+
+                        $query = DbUtils::getPdo()->prepare('INSERT INTO service
+                            (name, description, image_url, image_alt)
+                            VALUES (
+                                :name,
+                                :description,
+                                :upload,
+                                :alt
+                            )
+                        ');
         
-                $query->bindValue('name', DbUtils::protectDbData($post['name']));
-                $query->bindValue('description', DbUtils::protectDbData($post['description']));
-                // $query->bindParam('upload', $post['upload']);
-                $query->bindValue('alt', DbUtils::protectDbData($post['alt']));
-                $query->execute();
-        
-                // header('Location: /adm-services');
+                    $query->bindValue('name', DbUtils::protectDbData($post['name']));
+                    $query->bindValue('description', DbUtils::protectDbData($post['description']));
+                    $query->bindValue('upload', $uploadFile);
+                    $query->bindValue('alt', DbUtils::protectDbData($post['alt']));
+                    $query->execute();
+            
+                    echo "upload reussi.";
                 
-            } else  {
-                echo 'Champs vide. Insertion impossible !';
+                } else {
+                    echo "Erreur lors de l'upload du fichier.";
+                }
+            } else {
+                echo "Le fichier n'est pas une image.";
             }
+            
+        } else {
+            echo 'Champs vide. Insertion impossible !';
+        }
     }
 }
