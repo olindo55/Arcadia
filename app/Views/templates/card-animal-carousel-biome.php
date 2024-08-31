@@ -1,4 +1,7 @@
-<?php foreach ($animals as $animal) { ?>
+<?php 
+use App\Database\DbUtils;
+
+foreach ($animals as $animal) { ?>
     <div class="swiper-slide">
         <div class="carrousel-animal-card">
             <img src=<?php echo $animal['image_url'] ?> alt=<?php echo $animal['image_alt'] ?>>
@@ -7,7 +10,7 @@
                 <ul>
                     <li><p>Race: 
                         <?php
-                                    $queryBreed = DbConnection::getPdo()->prepare('SELECT name FROM breed WHERE id = :animal_breed_id LIMIT 1;');
+                                    $queryBreed = DbUtils::getPdo()->prepare('SELECT name FROM breed WHERE id = :animal_breed_id LIMIT 1;');
                                     $queryBreed->bindParam(':animal_breed_id', $animal['breed_id']);
                                     $queryBreed->execute();
                                     $breed = $queryBreed->fetch(PDO::FETCH_ASSOC);
@@ -21,7 +24,7 @@
                     </p></li>
                     <li><p>Habitats :  
                                 <?php
-                                    $queryBiome = DbConnection::getPdo()->prepare('SELECT name FROM biome WHERE id = :animal_biome_id');
+                                    $queryBiome = DbUtils::getPdo()->prepare('SELECT name FROM biome WHERE id = :animal_biome_id');
                                     $queryBiome->bindParam(':animal_biome_id', $animal['biome_id']);
                                     $queryBiome->execute();
                                     $biome = $queryBiome->fetch(PDO::FETCH_ASSOC);
@@ -35,7 +38,7 @@
                     </p></li>
                     <!-- according with feeding -->
                     <?php
-                                    $queryFood = DbConnection::getPdo()->prepare('SELECT * FROM feeding WHERE animal_id = :animal_id LIMIT 1');
+                                    $queryFood = DbUtils::getPdo()->prepare('SELECT * FROM feeding WHERE animal_id = :animal_id LIMIT 1');
                                     $queryFood->bindParam(':animal_id', $animal['id']);
                                     $queryFood->execute();
                                     $food = $queryFood->fetch(PDO::FETCH_ASSOC);
@@ -49,7 +52,7 @@
 
                     <!-- according with vet_report -->
                     <?php 
-                        $queryScore = DbConnection::getPdo()->prepare('SELECT * FROM vet_report WHERE animal_id = :animal_id LIMIT 1');
+                        $queryScore = DbUtils::getPdo()->prepare('SELECT * FROM vet_report WHERE animal_id = :animal_id LIMIT 1');
                         $queryScore->bindParam(':animal_id', $animal['id']);
                         $queryScore->execute();
                         $vet_report = $queryScore->fetch(PDO::FETCH_ASSOC);

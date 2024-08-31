@@ -1,5 +1,7 @@
 <?php
-$query = DbConnection::getPdo()->query('SELECT * FROM service');
+use App\Database\DbUtils;
+
+$query = DbUtils::getPdo()->query('SELECT * FROM service');
 $services = $query->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($services as $service) { ?>

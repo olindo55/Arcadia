@@ -1,4 +1,4 @@
-import Service from '../class/Service.js';
+import Service from './class/Service.js';
 
 let services = [];
 
@@ -15,10 +15,48 @@ rows.forEach(row => {
     services.push(newService);
 });
 // Afficher les données dans la console
-services.forEach(function(service) {
-    const serviceData = service.getService();
-    console.log(`Nom: ${serviceData[0]}, Alt: ${serviceData[3]}`);
-});
+// services.forEach(function(service) {
+//     const serviceData = service.getService();
+//     console.log(`Nom: ${serviceData[0]}, Alt: ${serviceData[3]}`);
+// });
+
+
+document.getElementById('sort-name')
+    .addEventListener('click', () => sortName(table));
+
+function sortName(table){
+    const tbody = table.tBodies[0];
+    const rows = Array.from(tbody.rows);
+
+    const icon = document.getElementById('sort-icon');
+    let ascending = icon.classList.contains('bi-sort-alpha-down');
+
+    // Sort the rows 
+    rows.sort((a, b) => {
+        const cellA = a.cells[0].textContent.trim().toLowerCase();
+        const cellB = b.cells[0].textContent.trim().toLowerCase();
+
+        if (ascending) {
+            return cellA.localeCompare(cellB); // Ascendant
+        } else {
+            return cellB.localeCompare(cellA); // Descendant
+        }
+    });
+
+    rows.forEach(row => tbody.appendChild(row));
+
+    // Icon toogle
+    if (ascending) {
+        icon.classList.remove('bi-sort-alpha-down');
+        icon.classList.add('bi-sort-alpha-down-alt');
+    } else {
+        icon.classList.remove('bi-sort-alpha-down-alt');
+        icon.classList.add('bi-sort-alpha-down');
+    }
+}
+
+
+
 
 // // EventListener for button 'Ajouter'
 // document.getElementById('newService')
