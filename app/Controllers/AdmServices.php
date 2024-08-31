@@ -9,7 +9,7 @@ class AdmServices
     {
         // Get data from DB
         $query = DbUtils::getPdo()->query('SELECT * FROM service');
-        $services = $query->fetchAll(PDO::FETCH_ASSOC);
+        $services = $query->fetchAll(\PDO::FETCH_ASSOC);
         
         // Creat HTML for each service
         $html = '';

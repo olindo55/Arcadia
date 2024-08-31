@@ -50,7 +50,7 @@ require_once 'app/config/config.php' ?>
                 $controllerName = 'App\\Controllers\\'.ucfirst($pageName);
                 $controller = new $controllerName;
                 $result = $controller->injection();
-                echo $rresult->injection();
+                echo $result;
             ?>
         </tbody>
     </table>
