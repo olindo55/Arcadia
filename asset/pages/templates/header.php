@@ -6,7 +6,7 @@ require_once 'C:/Env/Workspace/Arcadia/asset/pages/config/config.php';
     <header>
         <div class="main-nav" >
             <div id="logo" onclick="window.location.href ='/'">
-                <img src="./asset/images/logo/print_blur.png" alt="Logo du Zoo Arcadia représentant une empreinte de mammifère"></img>
+                <img src="./asset/images/logo/print_blur.png" alt="Logo du Zoo Arcadia représentant une empreinte de mammifère">
                 <div>
                     <h1>Zoo Arcadia</h1>
                     <h2>pour la Faune, par Nature</h2>
