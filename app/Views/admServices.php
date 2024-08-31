@@ -30,12 +30,11 @@ require_once 'app/config/config.php' ?>
 
     <br><br><br><br><br>
 
-
     <!-- <input type="text" id="search" placeholder="Recherche..."> -->
     <table id="list-service"  class="table table-hover">
         <thead>
             <tr class="table-primary">
-                <th><i class="bi bi-sort-alpha-down"></i> Nom</th> 
+                <th id="sort-name"><i id="sort-icon" class="bi bi-sort-alpha-down"></i> Nom</th> 
                 <!-- <i class="bi bi-sort-alpha-down-alt"></i> -->
                 <th>Description</th>
                 <th>Image</th>
@@ -55,4 +54,4 @@ require_once 'app/config/config.php' ?>
         </tbody>
     </table>
 </div>
-<script type="module" src="/asset/js/admin/services.js"></script>
+<!-- <script type="module" src="/asset/js/admin/services.js"></script> -->
