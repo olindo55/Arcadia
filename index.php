@@ -2,7 +2,7 @@
 require_once __DIR__.'/vendor/autoload.php';
 
 $pageName = $_GET['page'] ?? 'home';
-$page = 'asset/pages/'.$pageName.'.php';
+$page = 'src/View/'.$pageName.'.php';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $controllerName = 'App\\Controller\\'.ucfirst($pageName);
