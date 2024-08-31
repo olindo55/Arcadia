@@ -8,15 +8,15 @@ export const allRoutes = [
     new Route("/cookie", "Cookie", "/asset/pages/cookie.php",),
     new Route("/biome", "Les animaux et leurs habitats", "/asset/pages/biome.php","/asset/js/biome.js"),
     new Route("/signin", "Connexion", "/asset/pages/admin/signin.php","/asset/js/signin.js"),
-    new Route("/admin/animal", "Admin - Animaux", "/asset/pages/admin/animal.php",),
-    new Route("/admin/biome", "Admin - Habitats", "/asset/pages/admin/biome.php",),
-    new Route("/admin/comments", "Admin - Commentaires", "/asset/pages/admin/comments.php",),
-    new Route("/admin/feeding", "Admin - Nourrissage", "/asset/pages/admin/feeding.php",),
-    new Route("/admin/grant", "Admin - Droits et accès", "/asset/pages/admin/grant.php",),
-    new Route("/admin/opening", "Admin - Horaires", "/asset/pages/admin/opening.php",),
-    new Route("/admin/services", "Admin - Services", "/asset/pages/admin/services.php",),
-    new Route("/admin/vet_report", "Admin - Rapports vetérinaires", "/asset/pages/admin/vetreport.php",),
-    new Route("/test", "test", "/asset/pages/test.php",)////test
+    new Route("/adm-animal", "Admin - Animaux", "/asset/pages/admin/animal.php",),
+    new Route("/adm-biome", "Admin - Habitats", "/asset/pages/admin/biome.php",),
+    new Route("/adm-comments", "Admin - Commentaires", "/asset/pages/admin/comments.php",),
+    new Route("/adm-feeding", "Admin - Nourrissage", "/asset/pages/admin/feeding.php",),
+    new Route("/adm-grant", "Admin - Droits et accès", "/asset/pages/admin/grant.php",),
+    new Route("/adm-opening", "Admin - Horaires", "/asset/pages/admin/opening.php",),
+    new Route("/adm-services", "Admin - Services", "/asset/pages/admin/services.php","/asset/js/admin/services.js"),
+    new Route("/adm-vet_report", "Admin - Rapports vetérinaires", "/asset/pages/admin/vetreport.php",),
+    // new Route("/test", "test", "/asset/pages/test.php",)////test
 ];
 
 //The title
