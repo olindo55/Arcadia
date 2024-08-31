@@ -1,7 +1,9 @@
-<?php include_once 'config/config.php'; ?>
+<?php require_once 'src/config/config.php';
+use App\DbUtils;
+?>
 
 <?php
-$queryBiomes = DbConnection::getPdo()->query('SELECT * FROM biome');
+$queryBiomes = DbUtils::getPdo()->query('SELECT * FROM biome');
 $biomes = $queryBiomes->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -23,7 +25,7 @@ $biomes = $queryBiomes->fetchAll(PDO::FETCH_ASSOC);
         <div class="accordion accordion-flush" id="accordionFlush">
             <!-- cards animal -->
             <?php 
-                $queryAnimals = DbConnection::getPdo()->prepare('SELECT * FROM animal WHERE biome_id = (SELECT id FROM biome WHERE name = :biome_name)');
+                $queryAnimals = DbUtils::getPdo()->prepare('SELECT * FROM animal WHERE biome_id = (SELECT id FROM biome WHERE name = :biome_name)');
                 $queryAnimals->bindParam(':biome_name', $biome['name']);
                 $queryAnimals->execute();
                 $animals = $queryAnimals->fetchAll(PDO::FETCH_ASSOC);

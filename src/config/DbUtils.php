@@ -1,6 +1,10 @@
 <?php
 
-class DbConnection
+namespace App;
+
+use PDO;
+
+class DbUtils
 {
     const DSN = 'mysql:host=localhost;dbname=olindo55_arcadia;port=3306';
     const USER = 'root';

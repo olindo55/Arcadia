@@ -1,5 +1,4 @@
-    
-    <?php require_once 'config/config.php'; ?>
+<?php require_once 'src/config/config.php' ?>
 
     <div id="cookie">
         <h1>Politique de gestion des cookies</h1>
@@ -31,5 +30,5 @@
         <p>Nous pouvons être amenés à modifier cette politique de cookies de temps à autre. Toutes les modifications seront publiées sur cette page et prendront effet immédiatement. Nous vous encourageons à consulter cette politique régulièrement pour rester informé de la manière dont nous utilisons les cookies.</p>
 
         <h2>5. Contact</h2>
-        <p>Si vous avez des questions ou des préoccupations concernant notre utilisation des cookies, n'hésitez pas à nous contacter via le formulaire de <a href="/#form-comment">la page d'accueil</a>.</p>
+        <p>Si vous avez des questions ou des préoccupations concernant notre utilisation des cookies, n'hésitez pas à nous contacter via le formulaire de <a href="index.php?page=home">la page d'accueil</a>.</p>
     </div>

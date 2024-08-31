@@ -1,4 +1,4 @@
-<?php require_once 'config/config.php'; ?>
+<?php require_once 'src/config/config.php' ?>
 
 <form class="container-fluid col-10 col-md-4 py-3 contact-form" >
     <div class="col-10 pb-3">

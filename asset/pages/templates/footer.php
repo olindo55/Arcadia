@@ -1,4 +1,7 @@
-    </main>
+<?php 
+namespace App;
+?>
+</main>
 <footer>
         <div id="my-container">
             <div id="opening">

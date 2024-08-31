@@ -1,4 +1,5 @@
 <?php
+namespace App;
 require_once 'C:/Env/Workspace/Arcadia/asset/pages/config/config.php';
 ?>
 
