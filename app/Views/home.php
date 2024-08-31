@@ -1,4 +1,4 @@
-<?php require_once 'src/config/config.php' ?>
+<?php require_once 'app/config/config.php' ?>
 
 <section id="scene-home">
     <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade my-carousel" data-bs-ride="carousel">

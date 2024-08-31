@@ -2,7 +2,7 @@
     "name": "julien.martinati/arcadia",
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "app/"
         }
     },
     "require": {

@@ -2,7 +2,7 @@
 require_once __DIR__.'/vendor/autoload.php';
 
 $pageName = $_GET['page'] ?? 'home';
-$page = 'src/View/'.$pageName.'.php';
+$page = 'app/Views/'.$pageName.'.php';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $controllerName = 'App\\Controller\\'.ucfirst($pageName);
@@ -141,8 +141,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <!-- Script -->
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> <!-- swiper -->
-    <script type="module" src="/asset/js/script.js"></script>
-    <script type="module" src="/router/router.js"></script>
+    <script type="module" src="/asset/js/menu.js"></script>
+    <!-- <script type="module" src="/router/router.js"></script> -->
+    <!-- Management of script's page -->
+     <?php 
+    $jsFile = 'asset/js/'.$pageName.'.js';
+    echo '<script type="module" src="'.$jsFile.'"></script>' ;  
+     ?>
 </body>
 </html>
 

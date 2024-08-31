@@ -1,4 +1,4 @@
-<?php require_once 'src/config/config.php';
+<?php require_once 'app/config/config.php';
 use App\Database\DbUtils;
 ?>
 

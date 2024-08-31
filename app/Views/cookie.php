@@ -1,4 +1,4 @@
-<?php require_once 'src/config/config.php' ?>
+<?php require_once 'app/config/config.php' ?>
 
     <div id="cookie">
         <h1>Politique de gestion des cookies</h1>
