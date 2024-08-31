@@ -4,7 +4,7 @@ require_once 'app/config/config.php' ?>
 <div class="container-fluid col-8">
     <h1>Gestion des services</h1>
     <h3>Ajouter un service</h3>
-    <form method="post"action="form_validation_service.php" id="newService">
+    <form method="post" action="index.php?page=admServices" id="newService" enctype="multipart/form-data">
         <fieldset>
         <legend>Ajouter un service</legend>
             <div class="mb-3">
@@ -13,7 +13,7 @@ require_once 'app/config/config.php' ?>
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="5"></textarea>
+                <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
             </div>
             <div class="mb-3">
                 <label for="upload" class="form-label">Télécharger une image</label>

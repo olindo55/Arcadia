@@ -25,4 +25,34 @@ class AdmServices
         }
         return $html;
     }
+
+    public function managePostForm($post)
+    {
+        if (isset($post['name']) ||
+            isset($post['description']) ||
+            // isset($_FILE['upload']) ||
+            isset($post['alt'])) 
+            {
+                $query = DbUtils::getPdo()->prepare('INSERT INTO service
+                    (name, description/*, image_url*/, image_alt)
+                    VALUES (
+                        :name,
+                        :description,
+                        -- :upload,
+                        :alt
+                    )
+                ');
+        
+                $query->bindValue('name', DbUtils::protectDbData($post['name']));
+                $query->bindValue('description', DbUtils::protectDbData($post['description']));
+                // $query->bindParam('upload', $post['upload']);
+                $query->bindValue('alt', DbUtils::protectDbData($post['alt']));
+                $query->execute();
+        
+                // header('Location: /adm-services');
+                
+            } else  {
+                echo 'Champs vide. Insertion impossible !';
+            }
+    }
 }
