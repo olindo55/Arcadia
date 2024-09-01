@@ -79,21 +79,51 @@ table.addEventListener('click', function(event) {
         }
     } else if (event.target.classList.contains('bi-pencil-square')){
         const row = event.target.closest('tr');
-            const cells = row.querySelectorAll('td');
+        const cells = row.querySelectorAll('td');
 
-            // Passer les cellules en mode édition
-            cells.forEach((cell, index) => {
-                if (index < cells.length - 1) { // Exclure la dernière colonne (actions)
-                    const text = cell.textContent;
-                    cell.innerHTML = `<input type="text" value="${text}" />`;
+        // Cells in edition mode
+        cells.forEach((cell, index) => {
+            if (index < cells.length - 1) { // Exclude the last columne
+                const text = cell.textContent;
+                cell.innerHTML = `<input class=" col-12 edit-mode" type="text" value="${text}" />`;
+            }
+        });
+
+        // Masquer les icônes d'action
+        const actionCell = cells[cells.length - 1]
+        actionCell.querySelectorAll('.bi-pencil-square, .bi-trash').forEach(icon => {
+            icon.classList.add('hidden');
+        });
+        actionCell.querySelectorAll('.bi-x-circle, .bi-floppy').forEach(icon => {
+            icon.classList.remove('hidden');
+        });
+
+    } else if (event.target.classList.contains('bi-x-circle')){
+        const row = event.target.closest('tr');
+        const cells = row.querySelectorAll('td');
+
+        // Cells view mode
+        cells.forEach((cell, index) => {
+            if (index < cells.length - 1) { // Exclude the last columne
+                const input = cell.querySelector('input');
+                if (input) {
+                    cell.innerHTML = input.value;
                 }
-            });
+            }
+        });
 
-            // Ajouter un bouton "Sauvegarder" à la ligne
-            const saveButton = document.createElement('button');
-            saveButton.textContent = 'Sauvegarder';
-            saveButton.classList.add('save-button');
-            row.appendChild(saveButton);
+        // Masquer les icônes d'action
+        const actionCell = cells[cells.length - 1]
+        actionCell.querySelectorAll('.bi-pencil-square, .bi-trash').forEach(icon => {
+            icon.classList.remove('hidden');
+        });
+        actionCell.querySelectorAll('.bi-x-circle, .bi-floppy').forEach(icon => {
+            icon.classList.add('hidden');
+        });
+    
+
+
+            
 
             // Gestion du clic sur le bouton "Sauvegarder"
             saveButton.addEventListener('click', () => {

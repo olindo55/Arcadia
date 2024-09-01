@@ -19,7 +19,7 @@ class AdmServices
             $html .= '<td>' . $service['description'] . '</td>';
             $html .= '<td>' . $service['image_url']. '</td>';
             $html .= '<td>' . $service['image_alt'] . '</td>';
-            $html .= '<td>' .'<i class="bi bi-pencil-square"></i>'.'<i class="bi bi-trash" data-id="' . $service['id'] . '"></i>' . '</td>';
+            $html .= '<td class="icon-cell">' .'<i class="bi bi-pencil-square"></i>'.'<i class="bi bi-trash" data-id="' . $service['id'] . '"></i>'.'<i class="bi bi-x-circle hidden"></i>'.'<i class="bi bi-floppy hidden"></i>' . '</td>';
             $html .= '</tr>';
         }
         return $html;

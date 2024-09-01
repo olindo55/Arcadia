@@ -14,3 +14,13 @@
     box-shadow: 0 4px 4px #00000025;
     padding: 20px 20px;
 }  
+
+table{
+    i{
+        cursor: pointer;
+        font-size : 1.5rem;
+    }
+    .hidden{
+        display: none;
+    }
+}
