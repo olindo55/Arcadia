@@ -4,7 +4,6 @@ import MyToast from './class/MyToast.js';
 
 let services = [];
 
-let confirmModal;
 document.addEventListener('DOMContentLoaded', () => {
     confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
 });
@@ -223,30 +222,3 @@ table.addEventListener('click', function(event) {
         }
     }    
 });
-
-
-
-// --------------------------
-// ------   Alert   ---------
-// --------------------------
-
-// // manage the toast
-// function showToast(message, type = 'success') {
-//     const toastContainer = document.getElementById('toast-container');
-//     const toastElement = document.createElement('div');
-    
-//     toastElement.className = `toast align-items-center text-white bg-${type} border-0`;
-//     toastElement.innerHTML = `
-//         <div class="d-flex">
-//             <div class="toast-body">
-//                 ${message}
-//             </div>
-//             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-//         </div>`;
-    
-//     toastContainer.appendChild(toastElement);
-
-//     const toast = new bootstrap.Toast(toastElement);
-//     toast.show();
-// }
-
