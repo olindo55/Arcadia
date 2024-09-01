@@ -49,6 +49,30 @@ require_once 'app/config/config.php' ?>
                 echo $result;
             ?>
         </tbody>
-    </table>
+    </table> 
 </div>
-<!-- <script type="module" src="/asset/js/admin/services.js"></script> -->
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal" id="confirmModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalBasicLabel">Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body">
+                Êtes-vous sûr de vouloir supprimer ce service?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Supprimer</button>
+            </div>
+        </div>
+    </div>
+</div>
+

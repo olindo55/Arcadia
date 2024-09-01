@@ -55,28 +55,40 @@ table.addEventListener('click', function(event) {
         const serviceId = event.target.getAttribute('data-id');
         const row = event.target.closest('tr');
 
-        if (confirm('Êtes-vous sûr de vouloir supprimer cette ligne?')) {
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'app/Controllers/DeleteService.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    console.log('Réponse brute du serveur:', xhr.responseText); // Affichez la réponse brute
-                    try {
-                        const response = JSON.parse(xhr.responseText);
-                        if (response.success) {
-                            row.remove();
-                            alert('Ligne supprimée avec succès.');
-                        } else {
-                            alert('Erreur lors de la suppression: ' + response.error);
-                        }
-                    } catch (e) {
-                        console.error('Erreur lors de la conversion JSON:', e);
+        // Afficher la modal
+        const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+        confirmModal.show();
+
+        // Gestion du clic sur le bouton de confirmation dans la modal
+        document.getElementById('confirmDeleteButton').onclick = function() {
+            // AJAX for DELETE - start                
+                fetch('app/Controllers/DeleteService.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        'type': 'DELETE',
+                        'id': serviceId
+                    }).toString()
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        row.remove();
+                        alert('Ligne supprimée avec succès.');
+
+                    } else {
+                        alert('Erreur lors de la suppression du service.');
                     }
-                }
-            };
-            xhr.send('id=' + encodeURIComponent(serviceId));
+                })
+                .catch(error => console.error('Erreur:', error));
+            // AJAX for DELETE - Stop
+            
+            // Cacher la modal après la confirmation
+            confirmModal.hide()
         }
+
     } else if (event.target.classList.contains('bi-pencil-square')){
         const row = event.target.closest('tr');
         const cells = row.querySelectorAll('td');
@@ -135,6 +147,7 @@ table.addEventListener('click', function(event) {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: new URLSearchParams({
+                'type': 'UPDATE',
                 'id': serviceId,
                 'name': updatedData[0],
                 'description': updatedData[1],
