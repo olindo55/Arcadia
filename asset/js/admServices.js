@@ -53,27 +53,29 @@ function sortName(table){
 table.addEventListener('click', function(event) {
     if (event.target.classList.contains('bi-trash')) {
         const serviceId = event.target.getAttribute('data-id');
+        const row = event.target.closest('tr');
 
-        if (confirm('Êtes-vous sûr de vouloir supprimer ce service ?')) {
-            // Envoyer la requête AJAX pour supprimer l'élément
-            fetch(`/DeleteService.php`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: `id=${serviceId}&_method=DELETE`
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Supprimer la ligne du tableau
-                    const row = event.target.closest('tr');
-                    row.parentNode.removeChild(row);
-                } else {
-                    alert('Erreur lors de la suppression du service.');
+        if (confirm('Êtes-vous sûr de vouloir supprimer cette ligne?')) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'app/Controllers/DeleteService.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log('Réponse brute du serveur:', xhr.responseText); // Affichez la réponse brute
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+                        if (response.success) {
+                            row.remove();
+                            alert('Ligne supprimée avec succès.');
+                        } else {
+                            alert('Erreur lors de la suppression: ' + response.error);
+                        }
+                    } catch (e) {
+                        console.error('Erreur lors de la conversion JSON:', e);
+                    }
                 }
-            })
-            .catch(error => console.error('Erreur:', error));
+            };
+            xhr.send('id=' + encodeURIComponent(serviceId));
         }
     } else if (event.target.classList.contains('bi-pencil-square')){
         const row = event.target.closest('tr');
