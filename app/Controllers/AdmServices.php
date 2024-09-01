@@ -14,13 +14,12 @@ class AdmServices
         // Creat HTML for each service
         $html = '';
         foreach ($services as $service) {
-            $html .= '<tr>';
+            $html .= '<tr data-id="' . $service['id'] . '">';
             $html .= '<td>' . $service['name'] . '</td>';
             $html .= '<td>' . $service['description'] . '</td>';
             $html .= '<td>' . $service['image_url']. '</td>';
             $html .= '<td>' . $service['image_alt'] . '</td>';
-            $html .= '<td>' . $service['image_alt'] . '</td>';
-            $html .= '<td>' .'<i class="bi bi-pencil-square"></i>'.'<i class="bi bi-trash"></i>' . '</td>';
+            $html .= '<td>' .'<i class="bi bi-pencil-square"></i>'.'<i class="bi bi-trash" data-id="' . $service['id'] . '"></i>' . '</td>';
             $html .= '</tr>';
         }
         return $html;

@@ -14,12 +14,6 @@ rows.forEach(row => {
     );
     services.push(newService);
 });
-// Afficher les données dans la console
-// services.forEach(function(service) {
-//     const serviceData = service.getService();
-//     console.log(`Nom: ${serviceData[0]}, Alt: ${serviceData[3]}`);
-// });
-
 
 document.getElementById('sort-name')
     .addEventListener('click', () => sortName(table));
@@ -56,36 +50,80 @@ function sortName(table){
 }
 
 
+table.addEventListener('click', function(event) {
+    if (event.target.classList.contains('bi-trash')) {
+        const serviceId = event.target.getAttribute('data-id');
 
+        if (confirm('Êtes-vous sûr de vouloir supprimer ce service ?')) {
+            // Envoyer la requête AJAX pour supprimer l'élément
+            fetch(`/DeleteService.php`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `id=${serviceId}&_method=DELETE`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Supprimer la ligne du tableau
+                    const row = event.target.closest('tr');
+                    row.parentNode.removeChild(row);
+                } else {
+                    alert('Erreur lors de la suppression du service.');
+                }
+            })
+            .catch(error => console.error('Erreur:', error));
+        }
+    } else if (event.target.classList.contains('bi-pencil-square')){
+        const row = event.target.closest('tr');
+            const cells = row.querySelectorAll('td');
 
-// // EventListener for button 'Ajouter'
-// document.getElementById('newService')
-//     .addEventListener('submit', e => {
-//     e.preventDefault();
-//     servicesTableHTMLt()
-// });
+            // Passer les cellules en mode édition
+            cells.forEach((cell, index) => {
+                if (index < cells.length - 1) { // Exclure la dernière colonne (actions)
+                    const text = cell.textContent;
+                    cell.innerHTML = `<input type="text" value="${text}" />`;
+                }
+            });
 
-// function addService(){
-//     const form = document.getElementById("newService");
-//     const name = document.getElementById("name").value;
-//     const description = document.getElementById("description").value;
-//     // à implemanter pour l'image
-//     const alt = document.getElementById("alt").value;
+            // Ajouter un bouton "Sauvegarder" à la ligne
+            const saveButton = document.createElement('button');
+            saveButton.textContent = 'Sauvegarder';
+            saveButton.classList.add('save-button');
+            row.appendChild(saveButton);
 
-//     if (name != "" && description != "" && alt != ""){
-//         let newService = new Service(name, prenom, telephone);
-//         contacts.push(newContact);
-            
-//         // showContacts(); 
-//         contactTableHTML(newContact);
-    
-//         // efface les inputs
-//             form.reset();
-//     }
-//     else{
-//         window.alert("Merci de renseigner tous les champs.")
-//     }
-    
+            // Gestion du clic sur le bouton "Sauvegarder"
+            saveButton.addEventListener('click', () => {
+                const inputs = row.querySelectorAll('input');
+                const updatedData = Array.from(inputs).map(input => input.value);
+                const serviceId = row.querySelector('.bi-trash').getAttribute('data-id');
+
+                fetch(`/UpdateService.php`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `id=${serviceId}&name=${encodeURIComponent(updatedData[0])}&description=${encodeURIComponent(updatedData[1])}&alt=${encodeURIComponent(updatedData[2])}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Mettre à jour les cellules avec les nouvelles données
+                        inputs.forEach((input, index) => {
+                            cells[index].textContent = input.value;
+                        });
+                        row.removeChild(saveButton);
+                    } else {
+                        alert('Erreur lors de la mise à jour du service.');
+                    }
+                })
+                .catch(error => console.error('Erreur:', error));
+            });
+
+    }
+});
+
     
 // }
 // // affichage dans la console
