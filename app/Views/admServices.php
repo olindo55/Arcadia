@@ -52,29 +52,4 @@ require_once 'app/config/config.php' ?>
     </table> 
 </div>
 
-<!-- Modal -->
-<div class="modal" id="confirmModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalBasicLabel">Confirmation</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-            </div>
-            <div class="modal-body">
-                Êtes-vous sûr de vouloir supprimer ce service?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Supprimer</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Toast -->
-<div  role="alert" aria-live="assertive" aria-atomic="true" class="position-fixed top-0 end-0 p-3">
-  <div id="toast-container">
-    <!-- Toasts will be dynamically added by php -->
-  </div>
-</div>
 

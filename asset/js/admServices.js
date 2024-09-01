@@ -2,8 +2,16 @@ import Service from './class/Service.js';
 
 let services = [];
 
+let confirmModal;
+document.addEventListener('DOMContentLoaded', () => {
+    confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+});
+
+
 const table = document.getElementById('list-service');
 const rows = table.querySelectorAll('tbody tr');
+const spinnerContainer = document.getElementById('spinner-container');
+
 rows.forEach(row => {
     const cells = row.querySelectorAll('td');
     const newService = new Service(
@@ -48,50 +56,60 @@ function sortName(table){
         icon.classList.add('bi-sort-alpha-down');
     }
 }
-
-
 table.addEventListener('click', function(event) {
+    // DELETE
     if (event.target.classList.contains('bi-trash')) {
         const serviceId = event.target.getAttribute('data-id');
         const row = event.target.closest('tr');
 
-        // Afficher la modal
-        const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
-        confirmModal.show();
+        // Modal show
+        showConfirmModal(
+            'Êtes-vous sûr de vouloir supprimer ce service ?',
+            'Supprimer'
+        )   
 
-        // Gestion du clic sur le bouton de confirmation dans la modal
-        document.getElementById('confirmDeleteButton').onclick = function() {
+        // Clic on confirm button (modal)
+        document.getElementById('confirmButton').onclick = function() {
+            spinnerContainer.classList.remove('d-none');
             // AJAX for DELETE - start                
-                fetch('app/Controllers/DeleteService.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: new URLSearchParams({
-                        'type': 'DELETE',
-                        'id': serviceId
-                    }).toString()
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        row.remove();
-                        showToast('Ligne supprimée avec succès.', 'success');
+            fetch('app/Controllers/DeleteService.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'type': 'DELETE',
+                    'id': serviceId
+                }).toString()
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    row.remove();
+                    showToast('Ligne supprimée avec succès.', 'success');
+                    spinnerContainer.classList.add('d-none');
+                } else {
+                    showToast('Erreur lors de la suppression du service.', 'danger');
+                    spinnerContainer.classList.add('d-none');
+                }
+            })
+            .catch(error => {
+                showToast('Erreur lors de la suppression du service.', 'danger');//console.error('Erreur:', error));
+                spinnerContainer.classList.add('d-none');
+            })
+            // AJAX for DELETE - end
 
-                    } else {
-                        showToast('Erreur lors de la suppression du service.', 'danger');
-                    }
-                })
-                .catch(error => showToast('Erreur lors de la suppression du service.', 'danger'));//console.error('Erreur:', error));
-            // AJAX for DELETE - Stop
-
-            // Cacher la modal après la confirmation
             confirmModal.hide()
         }
 
-    } else if (event.target.classList.contains('bi-pencil-square')){
+    } 
+    // UPDATE edition
+    else if (event.target.classList.contains('bi-pencil-square')){
         const row = event.target.closest('tr');
         const cells = row.querySelectorAll('td');
+
+        // original data in var just in case of cancel
+        row.dataset.originalValues = JSON.stringify(Array.from(cells).slice(0, -1).map(cell => cell.textContent.trim()));
 
         // Cells in edition mode
         cells.forEach((cell, index) => {
@@ -101,7 +119,7 @@ table.addEventListener('click', function(event) {
             }
         });
 
-        // Masquer les icônes d'action
+        // Hide the other icons
         const actionCell = cells[cells.length - 1]
         actionCell.querySelectorAll('.bi-pencil-square, .bi-trash').forEach(icon => {
             icon.classList.add('hidden');
@@ -109,22 +127,22 @@ table.addEventListener('click', function(event) {
         actionCell.querySelectorAll('.bi-x-circle, .bi-floppy').forEach(icon => {
             icon.classList.remove('hidden');
         });
-
-    } else if (event.target.classList.contains('bi-x-circle')){
+    } 
+    // UPDATE cancel
+    else if (event.target.classList.contains('bi-x-circle')){
         const row = event.target.closest('tr');
         const cells = row.querySelectorAll('td');
 
+        const originalValues = JSON.parse(row.dataset.originalValues);
+
         // Cells view mode
         cells.forEach((cell, index) => {
-            if (index < cells.length - 1) { // Exclude the last columne
-                const input = cell.querySelector('input');
-                if (input) {
-                    cell.innerHTML = input.value;
-                }
+            if (index < cells.length - 1) { // Exclude the last column
+                cell.textContent = originalValues[index];
             }
         });
 
-        // Masquer les icônes d'action
+        // Hide icoons
         const actionCell = cells[cells.length - 1]
         actionCell.querySelectorAll('.bi-pencil-square, .bi-trash').forEach(icon => {
             icon.classList.remove('hidden');
@@ -132,53 +150,84 @@ table.addEventListener('click', function(event) {
         actionCell.querySelectorAll('.bi-x-circle, .bi-floppy').forEach(icon => {
             icon.classList.add('hidden');
         });
-
-    } else if (event.target.classList.contains('bi-floppy')) {
+    } 
+    // UPDATE !
+    else if (event.target.classList.contains('bi-floppy')) {
         const row = event.target.closest('tr');
         const cells = row.querySelectorAll('td');
         const inputs = row.querySelectorAll('input');
         const updatedData = Array.from(inputs).map(input => input.value);
         const serviceId = row.querySelector('.bi-trash').getAttribute('data-id');
-        
-        // Envoyer les données au serveur pour mettre à jour la base de données
-        fetch('app/Controllers/UpdateService.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: new URLSearchParams({
-                'type': 'UPDATE',
-                'id': serviceId,
-                'name': updatedData[0],
-                'description': updatedData[1],
-                'image_url': updatedData[2],
-                'image_alt': updatedData[3]
-            }).toString()
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Mettre à jour les cellules avec les nouvelles données
-                inputs.forEach((input, index) => {
-                    cells[index].textContent = input.value;
-                });
-                // Masquer les icônes de sauvegarde et d'annulation et afficher les icônes d'action
-                const actionCell = cells[cells.length - 1];
-                actionCell.querySelectorAll('.bi-x-circle, .bi-floppy').forEach(icon => {
-                    icon.classList.add('hidden');
-                });
-                actionCell.querySelectorAll('.bi-pencil-square, .bi-trash').forEach(icon => {
-                    icon.classList.remove('hidden');
-                });
-            } else {
-                alert('Erreur lors de la mise à jour du service.');
-            }
-        })
-        .catch(error => console.error('Erreur:', error));
+
+        // Modal show
+        showConfirmModal(
+            'Êtes-vous sûr de vouloir modifier ce service ?',
+            'Modifier'
+        )   
+
+        // Clic on confirm button (modal)
+        document.getElementById('confirmButton').onclick = function() {
+            spinnerContainer.classList.remove('d-none');
+            // AJAX for UPDATE - start
+            fetch('app/Controllers/UpdateService.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'type': 'UPDATE',
+                    'id': serviceId,
+                    'name': updatedData[0],
+                    'description': updatedData[1],
+                    'image_url': updatedData[2],
+                    'image_alt': updatedData[3]
+                }).toString()
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update the cells with the new datas
+                    inputs.forEach((input, index) => {
+                        cells[index].textContent = input.value;
+                    });
+                    // Hide and show the icons
+                    const actionCell = cells[cells.length - 1];
+                    actionCell.querySelectorAll('.bi-x-circle, .bi-floppy').forEach(icon => {
+                        icon.classList.add('hidden');
+                    });
+                    actionCell.querySelectorAll('.bi-pencil-square, .bi-trash').forEach(icon => {
+                        icon.classList.remove('hidden');
+                    });
+                    showToast('Service mis à jour avec succès.', 'success');
+                    spinnerContainer.classList.add('d-none');
+                } else {
+                    showToast('Erreur lors de la mise à jour.', 'danger');
+                    spinnerContainer.classList.add('d-none');
+                }
+            })
+            .catch(error => console.error('Erreur:', error));
+            // AJAX for UPDATE - end
+
+            confirmModal.hide()
+        }
     }
 });
 
-// Fonction pour créer et afficher un toast
+// manage the modal
+function showConfirmModal(message, confirmButtonText) {
+    // Sélectionner les éléments de la modale
+    const modalBody = document.querySelector('.modal-body');
+    const confirmButton = document.getElementById('confirmButton');
+
+    // Modifier le texte de la modal
+    modalBody.textContent = message;
+    confirmButton.textContent = confirmButtonText;
+
+    // Afficher la modale
+    confirmModal.show();
+}
+
+// manage the toast
 function showToast(message, type = 'success') {
     const toastContainer = document.getElementById('toast-container');
     const toastElement = document.createElement('div');
@@ -190,12 +239,10 @@ function showToast(message, type = 'success') {
                 ${message}
             </div>
             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-    `;
+        </div>`;
     
     toastContainer.appendChild(toastElement);
 
-    // Afficher le toast
     const toast = new bootstrap.Toast(toastElement);
     toast.show();
 }

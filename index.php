@@ -91,7 +91,44 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             <!-- end burger menu-->
         </header>
         <main id="main-page">
+            <!-- Injection page - start-->
             <?php require_once $page ?>
+            <!-- Injection page - end-->
+
+            <!-- Modal -->
+            <div class="modal" id="confirmModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalBasicLabel">Confirmation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Annuler</button>
+                            <button type="button" class="btn btn-danger" id="confirmButton">...</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toast -->
+            <div  role="alert" aria-live="assertive" aria-atomic="true" class="position-fixed top-0 end-0 p-3">
+                <div id="toast-container">
+                    <!-- Toasts will be dynamically added by php -->
+                </div>
+            </div>
+
+            <!-- Spinner -->
+            <div id="spinner-container" class="d-none">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+
         </main>
         <footer>
             <div id="my-container">

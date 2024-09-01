@@ -12494,6 +12494,16 @@ body p {
   font-family: "Quicksand", sans-serif;
 }
 
+#spinner-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  width: 3rem;
+  height: 3rem;
+}
+
 header {
   width: 100%;
   background-color: #4e7a27;
