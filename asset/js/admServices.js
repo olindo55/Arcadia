@@ -1,9 +1,26 @@
 import Service from './class/Service.js';
+import MyModal from './class/MyModal.js';
+import MyToast from './class/MyToast.js';
 
 let services = [];
 
+document.addEventListener('DOMContentLoaded', () => {
+    confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+});
+const spinnerContainer = document.getElementById('spinner-container');
+
+
+
+
+
+
+// --------------------------
+// ------   Table   ---------
+// --------------------------
+
 const table = document.getElementById('list-service');
 const rows = table.querySelectorAll('tbody tr');
+
 rows.forEach(row => {
     const cells = row.querySelectorAll('td');
     const newService = new Service(
@@ -14,12 +31,6 @@ rows.forEach(row => {
     );
     services.push(newService);
 });
-// Afficher les données dans la console
-// services.forEach(function(service) {
-//     const serviceData = service.getService();
-//     console.log(`Nom: ${serviceData[0]}, Alt: ${serviceData[3]}`);
-// });
-
 
 document.getElementById('sort-name')
     .addEventListener('click', () => sortName(table));
@@ -54,130 +65,160 @@ function sortName(table){
         icon.classList.add('bi-sort-alpha-down');
     }
 }
+table.addEventListener('click', function(event) {
+    // DELETE
+    if (event.target.classList.contains('bi-trash')) {
+        const serviceId = event.target.getAttribute('data-id');
+        const row = event.target.closest('tr');
 
+        // Modal show
+        const deleteModal = new MyModal('Êtes-vous sûr de vouloir supprimer ce service ?', 'Supprimer');
+        deleteModal.show()
 
+        // Clic on confirm button (modal)
+        document.getElementById('confirmButton').onclick = function() {
+            spinnerContainer.classList.remove('d-none');
+            // AJAX for DELETE - start                
+            fetch('app/Controllers/DeleteService.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'type': 'DELETE',
+                    'id': serviceId
+                }).toString()
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    row.remove();
+                    const toast = new MyToast('Service supprimé avec succès.', 'success');
+                    toast.show();
+                    spinnerContainer.classList.add('d-none');
+                } else {
+                    const toast = new MyToast('Erreur lors de la suppression du service.', 'danger');
+                    toast.show();
+                    spinnerContainer.classList.add('d-none');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                spinnerContainer.classList.add('d-none');
+            })
+            // AJAX for DELETE - end
+            deleteModal.hide()
+        }
 
+    } 
+    // UPDATE edition
+    else if (event.target.classList.contains('bi-pencil-square')){
+        const row = event.target.closest('tr');
+        const cells = row.querySelectorAll('td');
 
-// // EventListener for button 'Ajouter'
-// document.getElementById('newService')
-//     .addEventListener('submit', e => {
-//     e.preventDefault();
-//     servicesTableHTMLt()
-// });
+        // original data in var just in case of cancel
+        row.dataset.originalValues = JSON.stringify(Array.from(cells).slice(0, -1).map(cell => cell.textContent.trim()));
 
-// function addService(){
-//     const form = document.getElementById("newService");
-//     const name = document.getElementById("name").value;
-//     const description = document.getElementById("description").value;
-//     // à implemanter pour l'image
-//     const alt = document.getElementById("alt").value;
+        // Cells in edition mode
+        cells.forEach((cell, index) => {
+            if (index < cells.length - 1) { // Exclude the last columne
+                const text = cell.textContent;
+                cell.innerHTML = `<input class=" col-12 edit-mode" type="text" value="${text}" />`;
+            }
+        });
 
-//     if (name != "" && description != "" && alt != ""){
-//         let newService = new Service(name, prenom, telephone);
-//         contacts.push(newContact);
-            
-//         // showContacts(); 
-//         contactTableHTML(newContact);
-    
-//         // efface les inputs
-//             form.reset();
-//     }
-//     else{
-//         window.alert("Merci de renseigner tous les champs.")
-//     }
-    
-    
-// }
-// // affichage dans la console
-// function showContacts(){ 
-//     let contact = [];
-//     for (const i of contacts) {
-//         contact = i.getPersonne();
-//         console.log(`Nom: ${i.name}, Prénom: ${i.forename}, Téléphone: ${i.phone}`);
-//     }
-// }
-// affichage d'un tableau en HTML
-// function servicesTableHTML(contact){
-//     // Sélectionne le tbody de la table avec l'ID 'list-contact'
-//     const myTable = document.querySelector("#list-contact tbody");
-    
-//     // Crée un nouvel élément <tr> pour ajouter une nouvelle ligne au tableau
-//     const newRow = document.createElement('tr');
+        // Hide the other icons
+        const actionCell = cells[cells.length - 1]
+        actionCell.querySelectorAll('.bi-pencil-square, .bi-trash').forEach(icon => {
+            icon.classList.add('hidden');
+        });
+        actionCell.querySelectorAll('.bi-x-circle, .bi-floppy').forEach(icon => {
+            icon.classList.remove('hidden');
+        });
+    } 
+    // UPDATE cancel
+    else if (event.target.classList.contains('bi-x-circle')){
+        const row = event.target.closest('tr');
+        const cells = row.querySelectorAll('td');
 
-//     // Crée et ajoute des cellules <td> pour chaque propriété du contact
-//     const tdName = document.createElement('td');
-//     tdName.innerText = contact.name;
-//     newRow.appendChild(tdName);
-    
-//     const tdForename = document.createElement('td');
-//     tdForename.innerText = contact.forename;
-//     newRow.appendChild(tdForename);
+        const originalValues = JSON.parse(row.dataset.originalValues);
 
-//     const tdPhone = document.createElement('td');
-//     tdPhone.innerText = contact.phone;
-//     newRow.appendChild(tdPhone);
+        // Cells view mode
+        cells.forEach((cell, index) => {
+            if (index < cells.length - 1) { // Exclude the last column
+                cell.textContent = originalValues[index];
+            }
+        });
 
-//     // Crée et ajoute une cellule <td> et ajoute 2 boutons
-//     const tdModif = document.createElement('td');
-//     tdModif.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
-//     tdModif.addEventListener('click', function() {modifContact(contact, newRow);});
-//     newRow.appendChild(tdModif);
+        // Hide icoons
+        const actionCell = cells[cells.length - 1]
+        actionCell.querySelectorAll('.bi-pencil-square, .bi-trash').forEach(icon => {
+            icon.classList.remove('hidden');
+        });
+        actionCell.querySelectorAll('.bi-x-circle, .bi-floppy').forEach(icon => {
+            icon.classList.add('hidden');
+        });
+    } 
+    // UPDATE !
+    else if (event.target.classList.contains('bi-floppy')) {
+        const row = event.target.closest('tr');
+        const cells = row.querySelectorAll('td');
+        const inputs = row.querySelectorAll('input');
+        const updatedData = Array.from(inputs).map(input => input.value);
+        const serviceId = row.querySelector('.bi-trash').getAttribute('data-id');
 
-//     const tdDelete = document.createElement('td');
-//     tdDelete.innerHTML ='<i class="fa-solid fa-trash"></i>';
-//     tdDelete.addEventListener('click', function() {newRow.remove();});
-//     newRow.appendChild(tdDelete);
+        // Modal show
+        const updateModal = new MyModal('Êtes-vous sûr de vouloir modifier ce service ?', 'Modifier');
+        updateModal.show()
 
-//     myTable.appendChild(newRow);
-// }
-
-// function modifContact(contact, row){
-//     const tdName = row.children[0];
-//     const tdForename = row.children[1];
-//     const tdPhone = row.children[2];
-//     const tdModif = row.children[3];  // Le bouton "Modifier"
-//     const tdDelete = row.children[4]; // Le bouton "Supprimer"
-
-//     // cache les bouton modifier et supprimer
-//     tdModif.style.display = 'none';
-//     tdDelete.style.display = 'none';
-
-//     const inputName = document.createElement('input');
-//     inputName.type = 'text';
-//     inputName.value = tdName.innerText;
-//     tdName.innerText = '';
-//     tdName.appendChild(inputName);
-
-//     const inputForename = document.createElement('input');
-//     inputForename.type = 'text';
-//     inputForename.value = tdForename.innerText;
-//     tdForename.innerText = '';
-//     tdForename.appendChild(inputForename);
-
-//     const inputPhone = document.createElement('input');
-//     inputPhone.type = 'tel';
-//     inputPhone.value = tdPhone.innerText;
-//     tdPhone.innerText = '';
-//     tdPhone.appendChild(inputPhone);
-
-    
-//     const saveButton = document.createElement('span');
-//     saveButton.innerHTML = '<i class="fa-solid fa-floppy-disk"></i>';
-//     row.appendChild(saveButton);    
-//     saveButton.addEventListener('click', function() {
-//         contact.name = inputName.value;
-//         contact.forename = inputForename.value;
-//         contact.phone = inputPhone.value;
-
-//         tdName.innerText = contact.name;
-//         tdForename.innerText = contact.forename;
-//         tdPhone.innerText = contact.phone;
-
-//         row.removeChild(saveButton);
-        
-//         // Affiche de nouveau les boutons "Modifier" et "Supprimer"
-//         tdModif.style.display = 'inline';
-//         tdDelete.style.display = 'inline';
-//     });
-// }
-
+        // Clic on confirm button (modal)
+        document.getElementById('confirmButton').onclick = function() {
+            spinnerContainer.classList.remove('d-none');
+            // AJAX for UPDATE - start
+            fetch('app/Controllers/UpdateService.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'type': 'UPDATE',
+                    'id': serviceId,
+                    'name': updatedData[0],
+                    'description': updatedData[1],
+                    'image_url': updatedData[2],
+                    'image_alt': updatedData[3]
+                }).toString()
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update the cells with the new datas
+                    inputs.forEach((input, index) => {
+                        cells[index].textContent = input.value;
+                    });
+                    // Hide and show the icons
+                    const actionCell = cells[cells.length - 1];
+                    actionCell.querySelectorAll('.bi-x-circle, .bi-floppy').forEach(icon => {
+                        icon.classList.add('hidden');
+                    });
+                    actionCell.querySelectorAll('.bi-pencil-square, .bi-trash').forEach(icon => {
+                        icon.classList.remove('hidden');
+                    });
+                    const toast = new MyToast('Service mis à jour avec succès.', 'success');
+                    toast.show();
+                    spinnerContainer.classList.add('d-none');
+                } else {
+                    const toast = new MyToast('Erreur lors de la mise à jour.', 'danger');
+                    toast.show();
+                    spinnerContainer.classList.add('d-none');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                spinnerContainer.classList.add('d-none');
+            })
+            // AJAX for UPDATE - end
+            updateModal.hide()
+        }
+    }    
+});
