@@ -210,7 +210,7 @@ table.addEventListener('click', function(event) {
 
             confirmModal.hide()
         }
-    }
+    }    
 });
 
 // manage the modal

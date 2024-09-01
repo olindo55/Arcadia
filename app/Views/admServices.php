@@ -32,7 +32,6 @@ require_once 'app/config/config.php' ?>
         <thead>
             <tr class="table-primary ">
                 <th id="sort-name"><i id="sort-icon" class="bi bi-sort-alpha-down"></i> Nom</th> 
-                <!-- <i class="bi bi-sort-alpha-down-alt"></i> -->
                 <th>Description</th>
                 <th>Image</th>
                 <th>Alt</th>

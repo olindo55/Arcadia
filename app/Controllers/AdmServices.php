@@ -57,7 +57,7 @@ class AdmServices
                     $query->bindValue('alt', DbUtils::protectDbData($post['alt']));
                     $query->execute();
             
-                    echo "upload reussi.";
+                    echo  "upload reussi";
                 
                 } else {
                     echo "Erreur lors de l'upload du fichier.";
