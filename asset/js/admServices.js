@@ -1,5 +1,6 @@
 import Service from './class/Service.js';
 import MyModal from './class/MyModal.js';
+import MyToast from './class/MyToast.js';
 
 let services = [];
 
@@ -93,20 +94,20 @@ table.addEventListener('click', function(event) {
             .then(data => {
                 if (data.success) {
                     row.remove();
-                    showToast('Ligne supprimée avec succès.', 'success');
+                    const toast = new MyToast('Service supprimé avec succès.', 'success');
+                    toast.show();
                     spinnerContainer.classList.add('d-none');
                 } else {
-                    showToast('Erreur lors de la suppression du service.', 'danger');
+                    const toast = new MyToast('Erreur lors de la suppression du service.', 'danger');
+                    toast.show();
                     spinnerContainer.classList.add('d-none');
                 }
             })
             .catch(error => {
-                showToast('Erreur lors de la suppression du service.', 'danger');//console.error('Erreur:', error));
+                console.error('Erreur:', error);
                 spinnerContainer.classList.add('d-none');
             })
             // AJAX for DELETE - end
-
-            // confirmModal.hide()
             deleteModal.hide()
         }
 
@@ -204,16 +205,20 @@ table.addEventListener('click', function(event) {
                     actionCell.querySelectorAll('.bi-pencil-square, .bi-trash').forEach(icon => {
                         icon.classList.remove('hidden');
                     });
-                    showToast('Service mis à jour avec succès.', 'success');
+                    const toast = new MyToast('Service mis à jour avec succès.', 'success');
+                    toast.show();
                     spinnerContainer.classList.add('d-none');
                 } else {
-                    showToast('Erreur lors de la mise à jour.', 'danger');
+                    const toast = new MyToast('Erreur lors de la mise à jour.', 'danger');
+                    toast.show();
                     spinnerContainer.classList.add('d-none');
                 }
             })
-            .catch(error => console.error('Erreur:', error));
+            .catch(error => {
+                console.error('Erreur:', error);
+                spinnerContainer.classList.add('d-none');
+            })
             // AJAX for UPDATE - end
-
             updateModal.hide()
         }
     }    
@@ -225,23 +230,23 @@ table.addEventListener('click', function(event) {
 // ------   Alert   ---------
 // --------------------------
 
-// manage the toast
-function showToast(message, type = 'success') {
-    const toastContainer = document.getElementById('toast-container');
-    const toastElement = document.createElement('div');
+// // manage the toast
+// function showToast(message, type = 'success') {
+//     const toastContainer = document.getElementById('toast-container');
+//     const toastElement = document.createElement('div');
     
-    toastElement.className = `toast align-items-center text-white bg-${type} border-0`;
-    toastElement.innerHTML = `
-        <div class="d-flex">
-            <div class="toast-body">
-                ${message}
-            </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>`;
+//     toastElement.className = `toast align-items-center text-white bg-${type} border-0`;
+//     toastElement.innerHTML = `
+//         <div class="d-flex">
+//             <div class="toast-body">
+//                 ${message}
+//             </div>
+//             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+//         </div>`;
     
-    toastContainer.appendChild(toastElement);
+//     toastContainer.appendChild(toastElement);
 
-    const toast = new bootstrap.Toast(toastElement);
-    toast.show();
-}
+//     const toast = new bootstrap.Toast(toastElement);
+//     toast.show();
+// }
 
