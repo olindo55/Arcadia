@@ -91,9 +91,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             <!-- end burger menu-->
         </header>
         <main id="main-page">
+            
             <!-- Injection page - start-->
             <?php require_once $page ?>
             <!-- Injection page - end-->
+
+
 
             <!-- Modal -->
             <div class="modal" id="confirmModal" tabindex="-1">
