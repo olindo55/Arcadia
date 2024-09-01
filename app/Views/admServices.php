@@ -52,11 +52,6 @@ require_once 'app/config/config.php' ?>
     </table> 
 </div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal">
-    Launch demo modal
-</button>
-
 <!-- Modal -->
 <div class="modal" id="confirmModal" tabindex="-1">
     <div class="modal-dialog">
@@ -74,5 +69,12 @@ require_once 'app/config/config.php' ?>
             </div>
         </div>
     </div>
+</div>
+
+<!-- Toast -->
+<div  role="alert" aria-live="assertive" aria-atomic="true" class="position-fixed top-0 end-0 p-3">
+  <div id="toast-container">
+    <!-- Toasts will be dynamically added by php -->
+  </div>
 </div>
 

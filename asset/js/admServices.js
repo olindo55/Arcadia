@@ -76,15 +76,15 @@ table.addEventListener('click', function(event) {
                 .then(data => {
                     if (data.success) {
                         row.remove();
-                        alert('Ligne supprimée avec succès.');
+                        showToast('Ligne supprimée avec succès.', 'success');
 
                     } else {
-                        alert('Erreur lors de la suppression du service.');
+                        showToast('Erreur lors de la suppression du service.', 'danger');
                     }
                 })
-                .catch(error => console.error('Erreur:', error));
+                .catch(error => showToast('Erreur lors de la suppression du service.', 'danger'));//console.error('Erreur:', error));
             // AJAX for DELETE - Stop
-            
+
             // Cacher la modal après la confirmation
             confirmModal.hide()
         }
@@ -177,4 +177,26 @@ table.addEventListener('click', function(event) {
         .catch(error => console.error('Erreur:', error));
     }
 });
+
+// Fonction pour créer et afficher un toast
+function showToast(message, type = 'success') {
+    const toastContainer = document.getElementById('toast-container');
+    const toastElement = document.createElement('div');
+    
+    toastElement.className = `toast align-items-center text-white bg-${type} border-0`;
+    toastElement.innerHTML = `
+        <div class="d-flex">
+            <div class="toast-body">
+                ${message}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    `;
+    
+    toastContainer.appendChild(toastElement);
+
+    // Afficher le toast
+    const toast = new bootstrap.Toast(toastElement);
+    toast.show();
+}
 
