@@ -1,10 +1,9 @@
 <?php
 require_once 'app/config/config.php' ?>
 
-<div class="container-fluid col-8">
+<div class="container-fluid col-12 col-md-10 adm">
     <h1>Gestion des services</h1>
-    <h3>Ajouter un service</h3>
-    <form method="post" action="index.php?page=admServices" id="newService" enctype="multipart/form-data">
+    <form method="post" action="index.php?page=admServices" id="newService" class="container-fluid col-12 col-lg-6 col-md-10" enctype="multipart/form-data">
         <fieldset>
         <legend>Ajouter un service</legend>
             <div class="mb-3">
@@ -27,13 +26,11 @@ require_once 'app/config/config.php' ?>
         <button type="submit" id="addServicetButton" class="btn btn-primary">Ajouter</button>
     </form>
 
-
-    <br><br><br><br><br>
-
     <!-- <input type="text" id="search" placeholder="Recherche..."> -->
-    <table id="list-service"  class="table table-hover">
+     <h2>Les services diffusés</h2>
+    <table id="list-service"  class="table table-hover table-responsive">
         <thead>
-            <tr class="table-primary">
+            <tr class="table-primary ">
                 <th id="sort-name"><i id="sort-icon" class="bi bi-sort-alpha-down"></i> Nom</th> 
                 <!-- <i class="bi bi-sort-alpha-down-alt"></i> -->
                 <th>Description</th>
