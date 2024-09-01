@@ -1,4 +1,5 @@
 import Service from './class/Service.js';
+import MyModal from './class/MyModal.js';
 
 let services = [];
 
@@ -6,11 +7,19 @@ let confirmModal;
 document.addEventListener('DOMContentLoaded', () => {
     confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
 });
+const spinnerContainer = document.getElementById('spinner-container');
 
+
+
+
+
+
+// --------------------------
+// ------   Table   ---------
+// --------------------------
 
 const table = document.getElementById('list-service');
 const rows = table.querySelectorAll('tbody tr');
-const spinnerContainer = document.getElementById('spinner-container');
 
 rows.forEach(row => {
     const cells = row.querySelectorAll('td');
@@ -63,10 +72,8 @@ table.addEventListener('click', function(event) {
         const row = event.target.closest('tr');
 
         // Modal show
-        showConfirmModal(
-            'Êtes-vous sûr de vouloir supprimer ce service ?',
-            'Supprimer'
-        )   
+        const deleteModal = new MyModal('Êtes-vous sûr de vouloir supprimer ce service ?', 'Supprimer');
+        deleteModal.show()
 
         // Clic on confirm button (modal)
         document.getElementById('confirmButton').onclick = function() {
@@ -99,7 +106,8 @@ table.addEventListener('click', function(event) {
             })
             // AJAX for DELETE - end
 
-            confirmModal.hide()
+            // confirmModal.hide()
+            deleteModal.hide()
         }
 
     } 
@@ -160,10 +168,8 @@ table.addEventListener('click', function(event) {
         const serviceId = row.querySelector('.bi-trash').getAttribute('data-id');
 
         // Modal show
-        showConfirmModal(
-            'Êtes-vous sûr de vouloir modifier ce service ?',
-            'Modifier'
-        )   
+        const updateModal = new MyModal('Êtes-vous sûr de vouloir modifier ce service ?', 'Modifier');
+        updateModal.show()
 
         // Clic on confirm button (modal)
         document.getElementById('confirmButton').onclick = function() {
@@ -208,24 +214,16 @@ table.addEventListener('click', function(event) {
             .catch(error => console.error('Erreur:', error));
             // AJAX for UPDATE - end
 
-            confirmModal.hide()
+            updateModal.hide()
         }
     }    
 });
 
-// manage the modal
-function showConfirmModal(message, confirmButtonText) {
-    // Sélectionner les éléments de la modale
-    const modalBody = document.querySelector('.modal-body');
-    const confirmButton = document.getElementById('confirmButton');
 
-    // Modifier le texte de la modal
-    modalBody.textContent = message;
-    confirmButton.textContent = confirmButtonText;
 
-    // Afficher la modale
-    confirmModal.show();
-}
+// --------------------------
+// ------   Alert   ---------
+// --------------------------
 
 // manage the toast
 function showToast(message, type = 'success') {
