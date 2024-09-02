@@ -78,20 +78,18 @@ table.addEventListener('click', function(event) {
         // Clic on confirm button (modal)
         document.getElementById('confirmButton').onclick = function() {
             spinnerContainer.classList.remove('d-none');
-            // AJAX for DELETE - start                
+            // DELETE - start                
             fetch('app/Controllers/DeleteService.php', {
-                method: 'POST',
+                method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 body: new URLSearchParams({
-                    'type': 'DELETE',
                     'id': serviceId
-                }).toString()
+                }).toString() 
             })
-            .then(response => response.json())
             .then(data => {
-                if (data.success) {
+                if (data.ok) {
                     row.remove();
                     const toast = new MyToast('Service supprimé avec succès.', 'success');
                     toast.show();
@@ -103,10 +101,11 @@ table.addEventListener('click', function(event) {
                 }
             })
             .catch(error => {
-                console.error('Erreur:', error);
+                const toast = new MyToast('Erreur lors de la suppression du service. ' + error, 'danger');
+                toast.show();
                 spinnerContainer.classList.add('d-none');
             })
-            // AJAX for DELETE - end
+            // DELETE - end
             deleteModal.hide()
         }
 
