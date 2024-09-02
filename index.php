@@ -18,6 +18,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $error = $result;
     }
 }
+if($_SERVER['REQUEST_METHOD'] === 'PUT'){
+    $controllerName = 'App\\Controllers\\'.ucfirst($pageName);
+    $controller = new $controllerName;
+    return $controller->update();
+}
+if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
+    $controllerName = 'App\\Controllers\\'.ucfirst($pageName);
+    $controller = new $controllerName;
+    return $controller->delete();
+}
 
     
 ?>

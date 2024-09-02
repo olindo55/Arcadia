@@ -68,7 +68,9 @@ function sortName(table){
 table.addEventListener('click', function(event) {
     // DELETE
     if (event.target.classList.contains('bi-trash')) {
-        const serviceId = event.target.getAttribute('data-id');
+        const id = {
+            id: event.target.getAttribute('data-id')
+        };
         const row = event.target.closest('tr');
 
         // Modal show
@@ -78,33 +80,40 @@ table.addEventListener('click', function(event) {
         // Clic on confirm button (modal)
         document.getElementById('confirmButton').onclick = function() {
             spinnerContainer.classList.remove('d-none');
-            // DELETE - start                
-            fetch('app/Controllers/DeleteService.php', {
+            // DELETE - start             
+            fetch('index.php?page=admServices', {
                 method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    "Content-Type": "application/json"
                 },
-                body: new URLSearchParams({
-                    'id': serviceId
-                }).toString() 
+                body: JSON.stringify(id)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    const toast = new MyToast('Page non disponible', 'danger');
+                    toast.show();
+                } else {
+                    return response.json();
+                }
             })
             .then(data => {
-                if (data.ok) {
+                if (data.success) {
                     row.remove();
                     const toast = new MyToast('Service supprimé avec succès.', 'success');
                     toast.show();
-                    spinnerContainer.classList.add('d-none');
-                } else {
-                    const toast = new MyToast('Erreur lors de la suppression du service.', 'danger');
+                } 
+                else {
+                    const toast = new MyToast(`Erreur lors de la suppression du service: ${data.error}`, 'danger');
                     toast.show();
-                    spinnerContainer.classList.add('d-none');
                 }
             })
             .catch(error => {
-                const toast = new MyToast('Erreur lors de la suppression du service. ' + error, 'danger');
+                const toast = new MyToast(`Erreur lors de la suppression du service: ${error.message}`, 'danger');
                 toast.show();
-                spinnerContainer.classList.add('d-none');
             })
+            .finally(() => {
+                spinnerContainer.classList.add('d-none');
+            });
             // DELETE - end
             deleteModal.hide()
         }
@@ -173,50 +182,47 @@ table.addEventListener('click', function(event) {
         // Clic on confirm button (modal)
         document.getElementById('confirmButton').onclick = function() {
             spinnerContainer.classList.remove('d-none');
-            // AJAX for UPDATE - start
-            fetch('app/Controllers/UpdateService.php', {
-                method: 'POST',
+            const data = {
+                id: serviceId,
+                name: updatedData[0],
+                description: updatedData[1],
+                image_url: updatedData[2],
+                image_alt: updatedData[3]
+            }
+            // UPDATE - start
+            fetch('index.php?page=admServices', {
+                method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    "Content-Type": "application/json"
                 },
-                body: new URLSearchParams({
-                    'type': 'UPDATE',
-                    'id': serviceId,
-                    'name': updatedData[0],
-                    'description': updatedData[1],
-                    'image_url': updatedData[2],
-                    'image_alt': updatedData[3]
-                }).toString()
+                body: JSON.stringify(data)
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    const toast = new MyToast('Page non disponible', 'danger');
+                    toast.show();
+                } else {
+                    return response.json();
+                }
+            })
             .then(data => {
                 if (data.success) {
-                    // Update the cells with the new datas
-                    inputs.forEach((input, index) => {
-                        cells[index].textContent = input.value;
-                    });
-                    // Hide and show the icons
-                    const actionCell = cells[cells.length - 1];
-                    actionCell.querySelectorAll('.bi-x-circle, .bi-floppy').forEach(icon => {
-                        icon.classList.add('hidden');
-                    });
-                    actionCell.querySelectorAll('.bi-pencil-square, .bi-trash').forEach(icon => {
-                        icon.classList.remove('hidden');
-                    });
-                    const toast = new MyToast('Service mis à jour avec succès.', 'success');
+                    const toast = new MyToast('Service modifié avec succès.', 'success');
                     toast.show();
-                    spinnerContainer.classList.add('d-none');
-                } else {
-                    const toast = new MyToast('Erreur lors de la mise à jour.', 'danger');
+                } 
+                else {
+                    const toast = new MyToast(`Erreur lors de la modification du service: ${data.error}`, 'danger');
                     toast.show();
-                    spinnerContainer.classList.add('d-none');
                 }
             })
             .catch(error => {
-                console.error('Erreur:', error);
-                spinnerContainer.classList.add('d-none');
+                const toast = new MyToast(`Erreur lors de la modification du service: ${error.message}`, 'danger');
+                toast.show();
             })
-            // AJAX for UPDATE - end
+            .finally(() => {
+                spinnerContainer.classList.add('d-none');
+            });
+            // UPDATE - end
             updateModal.hide()
         }
     }    
