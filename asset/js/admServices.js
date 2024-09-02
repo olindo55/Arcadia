@@ -207,6 +207,18 @@ table.addEventListener('click', function(event) {
             })
             .then(data => {
                 if (data.success) {
+                    // Update the cells with the new datas
+                    inputs.forEach((input, index) => {
+                        cells[index].textContent = input.value;
+                    });
+                    // Hide and show the icons
+                    const actionCell = cells[cells.length - 1];
+                    actionCell.querySelectorAll('.bi-x-circle, .bi-floppy').forEach(icon => {
+                        icon.classList.add('hidden');
+                    });
+                    actionCell.querySelectorAll('.bi-pencil-square, .bi-trash').forEach(icon => {
+                        icon.classList.remove('hidden');
+                    });
                     const toast = new MyToast('Service modifié avec succès.', 'success');
                     toast.show();
                 } 
