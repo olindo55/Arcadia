@@ -3,26 +3,31 @@ namespace App\Controllers;
 use App\Database\DbUtils;
 
 class AdmServices
-{
-    public function injection(): string
+{   
+    public function view()
     {
-        // Get data from DB
-        $query = DbUtils::getPdo()->query('SELECT * FROM service');
-        $services = $query->fetchAll(\PDO::FETCH_ASSOC);
-        
-        // Creat HTML for each service
-        $html = '';
-        foreach ($services as $service) {
-            $html .= '<tr data-id="' . $service['id'] . '">';
-            $html .= '<td>' . $service['name'] . '</td>';
-            $html .= '<td>' . $service['description'] . '</td>';
-            $html .= '<td>' . $service['image_url']. '</td>';
-            $html .= '<td>' . $service['image_alt'] . '</td>';
-            $html .= '<td class="icon-cell">' .'<i class="bi bi-pencil-square"></i>'.'<i class="bi bi-trash" data-id="' . $service['id'] . '"></i>'.'<i class="bi bi-x-circle hidden"></i>'.'<i class="bi bi-floppy hidden"></i>' . '</td>';
-            $html .= '</tr>';
-        }
-        return $html;
+        return __DIR__.'/../Views/admServices.php';
     }
+
+    // public function injection(): string
+    // {
+    //     // Get data from DB
+    //     $query = DbUtils::getPdo()->query('SELECT * FROM service');
+    //     $services = $query->fetchAll(\PDO::FETCH_ASSOC);
+        
+    //     // Creat HTML for each service
+    //     $html = '';
+    //     foreach ($services as $service) {
+    //         $html .= '<tr data-id="' . $service['id'] . '">';
+    //         $html .= '<td>' . $service['name'] . '</td>';
+    //         $html .= '<td>' . $service['description'] . '</td>';
+    //         $html .= '<td>' . $service['image_url']. '</td>';
+    //         $html .= '<td>' . $service['image_alt'] . '</td>';
+    //         $html .= '<td class="icon-cell">' .'<i class="bi bi-pencil-square"></i>'.'<i class="bi bi-trash" data-id="' . $service['id'] . '"></i>'.'<i class="bi bi-x-circle hidden"></i>'.'<i class="bi bi-floppy hidden"></i>' . '</td>';
+    //         $html .= '</tr>';
+    //     }
+    //     return $html;
+    // }
 
     public function managePostForm($post, $files)
     {
@@ -69,7 +74,7 @@ class AdmServices
         }
     }
 
-    public function update()
+    public function put()
     {
         $requestJSON = trim(file_get_contents("php://input"));
         $request = json_decode($requestJSON, true);

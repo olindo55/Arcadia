@@ -81,7 +81,7 @@ table.addEventListener('click', function(event) {
         document.getElementById('confirmButton').onclick = function() {
             spinnerContainer.classList.remove('d-none');
             // DELETE - start             
-            fetch('index.php?page=admServices', {
+            fetch('/admServices/delete', {
                 method: 'DELETE',
                 headers: {
                     "Content-Type": "application/json"
@@ -190,7 +190,7 @@ table.addEventListener('click', function(event) {
                 image_alt: updatedData[3]
             }
             // UPDATE - start
-            fetch('index.php?page=admServices', {
+            fetch('/admServices/put', {
                 method: 'PUT',
                 headers: {
                     "Content-Type": "application/json"

@@ -1,5 +1,6 @@
-<?php
-require_once 'app/config/config.php' ?>
+<?php require_once 'app/config/config.php';
+use App\Database\DbUtils;
+?>
 
 <div class="container-fluid col-12 col-md-10 adm">
     <h1>Gestion des services</h1>
@@ -41,14 +42,19 @@ require_once 'app/config/config.php' ?>
         <tbody >
             <!--injection via php--> 
             <?php
-                $pageName = $_GET['page'] ?? 'home';
-                $controllerName = 'App\\Controllers\\'.ucfirst($pageName);
-                $controller = new $controllerName;
-                $result = $controller->injection();
-                echo $result;
+            $query = DbUtils::getPdo()->query('SELECT * FROM service');
+            $services = $query->fetchAll(\PDO::FETCH_ASSOC);
+
+            foreach ($services as $service) {
+                echo '<tr data-id="' . $service['id'] . '">';
+                echo '<td>' . $service['name'] . '</td>';
+                echo '<td>' . $service['description'] . '</td>';
+                echo '<td>' . $service['image_url']. '</td>';
+                echo '<td>' . $service['image_alt'] . '</td>';
+                echo '<td class="icon-cell">' .'<i class="bi bi-pencil-square"></i>'.'<i class="bi bi-trash" data-id="' . $service['id'] . '"></i>'.'<i class="bi bi-x-circle hidden"></i>'.'<i class="bi bi-floppy hidden"></i>' . '</td>';
+                echo '</tr>';
+            }
             ?>
         </tbody>
     </table> 
 </div>
-
-

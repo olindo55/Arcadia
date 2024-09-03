@@ -29,7 +29,7 @@
     <?php include 'templates/card-biome-home.php';?>
   </div>
   <!-- cards biome - stop -->
-  <button type="button" onclick="window.location.href ='index.php?page=biome'" class="btn btn-secondary btn-lg shadow-sm mt-2 my-button-desktop">Découvrir +</button>
+  <button type="button" onclick="window.location.href ='/biome/view'" class="btn btn-secondary btn-lg shadow-sm mt-2 my-button-desktop">Découvrir +</button>
 </section>
 
 <section id="service-home">
@@ -51,7 +51,7 @@
       </div>
     </div>  
   </div>
-  <button type="button" onclick="window.location.href ='index.php?page=service'" class="btn btn-secondary btn-lg shadow-sm mt-2 my-button-phone">En savoir +</button>
+  <button type="button" onclick="window.location.href ='/service/view'" class="btn btn-secondary btn-lg shadow-sm mt-2 my-button-phone">En savoir +</button>
 </section>
 
 <section id="comments-home">

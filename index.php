@@ -1,32 +1,49 @@
 <?php
 require_once __DIR__.'/vendor/autoload.php';
 
-$pageName = $_GET['page'] ?? 'home';
-$page = 'app/Views/'.$pageName.'.php';
+$uri = $_SERVER['REQUEST_URI'];
+$uriParts = explode('/',$uri);
+if (count($uriParts) === 2 && $uriParts[1] === '') {
+    $uriParts[1] = 'homepage';
+    $uriParts[2] = 'view';
+}
+unset($uriParts[0]);
+
+$controller = ucfirst($uriParts[1]);
+$method = ucfirst($uriParts[2]);
+
+$controllerName = 'App\\Controllers\\'.$controller;
+$controller = new $controllerName;
+
+$jsFile = '/asset/js/'.$uriParts[1].'.js';
+
+$error = null;
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $controllerName = 'App\\Controllers\\'.ucfirst($pageName);
-    $controller = new $controllerName;
     if(isset($_FILES)){
-        $result = $controller->managePostForm($_POST, $_FILES);
+        $result = $controller->$method($_POST, $_FILES);
     }
     else {
-        $result = $controller->managePostForm($_POST);
+        $result = $controller->$method($_POST);
     }
-    
-    if ($result != ""){
+    if ($result !== true){
         $error = $result;
     }
 }
-if($_SERVER['REQUEST_METHOD'] === 'PUT'){
-    $controllerName = 'App\\Controllers\\'.ucfirst($pageName);
-    $controller = new $controllerName;
-    return $controller->update();
+else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
+    return $controller->$method();
+    if ($result !== true){
+        $error = $result;
+    }
 }
-if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
-    $controllerName = 'App\\Controllers\\'.ucfirst($pageName);
-    $controller = new $controllerName;
-    return $controller->delete();
+else if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
+    return $controller->$method();
+    if ($result !== true){
+        $error = $result;
+    }
+}
+else {
+    $page = $controller->$method();
 }
 
     
@@ -39,10 +56,10 @@ if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
     <title>Accueil - Arcadia</title>
     <meta name="description" content="Le Zoo Arcadia vous invite à explorer son site web pour en apprendre davantage sur ses animaux et leurs habitats, les services offerts par le zoo et ses horaires."/>
     <!-- Bootstrap 5.3.3 -->
-     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-     <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+     <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css">
      
-     <link rel="stylesheet" href="./asset/scss/style.css">
+     <link rel="stylesheet" href="/asset/scss/style.css">
     <!-- Swiper -->
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
      
@@ -50,7 +67,7 @@ if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
     <body>
         <header>
             <div class="main-nav" >
-                <div id="logo" onclick="window.location.href ='index.php?page=home'">
+                <div id="logo" onclick="window.location.href ='/'">
                     <img src="./asset/images/logo/print_blur.png" alt="Logo du Zoo Arcadia représentant une empreinte de mammifère">
                     <div>
                         <h1>Zoo Arcadia</h1>
@@ -59,15 +76,15 @@ if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
                 </div>
                 <nav>
                     <ul>
-                        <li class="active"><a href="index.php?page=home">Accueil</a></li>
-                        <li><a href="index.php?page=biome">Le zoo</a></li>
-                        <li><a href="index.php?page=service">Services</a></li>
+                        <li class="active"><a href="/">Accueil</a></li>
+                        <li><a href="/biome/view">Le zoo</a></li>
+                        <li><a href="/service/view">Services</a></li>
                     </ul>
                 </nav>
                 <div id="nav-buttons">
-                    <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href ='index.php?page=contact'"><i class="bi bi-envelope"></i> Contactez-nous</button>
+                    <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href ='/contact/view'"><i class="bi bi-envelope"></i> Contactez-nous</button>
                     <div id="button-login">
-                        <a href="index.php?page=signin">
+                        <a href="/signin/view">
                             <i class="bi bi-person text-dark" style="font-size: 45px"></i>
                         </a>
                     </div>   
@@ -81,18 +98,18 @@ if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
             <!-- start burger menu-->
             <div class="my-burger-menu">
                 <ul>
-                    <li class="active"><a href="index.php?page=home">Accueil</a></li>
-                    <li><a href="index.php?page=biome">Le zoo</a></li>
-                    <li><a href="index.php?page=service">Services</a></li>
+                    <li class="active"><a href="/">Accueil</a></li>
+                    <li><a href="/biome/view">Le zoo</a></li>
+                    <li><a href="/service/view">Services</a></li>
                 </ul>
-                <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href ='index.php?page=contact'"><i class="bi bi-envelope"></i> Contactez-nous</button>
+                <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href ='/contact/view'"><i class="bi bi-envelope"></i> Contactez-nous</button>
                 
                 <!-- <button class="btn btn-secondary rounded-5 d-flex align-items-center justify-content-center">
                     <i class="bi bi-envelope me-2"></i> Contactez-nous
                 </button> -->
                 <div class="my-divider"></div>
                 <div id="button-login">
-                    <a href="index.php?page=signin">
+                    <a href="/signin/view">
                         <i class="bi bi-person text-dark" style="font-size: 45px"></i>
                     </a>
                     <p><?php echo $_SESSION['user']['forename']?></p>
@@ -176,7 +193,7 @@ if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
                         <div>Forêt de Brocéliande</div>
                         <div>35380 Paimpont, France</div>
                     </div>
-                    <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href = 'index.php?page=contact'"><i class="bi bi-envelope"></i> Contactez-nous</button>
+                    <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href = '/contact/view'"><i class="bi bi-envelope"></i> Contactez-nous</button>
                 </address>
         
                 <div id="social-network">
@@ -191,18 +208,17 @@ if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
 
             <div id="copyright">
                 <div>© Zoo Arcadia 2024</div>
-                <a href="index.php?page=cookie">Politique de gestion des cookies</a>
+                <a href="/cookie/view">Politique de gestion des cookies</a>
             </div>
         </footer>
 
     <!-- Script -->
-    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!-- bootstrap -->
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> <!-- swiper -->
     <script type="module" src="/asset/js/menu.js"></script>
     <!-- <script type="module" src="/router/router.js"></script> -->
     <!-- Management of script's page -->
      <?php 
-        $jsFile = 'asset/js/'.$pageName.'.js';
         echo '<script type="module" src="'.$jsFile.'"></script>' ;  
      ?>
 </body>
