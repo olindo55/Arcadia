@@ -10,14 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
 const spinnerContainer = document.getElementById('spinner-container');
 
 
-
-
-
-
 // --------------------------
 // ------   Table   ---------
 // --------------------------
 
+
+// need it for sort fnct
 const table = document.getElementById('list-service');
 const rows = table.querySelectorAll('tbody tr');
 
@@ -65,6 +63,49 @@ function sortName(table){
         icon.classList.add('bi-sort-alpha-down');
     }
 }
+
+
+
+// POST
+document.getElementById('addServicetButton').addEventListener('click', function(event){
+    event.preventDefault();
+    spinnerContainer.classList.remove('d-none');
+
+    const form = document.getElementById('newService');
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            const toast = new MyToast('Page non disponible', 'danger');
+            toast.show();
+        } else {
+            return response.json();
+        }
+    })
+    .then(data => {
+        if (data.success) {
+            // addLine(formData.get('name'), formData.get('description'), 'asset/images/services/'.formData.get('upload'), formData.get('alt'));
+            const toast = new MyToast('Service ajouté avec succès.', 'success');
+            toast.show();
+        } 
+        else {
+            const toast = new MyToast(`Erreur lors de l'ajout du service: ${data.error}`, 'danger');
+            toast.show();
+        }
+    })
+    .catch(error => {
+        const toast = new MyToast(`Erreur lors de  l'ajout du service: ${error.message}`, 'danger');
+        toast.show();
+    })
+    .finally(() => {
+        spinnerContainer.classList.add('d-none');
+    });
+});
+
 table.addEventListener('click', function(event) {
     // DELETE
     if (event.target.classList.contains('bi-trash')) {
@@ -99,11 +140,11 @@ table.addEventListener('click', function(event) {
             .then(data => {
                 if (data.success) {
                     row.remove();
-                    const toast = new MyToast('Service supprimé avec succès.', 'success');
+                    const toast = new MyToast(data.message, 'success');
                     toast.show();
                 } 
                 else {
-                    const toast = new MyToast(`Erreur lors de la suppression du service: ${data.error}`, 'danger');
+                    const toast = new MyToast(`Erreur lors de la suppression du service: ${data.message}`, 'danger');
                     toast.show();
                 }
             })
@@ -117,8 +158,8 @@ table.addEventListener('click', function(event) {
             // DELETE - end
             deleteModal.hide()
         }
-
     } 
+    
     // UPDATE edition
     else if (event.target.classList.contains('bi-pencil-square')){
         const row = event.target.closest('tr');
@@ -219,11 +260,11 @@ table.addEventListener('click', function(event) {
                     actionCell.querySelectorAll('.bi-pencil-square, .bi-trash').forEach(icon => {
                         icon.classList.remove('hidden');
                     });
-                    const toast = new MyToast('Service modifié avec succès.', 'success');
+                    const toast = new MyToast(data.message, 'success');
                     toast.show();
                 } 
                 else {
-                    const toast = new MyToast(`Erreur lors de la modification du service: ${data.error}`, 'danger');
+                    const toast = new MyToast(`Erreur lors de la modification du service: ${data.message}`, 'danger');
                     toast.show();
                 }
             })
@@ -239,3 +280,27 @@ table.addEventListener('click', function(event) {
         }
     }    
 });
+
+function addLine(name, description, imageUrl, altText) {
+    const table = document.getElementById('list-service').getElementsByTagName('tbody')[0];
+    const newRow = table.insertRow();
+
+    const nameCell = newRow.insertCell(0);
+    const descriptionCell = newRow.insertCell(1);
+    const imageUrlCell = newRow.insertCell(2);
+    const altCell = newRow.insertCell(3);
+    const actionsCell = newRow.insertCell(4);
+
+    nameCell.textContent = name;
+    descriptionCell.textContent = description;
+    imageUrlCell.textContent = imageUrl;
+    altCell.textContent = altText;
+
+    actionsCell.className = 'icon-cell';
+    actionsCell.innerHTML = `
+        <i class="bi bi-pencil-square"></i>
+        <i class="bi bi-trash"></i>
+        <i class="bi bi-x-circle hidden"></i>
+        <i class="bi bi-floppy hidden"></i>
+    `;
+}

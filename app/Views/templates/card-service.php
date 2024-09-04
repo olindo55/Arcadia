@@ -12,4 +12,3 @@ foreach ($services as $service) { ?>
           </div>
         </div>
 <?php } ?>
- 

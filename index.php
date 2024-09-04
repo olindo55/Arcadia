@@ -68,7 +68,7 @@ else {
         <header>
             <div class="main-nav" >
                 <div id="logo" onclick="window.location.href ='/'">
-                    <img src="./asset/images/logo/print_blur.png" alt="Logo du Zoo Arcadia représentant une empreinte de mammifère">
+                    <img src="/asset/images/logo/print_blur.png" alt="Logo du Zoo Arcadia représentant une empreinte de mammifère">
                     <div>
                         <h1>Zoo Arcadia</h1>
                         <h2>pour la Faune, par Nature</h2>
@@ -76,19 +76,48 @@ else {
                 </div>
                 <nav>
                     <ul>
-                        <li class="active"><a href="/">Accueil</a></li>
-                        <li><a href="/biome/view">Le zoo</a></li>
-                        <li><a href="/service/view">Services</a></li>
+                        <li class="<?= $uriParts[1] == 'homepage' ? 'active' : '' ?>"><a href="/">Accueil</a></li>
+                        <li class="<?= $uriParts[1] == 'biome' ? 'active' : '' ?>"><a href="/biome/view">Le zoo</a></li>
+                        <li class="<?= $uriParts[1] == 'service' ? 'active' : '' ?>"><a href="/service/view">Services</a></li>
+                        <li class="<?= $uriParts[1] == 'service' ? 'active' : '' ?>"><a href="/contact/view">Contactez-nous</a></li>
                     </ul>
                 </nav>
+                
                 <div id="nav-buttons">
-                    <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href ='/contact/view'"><i class="bi bi-envelope"></i> Contactez-nous</button>
-                    <div id="button-login">
-                        <a href="/signin/view">
-                            <i class="bi bi-person text-dark" style="font-size: 45px"></i>
-                        </a>
-                    </div>   
-                    <p><?php echo (isset($_SESSION['user']['forename']) ? $_SESSION['user']['forename'] : 'Visiteur');?></p>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                            Connexion
+                        </button>
+                        <form class="dropdown-menu p-4">
+                            <div class="mb-3">
+                            <label for="email" class="form-label">Mot de passe</label>
+                            <input type="email" class="form-control" id="email" placeholder="email@example.com">
+                            </div>
+                            <div class="mb-3">
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <input type="password" class="form-control" id="password" placeholder="votre mot de passe">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Connecter</button>
+                        </form>
+                    </div>
+                    <li class="nav-item dropdown">
+                        <button type="button" class="btn btn-secondary">Administration</button>
+                        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admServices' ? 'active' : '' ?>" href="/admServices/view">Services</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admComments' ? 'active' : '' ?>" href="/admComments/view">Avis</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admOpening' ? 'active' : '' ?>" href="/admOpening/view">Horaires</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admBiomes' ? 'active' : '' ?>" href="/admBiomes/view">Habitats</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admAnimals' ? 'active' : '' ?>" href="/admAnimals/view">Animaux</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admFeedings' ? 'active' : '' ?>" href="/admFeeding/view">Nourrissages</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admVet' ? 'active' : '' ?>"a href="/admVet/view">Rapports vétérinaire</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admUsers' ? 'active' : '' ?>" href="/admUsers/view">Droits et utilisateurs</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Déconnexion</a></li>
+                        </ul>
+                    </li>
                 </div>
                 <div class="my-burger-button">
                     <i class="bi bi-list text-light" style="font-size: 33px"></i> <!-- burger icon -->
@@ -98,22 +127,49 @@ else {
             <!-- start burger menu-->
             <div class="my-burger-menu">
                 <ul>
-                    <li class="active"><a href="/">Accueil</a></li>
-                    <li><a href="/biome/view">Le zoo</a></li>
-                    <li><a href="/service/view">Services</a></li>
+                    <li class="<?= $uriParts[1] == 'homepage' ? 'active' : '' ?>"><a href="/">Accueil</a></li>
+                    <li class="<?= $uriParts[1] == 'biome' ? 'active' : '' ?>"><a href="/biome/view">Le zoo</a></li>
+                    <li class="<?= $uriParts[1] == 'service' ? 'active' : '' ?>"><a href="/service/view">Services</a></li>                       
+                    <li class="<?= $uriParts[1] == 'service' ? 'active' : '' ?>"><a href="/contact/view">Contactez-nous</a></li>
+                    <hr>
+                    <!-- Connection button -->
+                    <div class="dropdown">
+                        <div class="myConnection">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                Connexion
+                            </button>
+                            <form class="dropdown-menu p-4">
+                                <div class="mb-3">
+                                <label for="email" class="form-label">Mot de passe</label>
+                                <input type="email" class="form-control" id="email" placeholder="email@example.com">
+                                </div>
+                                <div class="mb-3">
+                                <label for="password" class="form-label">Mot de passe</label>
+                                <input type="password" class="form-control" id="password" placeholder="votre mot de passe">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Connecter</button>
+                            </form>
+                        </div>
+                    </div>
+                    <li class="nav-item dropdown">
+                        <button type="button" class="btn btn-secondary">Administration</button>
+                        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admServices' ? 'active' : '' ?>" href="/admServices/view">Services</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admComments' ? 'active' : '' ?>" href="/admComments/view">Avis</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admOpening' ? 'active' : '' ?>" href="/admOpening/view">Horaires</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admBiomes' ? 'active' : '' ?>" href="/admBiomes/view">Habitats</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admAnimals' ? 'active' : '' ?>" href="/admAnimals/view">Animaux</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admFeedings' ? 'active' : '' ?>" href="/admFeeding/view">Nourrissages</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admVet' ? 'active' : '' ?>"a href="/admVet/view">Rapports vétérinaire</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admUsers' ? 'active' : '' ?>" href="/admUsers/view">Droits et utilisateurs</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Déconnexion</a></li>
+                        </ul>
+                    </li>
                 </ul>
-                <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href ='/contact/view'"><i class="bi bi-envelope"></i> Contactez-nous</button>
-                
-                <!-- <button class="btn btn-secondary rounded-5 d-flex align-items-center justify-content-center">
-                    <i class="bi bi-envelope me-2"></i> Contactez-nous
-                </button> -->
-                <div class="my-divider"></div>
-                <div id="button-login">
-                    <a href="/signin/view">
-                        <i class="bi bi-person text-dark" style="font-size: 45px"></i>
-                    </a>
-                    <p><?php echo $_SESSION['user']['forename']?></p>
-                </div> 
             </div>
             <!-- end burger menu-->
         </header>

@@ -12850,21 +12850,29 @@ header .my-burger-menu ul {
   padding-bottom: 15px;
   padding-left: 0px;
 }
-header .my-burger-menu ul .active {
-  text-decoration: underline;
-}
 header .my-burger-menu .my-divider {
   border-top: #eaece0 solid 1px;
   width: 40%;
   margin: 25px auto;
 }
 header .my-burger-menu.open {
-  height: 350px;
+  height: 650px;
   padding-top: 20px;
   padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 header nav {
   display: none;
+}
+header .dropdown {
+  all: unset;
+}
+header .dropdown .myConnection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 footer {

@@ -1,4 +1,4 @@
-<?php require_once 'app/config/config.php' ?>
+<!-- <?php require_once 'app/config/config.php' ?> -->
 
 <section id="scene-home">
     <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade my-carousel" data-bs-ride="carousel">
@@ -37,7 +37,7 @@
   <div id="service-container">
     <div id="text-service">
       <p>Bienvenue au Zoo Arcadia, un lieu dédié à la découverte et à la protection de la faune sauvage. Situé au cœur d’un environnement naturel exceptionnel, la forêt de Brocéliande,  notre zoo offre une multitude de services conçus pour rendre votre visite non seulement agréable, mais aussi éducative et inspirante. Que vous soyez un passionné de la nature, un amateur d'animaux ou une famille en quête d'aventures, nos services sont pensés pour répondre à vos besoins et surpasser vos attentes.</p>
-      <button type="button" onclick="window.location.href ='index.php?page=service'" class="btn btn-secondary btn-lg shadow-sm mt-2 my-button-desktop">En savoir +</button>
+      <button type="button" onclick="window.location.href ='/service/view'" class="btn btn-secondary btn-lg shadow-sm mt-2 my-button-desktop">En savoir +</button>
     </div>      
     <div class="swiper swiperService">
       <div class="swiper-wrapper">
