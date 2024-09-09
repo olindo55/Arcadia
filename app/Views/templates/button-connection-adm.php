@@ -22,16 +22,17 @@
         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
             Connexion
         </button>
-        <form class="dropdown-menu p-4">
-            <div class="mb-3">
-            <label for="email" class="form-label">Mot de passe</label>
-            <input type="email" class="form-control" id="email" placeholder="email@example.com">
-            </div>
-            <div class="mb-3">
+        <form method="post" class="dropdown-menu p-4" id="login-form">
+        <div class="mb-3">
+            <label for="email" class="form-label">Adresse Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="email@example.com">
+        </div>
+        <div class="mb-3">
             <label for="password" class="form-label">Mot de passe</label>
-            <input type="password" class="form-control" id="password" placeholder="votre mot de passe">
-            </div>
-            <button type="submit" class="btn btn-primary">Connecter</button>
-        </form>
+            <input type="password" class="form-control" id="password" name="password" placeholder="votre mot de passe">
+        </div>
+        <button type="submit" class="btn btn-primary" id="login-button">Connecter</button>
+    </form>
+
     </div>
 <?php endif; ?>

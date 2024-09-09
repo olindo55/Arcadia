@@ -1,4 +1,4 @@
-
+import MyToast from './class/MyToast.js';
 
 // burger menu
 const burgerMenuButton = document.querySelector('.my-burger-button')
@@ -19,4 +19,13 @@ document.addEventListener('DOMContentLoaded', function () {
             this.classList.add('active');
         });
     });
+});
+
+
+// toast flashMessage
+document.addEventListener('DOMContentLoaded', function() {
+    if (flashMessage) {
+        const toast = new MyToast(flashMessage, flashAlert);
+        toast.show();
+    }
 });
