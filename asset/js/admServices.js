@@ -74,7 +74,7 @@ document.getElementById('addServicetButton').addEventListener('click', function(
     const form = document.getElementById('newService');
     const formData = new FormData(form);
 
-    fetch(form.action, {
+    fetch('/admServices/post', {
         method: 'POST',
         body: formData
     })
@@ -88,7 +88,7 @@ document.getElementById('addServicetButton').addEventListener('click', function(
     })
     .then(data => {
         if (data.success) {
-            // addLine(formData.get('name'), formData.get('description'), 'asset/images/services/'.formData.get('upload'), formData.get('alt'));
+            addLine(data.data);
             const toast = new MyToast('Service ajouté avec succès.', 'success');
             toast.show();
         } 
@@ -98,6 +98,7 @@ document.getElementById('addServicetButton').addEventListener('click', function(
         }
     })
     .catch(error => {
+        // console.log(data);
         const toast = new MyToast(`Erreur lors de  l'ajout du service: ${error.message}`, 'danger');
         toast.show();
     })
@@ -281,7 +282,7 @@ table.addEventListener('click', function(event) {
     }    
 });
 
-function addLine(name, description, imageUrl, altText) {
+function addLine(data) {
     const table = document.getElementById('list-service').getElementsByTagName('tbody')[0];
     const newRow = table.insertRow();
 
@@ -291,10 +292,10 @@ function addLine(name, description, imageUrl, altText) {
     const altCell = newRow.insertCell(3);
     const actionsCell = newRow.insertCell(4);
 
-    nameCell.textContent = name;
-    descriptionCell.textContent = description;
-    imageUrlCell.textContent = imageUrl;
-    altCell.textContent = altText;
+    nameCell.textContent = data.name;
+    descriptionCell.textContent = data.description;
+    imageUrlCell.textContent = data.upload;
+    altCell.textContent = data.alt;
 
     actionsCell.className = 'icon-cell';
     actionsCell.innerHTML = `

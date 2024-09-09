@@ -5,7 +5,7 @@ use App\Database\DbUtils;
 
 <div class="container-fluid col-12 col-md-10 adm">
     <h1>Gestion des services</h1>
-    <form method="post" action="/admServices/post" id="newService" class="container-fluid col-12 col-lg-6 col-md-10" enctype="multipart/form-data">
+    <form method="post" action="" id="newService" class="container-fluid col-12 col-lg-6 col-md-10" enctype="multipart/form-data">
         <fieldset>
         <legend>Ajouter un service</legend>
             <div class="mb-3">
