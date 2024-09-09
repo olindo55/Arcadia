@@ -9,11 +9,12 @@ class AdmServices
         return __DIR__.'/../Views/admServices.php';
     }
 
-    public function post(array $data, $files): array
-    {
+    public function post(array $data, $files)
+    {   
+        header('Content-Type: application/json');
         if (isset($data['name']) &&
             isset($data['description']) &&
-            isset($_FILE['upload']) &&
+            isset($_FILES['upload']) &&
             isset($data['alt'])) 
             {
                 $uploadDir = 'asset/images/services/'; 
@@ -34,36 +35,42 @@ class AdmServices
                                 :alt
                             )
                         ');
-                    $query->bindValue('name', DbUtils::protectDbData($data['name']));
-                    $query->bindValue('description', DbUtils::protectDbData($data['description']));
-                    $query->bindValue('upload', '../../'.$uploadFile);
-                    $query->bindValue('alt', DbUtils::protectDbData($data['alt']));
-                    
-                    if($query->execute()){
-                        return ['success' => true,
-                                'message' => 'Une erreur est survenue lors de l\'enregistrement.',
+                        $data['upload'] = '../../' . $uploadFile;
+                        $query->bindValue('name', DbUtils::protectDbData($data['name']));
+                        $query->bindValue('description', DbUtils::protectDbData($data['description']));
+                        $query->bindValue('upload', DbUtils::protectDbData($data['upload']));
+                        $query->bindValue('alt', DbUtils::protectDbData($data['alt']));
+                        
+                        if($query->execute()){
+                            echo json_encode([
+                                'success' => true,
+                                'message' => 'Le service a été créé.',
                                 'data' => $data,
-                        ];
-                    }       
+                            ]);
+                            exit();
+                        }else{
+                            echo json_encode([
+                                'success' => false,
+                                'message' => 'Une erreur est survenue lors de l\'enregistrement.',
+                                'data' => $data
+                            ]);
+                            exit();
+                        }  
+                    }
                 } else {
-                    return [
+                    echo json_encode([
                         'success' => false,
-                        'message' => 'Le service a été créé',
-                        'data' => $data
-                    ];
+                        'message' => 'Le fichier n\'est pas une image.'
+                    ]);
+                    exit();
                 }
             } else {
-                return [
+                echo json_encode([
                     'success' => false,
-                    'message' => 'Le fichier \'est pas une image.'
-                ];
+                    'message' => 'Champs vide. Insertion impossible !'
+                ]);
+                exit();
             }
-        } else {
-            return [
-                'success' => false,
-                'message' => 'Champs vide. Insertion impossible !'
-            ];
-        }
     }
 
     public function put()
