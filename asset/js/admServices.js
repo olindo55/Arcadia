@@ -10,14 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
 const spinnerContainer = document.getElementById('spinner-container');
 
 
-
-
-
-
 // --------------------------
 // ------   Table   ---------
 // --------------------------
 
+
+// need it for sort fnct
 const table = document.getElementById('list-service');
 const rows = table.querySelectorAll('tbody tr');
 
@@ -65,10 +63,55 @@ function sortName(table){
         icon.classList.add('bi-sort-alpha-down');
     }
 }
+
+
+
+// POST
+document.getElementById('addServicetButton').addEventListener('click', function(event){
+    event.preventDefault();
+    spinnerContainer.classList.remove('d-none');
+
+    const form = document.getElementById('newService');
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            const toast = new MyToast('Page non disponible', 'danger');
+            toast.show();
+        } else {
+            return response.json();
+        }
+    })
+    .then(data => {
+        if (data.success) {
+            // addLine(formData.get('name'), formData.get('description'), 'asset/images/services/'.formData.get('upload'), formData.get('alt'));
+            const toast = new MyToast('Service ajouté avec succès.', 'success');
+            toast.show();
+        } 
+        else {
+            const toast = new MyToast(`Erreur lors de l'ajout du service: ${data.error}`, 'danger');
+            toast.show();
+        }
+    })
+    .catch(error => {
+        const toast = new MyToast(`Erreur lors de  l'ajout du service: ${error.message}`, 'danger');
+        toast.show();
+    })
+    .finally(() => {
+        spinnerContainer.classList.add('d-none');
+    });
+});
+
 table.addEventListener('click', function(event) {
     // DELETE
     if (event.target.classList.contains('bi-trash')) {
-        const serviceId = event.target.getAttribute('data-id');
+        const id = {
+            id: event.target.getAttribute('data-id')
+        };
         const row = event.target.closest('tr');
 
         // Modal show
@@ -78,38 +121,45 @@ table.addEventListener('click', function(event) {
         // Clic on confirm button (modal)
         document.getElementById('confirmButton').onclick = function() {
             spinnerContainer.classList.remove('d-none');
-            // DELETE - start                
-            fetch('app/Controllers/DeleteService.php', {
+            // DELETE - start             
+            fetch('/admServices/delete', {
                 method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    "Content-Type": "application/json"
                 },
-                body: new URLSearchParams({
-                    'id': serviceId
-                }).toString() 
+                body: JSON.stringify(id)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    const toast = new MyToast('Page non disponible', 'danger');
+                    toast.show();
+                } else {
+                    return response.json();
+                }
             })
             .then(data => {
-                if (data.ok) {
+                if (data.success) {
                     row.remove();
-                    const toast = new MyToast('Service supprimé avec succès.', 'success');
+                    const toast = new MyToast(data.message, 'success');
                     toast.show();
-                    spinnerContainer.classList.add('d-none');
-                } else {
-                    const toast = new MyToast('Erreur lors de la suppression du service.', 'danger');
+                } 
+                else {
+                    const toast = new MyToast(`Erreur lors de la suppression du service: ${data.message}`, 'danger');
                     toast.show();
-                    spinnerContainer.classList.add('d-none');
                 }
             })
             .catch(error => {
-                const toast = new MyToast('Erreur lors de la suppression du service. ' + error, 'danger');
+                const toast = new MyToast(`Erreur lors de la suppression du service: ${error.message}`, 'danger');
                 toast.show();
-                spinnerContainer.classList.add('d-none');
             })
+            .finally(() => {
+                spinnerContainer.classList.add('d-none');
+            });
             // DELETE - end
             deleteModal.hide()
         }
-
     } 
+    
     // UPDATE edition
     else if (event.target.classList.contains('bi-pencil-square')){
         const row = event.target.closest('tr');
@@ -173,22 +223,29 @@ table.addEventListener('click', function(event) {
         // Clic on confirm button (modal)
         document.getElementById('confirmButton').onclick = function() {
             spinnerContainer.classList.remove('d-none');
-            // AJAX for UPDATE - start
-            fetch('app/Controllers/UpdateService.php', {
-                method: 'POST',
+            const data = {
+                id: serviceId,
+                name: updatedData[0],
+                description: updatedData[1],
+                image_url: updatedData[2],
+                image_alt: updatedData[3]
+            }
+            // UPDATE - start
+            fetch('/admServices/put', {
+                method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    "Content-Type": "application/json"
                 },
-                body: new URLSearchParams({
-                    'type': 'UPDATE',
-                    'id': serviceId,
-                    'name': updatedData[0],
-                    'description': updatedData[1],
-                    'image_url': updatedData[2],
-                    'image_alt': updatedData[3]
-                }).toString()
+                body: JSON.stringify(data)
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    const toast = new MyToast('Page non disponible', 'danger');
+                    toast.show();
+                } else {
+                    return response.json();
+                }
+            })
             .then(data => {
                 if (data.success) {
                     // Update the cells with the new datas
@@ -203,21 +260,47 @@ table.addEventListener('click', function(event) {
                     actionCell.querySelectorAll('.bi-pencil-square, .bi-trash').forEach(icon => {
                         icon.classList.remove('hidden');
                     });
-                    const toast = new MyToast('Service mis à jour avec succès.', 'success');
+                    const toast = new MyToast(data.message, 'success');
                     toast.show();
-                    spinnerContainer.classList.add('d-none');
-                } else {
-                    const toast = new MyToast('Erreur lors de la mise à jour.', 'danger');
+                } 
+                else {
+                    const toast = new MyToast(`Erreur lors de la modification du service: ${data.message}`, 'danger');
                     toast.show();
-                    spinnerContainer.classList.add('d-none');
                 }
             })
             .catch(error => {
-                console.error('Erreur:', error);
-                spinnerContainer.classList.add('d-none');
+                const toast = new MyToast(`Erreur lors de la modification du service: ${error.message}`, 'danger');
+                toast.show();
             })
-            // AJAX for UPDATE - end
+            .finally(() => {
+                spinnerContainer.classList.add('d-none');
+            });
+            // UPDATE - end
             updateModal.hide()
         }
     }    
 });
+
+function addLine(name, description, imageUrl, altText) {
+    const table = document.getElementById('list-service').getElementsByTagName('tbody')[0];
+    const newRow = table.insertRow();
+
+    const nameCell = newRow.insertCell(0);
+    const descriptionCell = newRow.insertCell(1);
+    const imageUrlCell = newRow.insertCell(2);
+    const altCell = newRow.insertCell(3);
+    const actionsCell = newRow.insertCell(4);
+
+    nameCell.textContent = name;
+    descriptionCell.textContent = description;
+    imageUrlCell.textContent = imageUrl;
+    altCell.textContent = altText;
+
+    actionsCell.className = 'icon-cell';
+    actionsCell.innerHTML = `
+        <i class="bi bi-pencil-square"></i>
+        <i class="bi bi-trash"></i>
+        <i class="bi bi-x-circle hidden"></i>
+        <i class="bi bi-floppy hidden"></i>
+    `;
+}

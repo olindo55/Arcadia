@@ -1,22 +1,49 @@
 <?php
 require_once __DIR__.'/vendor/autoload.php';
 
-$pageName = $_GET['page'] ?? 'home';
-$page = 'app/Views/'.$pageName.'.php';
+$uri = $_SERVER['REQUEST_URI'];
+$uriParts = explode('/',$uri);
+if (count($uriParts) === 2 && $uriParts[1] === '') {
+    $uriParts[1] = 'homepage';
+    $uriParts[2] = 'view';
+}
+unset($uriParts[0]);
+
+$controller = ucfirst($uriParts[1]);
+$method = ucfirst($uriParts[2]);
+
+$controllerName = 'App\\Controllers\\'.$controller;
+$controller = new $controllerName;
+
+$jsFile = '/asset/js/'.$uriParts[1].'.js';
+
+$error = null;
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $controllerName = 'App\\Controllers\\'.ucfirst($pageName);
-    $controller = new $controllerName;
     if(isset($_FILES)){
-        $result = $controller->managePostForm($_POST, $_FILES);
+        $result = $controller->$method($_POST, $_FILES);
     }
     else {
-        $result = $controller->managePostForm($_POST);
+        $result = $controller->$method($_POST);
     }
-    
-    if ($result != ""){
+    if ($result !== true){
         $error = $result;
     }
+}
+else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
+    return $controller->$method();
+    if ($result !== true){
+        $error = $result;
+    }
+}
+else if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
+    return $controller->$method();
+    if ($result !== true){
+        $error = $result;
+    }
+}
+else {
+    $page = $controller->$method();
 }
 
     
@@ -29,10 +56,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <title>Accueil - Arcadia</title>
     <meta name="description" content="Le Zoo Arcadia vous invite à explorer son site web pour en apprendre davantage sur ses animaux et leurs habitats, les services offerts par le zoo et ses horaires."/>
     <!-- Bootstrap 5.3.3 -->
-     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-     <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+     <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css">
      
-     <link rel="stylesheet" href="./asset/scss/style.css">
+     <link rel="stylesheet" href="/asset/scss/style.css">
     <!-- Swiper -->
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
      
@@ -40,8 +67,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <body>
         <header>
             <div class="main-nav" >
-                <div id="logo" onclick="window.location.href ='index.php?page=home'">
-                    <img src="./asset/images/logo/print_blur.png" alt="Logo du Zoo Arcadia représentant une empreinte de mammifère">
+                <div id="logo" onclick="window.location.href ='/'">
+                    <img src="/asset/images/logo/print_blur.png" alt="Logo du Zoo Arcadia représentant une empreinte de mammifère">
                     <div>
                         <h1>Zoo Arcadia</h1>
                         <h2>pour la Faune, par Nature</h2>
@@ -49,19 +76,48 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 </div>
                 <nav>
                     <ul>
-                        <li class="active"><a href="index.php?page=home">Accueil</a></li>
-                        <li><a href="index.php?page=biome">Le zoo</a></li>
-                        <li><a href="index.php?page=service">Services</a></li>
+                        <li class="<?= $uriParts[1] == 'homepage' ? 'active' : '' ?>"><a href="/">Accueil</a></li>
+                        <li class="<?= $uriParts[1] == 'biome' ? 'active' : '' ?>"><a href="/biome/view">Le zoo</a></li>
+                        <li class="<?= $uriParts[1] == 'service' ? 'active' : '' ?>"><a href="/service/view">Services</a></li>
+                        <li class="<?= $uriParts[1] == 'service' ? 'active' : '' ?>"><a href="/contact/view">Contactez-nous</a></li>
                     </ul>
                 </nav>
+                
                 <div id="nav-buttons">
-                    <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href ='index.php?page=contact'"><i class="bi bi-envelope"></i> Contactez-nous</button>
-                    <div id="button-login">
-                        <a href="index.php?page=signin">
-                            <i class="bi bi-person text-dark" style="font-size: 45px"></i>
-                        </a>
-                    </div>   
-                    <p><?php echo (isset($_SESSION['user']['forename']) ? $_SESSION['user']['forename'] : 'Visiteur');?></p>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                            Connexion
+                        </button>
+                        <form class="dropdown-menu p-4">
+                            <div class="mb-3">
+                            <label for="email" class="form-label">Mot de passe</label>
+                            <input type="email" class="form-control" id="email" placeholder="email@example.com">
+                            </div>
+                            <div class="mb-3">
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <input type="password" class="form-control" id="password" placeholder="votre mot de passe">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Connecter</button>
+                        </form>
+                    </div>
+                    <li class="nav-item dropdown">
+                        <button type="button" class="btn btn-secondary">Administration</button>
+                        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admServices' ? 'active' : '' ?>" href="/admServices/view">Services</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admComments' ? 'active' : '' ?>" href="/admComments/view">Avis</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admOpening' ? 'active' : '' ?>" href="/admOpening/view">Horaires</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admBiomes' ? 'active' : '' ?>" href="/admBiomes/view">Habitats</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admAnimals' ? 'active' : '' ?>" href="/admAnimals/view">Animaux</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admFeedings' ? 'active' : '' ?>" href="/admFeeding/view">Nourrissages</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admVet' ? 'active' : '' ?>"a href="/admVet/view">Rapports vétérinaire</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admUsers' ? 'active' : '' ?>" href="/admUsers/view">Droits et utilisateurs</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Déconnexion</a></li>
+                        </ul>
+                    </li>
                 </div>
                 <div class="my-burger-button">
                     <i class="bi bi-list text-light" style="font-size: 33px"></i> <!-- burger icon -->
@@ -71,22 +127,49 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             <!-- start burger menu-->
             <div class="my-burger-menu">
                 <ul>
-                    <li class="active"><a href="index.php?page=home">Accueil</a></li>
-                    <li><a href="index.php?page=biome">Le zoo</a></li>
-                    <li><a href="index.php?page=service">Services</a></li>
+                    <li class="<?= $uriParts[1] == 'homepage' ? 'active' : '' ?>"><a href="/">Accueil</a></li>
+                    <li class="<?= $uriParts[1] == 'biome' ? 'active' : '' ?>"><a href="/biome/view">Le zoo</a></li>
+                    <li class="<?= $uriParts[1] == 'service' ? 'active' : '' ?>"><a href="/service/view">Services</a></li>                       
+                    <li class="<?= $uriParts[1] == 'service' ? 'active' : '' ?>"><a href="/contact/view">Contactez-nous</a></li>
+                    <hr>
+                    <!-- Connection button -->
+                    <div class="dropdown">
+                        <div class="myConnection">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                Connexion
+                            </button>
+                            <form class="dropdown-menu p-4">
+                                <div class="mb-3">
+                                <label for="email" class="form-label">Mot de passe</label>
+                                <input type="email" class="form-control" id="email" placeholder="email@example.com">
+                                </div>
+                                <div class="mb-3">
+                                <label for="password" class="form-label">Mot de passe</label>
+                                <input type="password" class="form-control" id="password" placeholder="votre mot de passe">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Connecter</button>
+                            </form>
+                        </div>
+                    </div>
+                    <li class="nav-item dropdown">
+                        <button type="button" class="btn btn-secondary">Administration</button>
+                        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admServices' ? 'active' : '' ?>" href="/admServices/view">Services</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admComments' ? 'active' : '' ?>" href="/admComments/view">Avis</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admOpening' ? 'active' : '' ?>" href="/admOpening/view">Horaires</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admBiomes' ? 'active' : '' ?>" href="/admBiomes/view">Habitats</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admAnimals' ? 'active' : '' ?>" href="/admAnimals/view">Animaux</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admFeedings' ? 'active' : '' ?>" href="/admFeeding/view">Nourrissages</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admVet' ? 'active' : '' ?>"a href="/admVet/view">Rapports vétérinaire</a></li>
+                            <li><a class="dropdown-item <?= $uriParts[1] == 'admUsers' ? 'active' : '' ?>" href="/admUsers/view">Droits et utilisateurs</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Déconnexion</a></li>
+                        </ul>
+                    </li>
                 </ul>
-                <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href ='index.php?page=contact'"><i class="bi bi-envelope"></i> Contactez-nous</button>
-                
-                <!-- <button class="btn btn-secondary rounded-5 d-flex align-items-center justify-content-center">
-                    <i class="bi bi-envelope me-2"></i> Contactez-nous
-                </button> -->
-                <div class="my-divider"></div>
-                <div id="button-login">
-                    <a href="index.php?page=signin">
-                        <i class="bi bi-person text-dark" style="font-size: 45px"></i>
-                    </a>
-                    <p><?php echo $_SESSION['user']['forename']?></p>
-                </div> 
             </div>
             <!-- end burger menu-->
         </header>
@@ -166,7 +249,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         <div>Forêt de Brocéliande</div>
                         <div>35380 Paimpont, France</div>
                     </div>
-                    <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href = 'index.php?page=contact'"><i class="bi bi-envelope"></i> Contactez-nous</button>
+                    <button class="btn btn-secondary rounded-5" type="button" onclick="window.location.href = '/contact/view'"><i class="bi bi-envelope"></i> Contactez-nous</button>
                 </address>
         
                 <div id="social-network">
@@ -181,18 +264,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             <div id="copyright">
                 <div>© Zoo Arcadia 2024</div>
-                <a href="index.php?page=cookie">Politique de gestion des cookies</a>
+                <a href="/cookie/view">Politique de gestion des cookies</a>
             </div>
         </footer>
 
     <!-- Script -->
-    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!-- bootstrap -->
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> <!-- swiper -->
     <script type="module" src="/asset/js/menu.js"></script>
     <!-- <script type="module" src="/router/router.js"></script> -->
     <!-- Management of script's page -->
      <?php 
-        $jsFile = 'asset/js/'.$pageName.'.js';
         echo '<script type="module" src="'.$jsFile.'"></script>' ;  
      ?>
 </body>

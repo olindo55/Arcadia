@@ -166,23 +166,35 @@ header {
             padding-bottom: 15px;
             padding-left: 0px;
         }
-        ul .active{
-            text-decoration: underline;
-        }
         .my-divider{
             border-top: $light solid 1px;
             width: 40%;
             margin: 25px auto;
         } 
+        .active{
+            text-decoration: underline;
+        }
     }
     .my-burger-menu.open{
-        height: 350px; 
+        height: 650px; 
         padding-top: 20px;
         padding-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
     }
     
     nav {
         display: none;
+    }
+
+    .dropdown{
+        all: unset;
+        .myConnection{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }        
     }
     
 }

@@ -4,7 +4,10 @@ namespace App\Controllers;
 
 class Contact 
 {
-
+    public function view()
+    {
+        return __DIR__.'/../Views/homepage.php';
+    }
     public function managePostForm($post)
     {
         if (isset($post['email']) || isset($post['message'])) {

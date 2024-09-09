@@ -1,38 +1,22 @@
 <?php
-
 namespace App\Controllers;
 use App\Database\DbUtils;
 
 class AdmServices
-{
-    public function injection(): string
+{   
+    public function view()
     {
-        // Get data from DB
-        $query = DbUtils::getPdo()->query('SELECT * FROM service');
-        $services = $query->fetchAll(\PDO::FETCH_ASSOC);
-        
-        // Creat HTML for each service
-        $html = '';
-        foreach ($services as $service) {
-            $html .= '<tr data-id="' . $service['id'] . '">';
-            $html .= '<td>' . $service['name'] . '</td>';
-            $html .= '<td>' . $service['description'] . '</td>';
-            $html .= '<td>' . $service['image_url']. '</td>';
-            $html .= '<td>' . $service['image_alt'] . '</td>';
-            $html .= '<td class="icon-cell">' .'<i class="bi bi-pencil-square"></i>'.'<i class="bi bi-trash" data-id="' . $service['id'] . '"></i>'.'<i class="bi bi-x-circle hidden"></i>'.'<i class="bi bi-floppy hidden"></i>' . '</td>';
-            $html .= '</tr>';
-        }
-        return $html;
+        return __DIR__.'/../Views/admServices.php';
     }
 
-    public function managePostForm($post, $files)
+    public function post(array $data, $files): array
     {
-        if (isset($post['name']) ||
-            isset($post['description']) ||
-            isset($_FILE['upload']) ||
-            isset($post['alt'])) 
+        if (isset($data['name']) &&
+            isset($data['description']) &&
+            isset($_FILE['upload']) &&
+            isset($data['alt'])) 
             {
-                $uploadDir = 'asset/uploads/'; 
+                $uploadDir = 'asset/images/services/'; 
                 $uploadFile = $uploadDir . basename($files['upload']['name']);
 
                 $imageFileType = strtolower(pathinfo($uploadFile, PATHINFO_EXTENSION));
@@ -50,24 +34,96 @@ class AdmServices
                                 :alt
                             )
                         ');
-        
-                    $query->bindValue('name', DbUtils::protectDbData($post['name']));
-                    $query->bindValue('description', DbUtils::protectDbData($post['description']));
-                    $query->bindValue('upload', $uploadFile);
-                    $query->bindValue('alt', DbUtils::protectDbData($post['alt']));
-                    $query->execute();
-            
-                    echo  "upload reussi";
-                
+                    $query->bindValue('name', DbUtils::protectDbData($data['name']));
+                    $query->bindValue('description', DbUtils::protectDbData($data['description']));
+                    $query->bindValue('upload', '../../'.$uploadFile);
+                    $query->bindValue('alt', DbUtils::protectDbData($data['alt']));
+                    
+                    if($query->execute()){
+                        return ['success' => true,
+                                'message' => 'Une erreur est survenue lors de l\'enregistrement.',
+                                'data' => $data,
+                        ];
+                    }       
                 } else {
-                    echo "Erreur lors de l'upload du fichier.";
+                    return [
+                        'success' => false,
+                        'message' => 'Le service a été créé',
+                        'data' => $data
+                    ];
                 }
             } else {
-                echo "Le fichier n'est pas une image.";
+                return [
+                    'success' => false,
+                    'message' => 'Le fichier \'est pas une image.'
+                ];
             }
-            
         } else {
-            echo 'Champs vide. Insertion impossible !';
+            return [
+                'success' => false,
+                'message' => 'Champs vide. Insertion impossible !'
+            ];
+        }
+    }
+
+    public function put()
+    {
+        $requestJSON = trim(file_get_contents("php://input"));
+        $request = json_decode($requestJSON, true);
+        
+        if (isset($request['id'], $request['name'], $request['description'], $request['image_url'], $request['image_alt'])) {
+            $id = $request['id'];
+            $name = $request['name'];
+            $description = $request['description'];
+            $url = $request['image_url'];
+            $alt = $request['image_alt'];
+
+            $query = DbUtils::getPdo()->prepare("UPDATE service SET name = :name , description = :description , image_url = :image_url , image_alt = :image_alt WHERE id = :id");
+            $query->bindValue('id', DbUtils::protectDbData($request['id']));
+            $query->bindValue('name', DbUtils::protectDbData($request['name']));
+            $query->bindValue('description', DbUtils::protectDbData($request['description']));
+            $query->bindValue('image_url', DbUtils::protectDbData($request['image_url']));
+            $query->bindValue('image_alt', DbUtils::protectDbData($request['image_alt']));
+            $query->execute();
+
+            echo json_encode([
+                'success' => true,
+                'message' => 'Service modifié avec succès.',
+            ]);
+        } else {
+            echo json_encode([
+                'success' => false, 
+                'message' => 'Erreur du serveur lors de l\'exécution de la requête',
+            ]);
+        }
+    }
+
+    public function delete()
+    {   
+        $requestJSON = trim(file_get_contents("php://input"));
+        $request = json_decode($requestJSON, true);
+
+        if (isset($request['id'])) {
+            $query = DbUtils::getPdo()->prepare("DELETE FROM service WHERE id = :id");
+            $query->bindValue(':id', $request['id'], \PDO::PARAM_INT);
+    
+            if ($query->execute()) {
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Service supprimé avec succès.',
+                ]);
+            } else {
+                echo json_encode([
+                    'success' => false, 
+                    'message' => 'Erreur du serveur lors de l\'exécution de la requête',
+                ]);
+            }
+        } else {
+            echo json_encode([
+                'success' => false, 
+                'message' => 'Paramètre manquant',
+            ]);
         }
     }
 }
+
