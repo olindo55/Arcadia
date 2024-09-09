@@ -12855,6 +12855,9 @@ header .my-burger-menu .my-divider {
   width: 40%;
   margin: 25px auto;
 }
+header .my-burger-menu .active {
+  text-decoration: underline;
+}
 header .my-burger-menu.open {
   height: 650px;
   padding-top: 20px;
