@@ -1,3 +1,50 @@
+import MyModal from './class/MyModal.js';
+import MyToast from './class/MyToast.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+    confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+});
+const spinnerContainer = document.getElementById('spinner-container');
+
+// POST
+document.getElementById('btnForm').addEventListener('click', function(event){
+  event.preventDefault();
+  spinnerContainer.classList.remove('d-none');
+
+  const form = document.getElementById('newServicecontact-form');
+  const formData = new FormData(form);
+
+  fetch('/contact/managePostForm', {
+      method: 'POST',
+      body: formData
+  })
+  .then(response => {
+      if (!response.ok) {
+          const toast = new MyToast('Page non disponible', 'danger');
+          toast.show();
+      } else {
+          return response.json();
+      }
+  })
+  .then(data => {
+      if (data.success) {
+          const toast = new MyToast(data.message, 'success');
+          toast.show();
+      } 
+      else {
+          const toast = new MyToast(data.message, 'danger');
+          toast.show();
+      }
+  })
+  .catch(error => {
+      const toast = new MyToast(`Erreur lors de l'envoi: ${error.message}`, 'danger');
+      toast.show();
+  })
+  .finally(() => {
+      spinnerContainer.classList.add('d-none');
+  });
+});
+
 // get the inputs
 const inputEmail = document.getElementById('email');
 const inputSubject = document.getElementById('subject');
