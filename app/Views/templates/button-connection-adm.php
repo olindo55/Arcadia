@@ -1,4 +1,4 @@
-<?php if($_SESSION['connected']) : ?>
+<?php if(isset($_SESSION['connected']) && $_SESSION['connected']) : ?>
     <li class="nav-item dropdown">
         <button type="button" class="btn btn-secondary">Administration</button>
         <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
@@ -14,10 +14,10 @@
             <li><a class="dropdown-item <?= $uriParts[1] == 'admVet' ? 'active' : '' ?>"a href="/admVet/view">Rapports vétérinaire</a></li>
             <li><a class="dropdown-item <?= $uriParts[1] == 'admUsers' ? 'active' : '' ?>" href="/admUsers/view">Droits et utilisateurs</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Déconnexion</a></li>
+            <li><a class="dropdown-item" id="signout" href="/login/signout">Déconnexion</a></li>
         </ul>
     </li>
-    <?php else : ?>
+<?php else : ?>
     <div class="dropdown">
         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
             Connexion

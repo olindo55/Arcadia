@@ -4,12 +4,19 @@ use App\Database\DbUtils;
 use PDO;
 
 class Login
-{
+{   
+    function signout(){
+        $_SESSION['connected'] = false;
+        $_SESSION['flash_message'] = 'Vous êtes désormais déconnecté(e)';
+        $_SESSION['flash_alert'] = 'success';
+        return __DIR__.'/../Views/homepage.php';
+    }
+
     function check($data){
         if (!$data['email'] || !$data['password']) {
             echo json_encode([
                 'success' => false,
-                'message' => '1Email ou mot de passe incorrect',
+                'message' => 'Email ou mot de passe incorrect',
             ]);
             exit();
 
@@ -23,7 +30,7 @@ class Login
             if (!$user) {
                 echo json_encode([
                     'success' => false,
-                    'message' => '2Email ou mot de passe incorrect',
+                    'message' => 'Email ou mot de passe incorrect',
                 ]);
                 exit();
 
@@ -33,7 +40,7 @@ class Login
                 if (!$passwordOk) {
                     echo json_encode([
                         'success' => false,
-                        'message' => '3Email ou mot de passe incorrect',
+                        'message' => 'Email ou mot de passe incorrect',
                     ]);
                     exit();
 

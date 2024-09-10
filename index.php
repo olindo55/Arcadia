@@ -2,7 +2,6 @@
 require_once __DIR__.'/vendor/autoload.php';
 
 session_start();
-$_SESSION['connected'] = false;
 
 $uri = $_SERVER['REQUEST_URI'];
 $uriParts = explode('/',$uri);

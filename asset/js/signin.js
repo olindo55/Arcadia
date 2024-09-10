@@ -6,10 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 const spinnerContainer = document.getElementById('spinner-container');
 
+// signin
 document.getElementById('login-button')
     .addEventListener('click', function(event){
-        // const toast = new MyToast('test', 'warning');
-        // toast.show();
         event.preventDefault();
         spinnerContainer.classList.remove('d-none');
 
@@ -30,11 +29,7 @@ document.getElementById('login-button')
         })
         .then(data => {
             if (data.success) {
-                const toast = new MyToast(data.message, 'success');
-                toast.show();
-                // setTimeout(() => {
-                    window.location.href = '/homepage/view';
-                // }, 2000);
+                window.location.href = '/homepage/view';
             } 
             else {
                 const toast = new MyToast(data.message, 'danger');
@@ -42,7 +37,6 @@ document.getElementById('login-button')
             }
         })
         .catch(error => {
-            // console.log(data);
             const toast = new MyToast(`Erreur lors de  la connexion`, 'danger');
             toast.show();
         })
@@ -50,92 +44,6 @@ document.getElementById('login-button')
             spinnerContainer.classList.add('d-none');
         });
     });
-
-
-
-
-
-
-// // get the inputs
-// const inputLogin = document.getElementById('username');
-// const inputPassword = document.getElementById('password');
-// const btnSignin = document.getElementById('btnForm');
-
-// // listeners
-// inputLogin.addEventListener('keyup', validateForm);
-// inputPassword.addEventListener('keyup', validateForm);
-// btnSignin.addEventListener("click", checkCredentials);
-
-
-// function validateForm(){
-//     const loginValid = validateEmail(inputLogin);
-//     const passwordValid = validateRequired(inputPassword);
-    
-//     if (loginValid && passwordValid){
-//         btnSignin.disabled = false;
-//     }
-//     else {
-//         btnSignin.disabled = true;
-//     }
-// }
-
-// function validateEmail(input){
-//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//     const mailUser = input.value;
-//     if (mailUser.match(emailRegex)){
-//       input.classList.add('is-valid');
-//       input.classList.remove('is-invalid');
-//       return true;
-//     }
-//     else {
-//       input.classList.remove('is-valid');
-//       input.classList.add('is-invalid');
-//       return false;
-//     }
-//   }
-  
-// function validateRequired(input){
-//     if (input.value == ''){
-//         input.classList.remove('is-valid');
-//         input.classList.add('is-invalid');
-//         return false;
-//     }
-//     else {
-//         input.classList.add('is-valid');
-//         input.classList.remove('is-invalid');
-//         return true;
-//     }
-// }
-
-// // function checkCredentials(){
-// //     //Ici, il faudra appeler l'API pour vérifier les credentials en BDD
-
-// //     if(inputLogin.value == "admin@arcadia.com" && inputPassword.value == "123"){
-// //         //Il faudra récupérer le vrai token
-// //         const token = "lkjsdngfljsqdnglkjsdbglkjqskjgkfjgbqslkfdgbskldfgdfgsdgf";
-// //         setToken(token);
-// //         setCookie(RoleCookieName, "admin", 7);
-// //         window.location.replace("/");
-// //     }
-// //     else{
-// //         inputLogin.value = "";
-// //         inputLogin.classList.remove('is-valid');
-// //         inputLogin.classList.add('is-invalid');
-// //         inputPassword.value = "";
-// //         inputPassword.classList.remove('is-valid');
-// //         inputPassword.classList.add('is-invalid');
-  
-// //         let errorMessage = document.getElementById('error-message');
-// //         if (!errorMessage) {
-// //           errorMessage = document.createElement('div');
-// //           errorMessage.id = 'error-message';
-// //           errorMessage.className = 'alert alert-danger mt-3';
-// //           errorMessage.textContent = "Identifiant et/ou mot de passe invalides !";
-// //           document.getElementById('signin-form').appendChild(errorMessage);
-// //         }
-// //     }  
-// // }
-
 
 
 // // // token
