@@ -6,7 +6,7 @@ class Contact
 {
     public function view()
     {
-        return __DIR__.'/../Views/homepage.php';
+        return __DIR__.'/../Views/contact.php';
     }
     public function managePostForm($post)
     {
@@ -22,7 +22,17 @@ class Contact
             
             $emailToSend = mail('julien.martinati@gmail.com', htmlspecialchars($post['subject']), $message, $entete);
             if(!$emailToSend){
-                return 'Probleme : Votre message n\'a pas été envoyé.';
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Probleme : Votre message n\'a pas été envoyé.',
+                ]);
+                exit();
+            }else{
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Votre message pas été  avec succés.',
+                ]);
+                exit();
             }
           }
     }

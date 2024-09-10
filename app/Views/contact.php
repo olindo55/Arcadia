@@ -1,6 +1,4 @@
-<!-- <?php require_once 'app/config/config.php' ?> -->
-
-<form class="container-fluid col-10 col-md-4 py-3 contact-form" method="post" action="index.php?page=contact">
+<form class="container-fluid col-10 col-md-4 py-3 contact-form" method="post" id="contact-form">
     <div class="col-10 pb-3">
         <label for="email" class="form-label" method="post">Votre email</label>
         <div class="input-group has-validation">

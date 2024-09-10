@@ -2,7 +2,6 @@
 require_once __DIR__.'/vendor/autoload.php';
 
 session_start();
-$_SESSION['connected'] = false;
 
 $uri = $_SERVER['REQUEST_URI'];
 $uriParts = explode('/',$uri);
@@ -49,6 +48,13 @@ else {
     $page = $controller->$method();
 }
 
+$flashMessage = '';
+if (isset($_SESSION['flash_message'])) {
+    $flashMessage = $_SESSION['flash_message'];
+    $flashAlert =$_SESSION['flash_alert'];
+    unset($_SESSION['flash_message']);
+    unset($_SESSION['flash_alert']);
+}
     
 ?>
 <!DOCTYPE html>
@@ -207,6 +213,12 @@ else {
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> <!-- swiper -->
     <script type="module" src="/asset/js/menu.js"></script>
+    <script type="module" src="/asset/js/signin.js"></script>
+    <script type="text/javascript">
+        // Variables PHP injectées dans le JS
+        const flashMessage = <?php echo json_encode($flashMessage); ?>;
+        const flashAlert = <?php echo json_encode($flashAlert); ?>;
+        </script>
     <!-- <script type="module" src="/router/router.js"></script> -->
     <!-- Management of script's page -->
      <?php 
