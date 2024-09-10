@@ -5,14 +5,18 @@
             <span class="visually-hidden">Toggle Dropdown</span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item <?= $uriParts[1] == 'admServices' ? 'active' : '' ?>" href="/admServices/view">Services</a></li>
-            <li><a class="dropdown-item <?= $uriParts[1] == 'admComments' ? 'active' : '' ?>" href="/admComments/view">Avis</a></li>
-            <li><a class="dropdown-item <?= $uriParts[1] == 'admOpening' ? 'active' : '' ?>" href="/admOpening/view">Horaires</a></li>
-            <li><a class="dropdown-item <?= $uriParts[1] == 'admBiomes' ? 'active' : '' ?>" href="/admBiomes/view">Habitats</a></li>
-            <li><a class="dropdown-item <?= $uriParts[1] == 'admAnimals' ? 'active' : '' ?>" href="/admAnimals/view">Animaux</a></li>
-            <li><a class="dropdown-item <?= $uriParts[1] == 'admFeedings' ? 'active' : '' ?>" href="/admFeeding/view">Nourrissages</a></li>
-            <li><a class="dropdown-item <?= $uriParts[1] == 'admVet' ? 'active' : '' ?>"a href="/admVet/view">Rapports vétérinaire</a></li>
-            <li><a class="dropdown-item <?= $uriParts[1] == 'admUsers' ? 'active' : '' ?>" href="/admUsers/view">Droits et utilisateurs</a></li>
+            <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'administrateur') : ?>
+                <li><a class="dropdown-item <?= $uriParts[1] == 'admUsers' ? 'active' : '' ?>" href="/admUsers/view">Droits et utilisateurs</a></li>
+                <li><a class="dropdown-item <?= $uriParts[1] == 'admServices' ? 'active' : '' ?>" href="/admServices/view">Services</a></li>
+                <li><a class="dropdown-item <?= $uriParts[1] == 'admOpening' ? 'active' : '' ?>" href="/admOpening/view">Horaires</a></li>
+                <li><a class="dropdown-item <?= $uriParts[1] == 'admBiomes' ? 'active' : '' ?>" href="/admBiomes/view">Habitats</a></li>
+                <li><a class="dropdown-item <?= $uriParts[1] == 'admAnimals' ? 'active' : '' ?>" href="/admAnimals/view">Animaux</a></li>
+            <?php elseif(isset($_SESSION['role']) && ($_SESSION['role'] === 'administrateur' || $_SESSION['role'] === 'vétérinaire')): ?>
+                <li><a class="dropdown-item <?= $uriParts[1] == 'admVet' ? 'active' : '' ?>"a href="/admVet/view">Rapports vétérinaire</a></li>
+            <?php elseif(isset($_SESSION['role']) && ($_SESSION['role'] === 'administrateur' || $_SESSION['role'] === 'employé')): ?>
+                <li><a class="dropdown-item <?= $uriParts[1] == 'admFeedings' ? 'active' : '' ?>" href="/admFeeding/view">Nourrissages</a></li>
+                <li><a class="dropdown-item <?= $uriParts[1] == 'admComments' ? 'active' : '' ?>" href="/admComments/view">Avis</a></li>
+            <?php endif; ?>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" id="signout" href="/login/signout">Déconnexion</a></li>
         </ul>

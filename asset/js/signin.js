@@ -1,4 +1,3 @@
-import MyModal from './class/MyModal.js';
 import MyToast from './class/MyToast.js';
 
 document.addEventListener('DOMContentLoaded', () => {

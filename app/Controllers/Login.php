@@ -56,7 +56,7 @@ class Login
                     if (preg_match('/^[aeiouyAEIOUY]/', $_SESSION['role'])){
                         $message = 'Bonjour '. ', vous êtes désormais connecté(e) en tant qu\''. $_SESSION['role']. '.';
                     }else{
-                        'Bonjour '. ', vous êtes désormais connecté(e) en tant que '. $_SESSION['role']. '.';
+                        $message = 'Bonjour '. ', vous êtes désormais connecté(e) en tant que '. $_SESSION['role']. '.';
                     }
                     $_SESSION['flash_message'] = $message;
                     $_SESSION['flash_alert'] = 'success';
