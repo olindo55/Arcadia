@@ -1,7 +1,7 @@
 <?php
 use App\Database\DbUtils;
 
-$query = DbUtils::getPdo()->query('SELECT * FROM comment WHERE published = true');
+$query = DbUtils::getPdo()->query('SELECT * FROM comment WHERE published = true ORDER BY date_comment DESC;');
 $comments = $query->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($comments as $comment) {

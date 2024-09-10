@@ -62,11 +62,11 @@
       </div>
     </div>
   </div>
-  <form id="form-comment" action="">
+  <form id="form-comment" method="post">
     <h2>Laissez votre commentaire<span class="point">.</span></h2>
     <div class="mb-3">
       <label for="pseudo" class="form-label">Nom/Pseudo*</label>
-      <input type="text" class="form-control" id="pseudo" placeholder="ici mon pseudo..." >
+      <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="ici mon pseudo..." >
       <div class="valid-feedback">
         ok!
       </div>
@@ -76,7 +76,7 @@
     </div>
     <div class="mb-3">
       <label for="comment" class="form-label">Commentaire*</label>
-      <textarea class="form-control" id="comment" rows="6"></textarea>
+      <textarea class="form-control" id="comment" name="comment" rows="6"></textarea>
       <div class="valid-feedback">
         ok!
       </div>
@@ -93,7 +93,7 @@
         <span class="my-star" data-value="1">★</span>
       </div>
       <input  type="hidden" id="ratingValue" name="ratingValue" value="0">
-      <button type="submit" class="btn btn-secondary btn-lg shadow-sm mt-2" id="btnForm" disabled>Envoyer</button>
+      <button type="submit" class="btn btn-secondary btn-lg shadow-sm mt-2" id="btn-form-comment" disabled>Envoyer</button>
     </div>
   </form>
 </section>

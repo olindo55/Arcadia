@@ -1,3 +1,13 @@
+import Service from './class/Service.js';
+import MyModal from './class/MyModal.js';
+import MyToast from './class/MyToast.js';
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+});
+const spinnerContainer = document.getElementById('spinner-container');
+
 // Swiper for carousel
 //--------------------
 const swiperService = new Swiper('.swiperService', {
@@ -75,7 +85,7 @@ function validateForm(){
   const commentValid = validateRequired(inputComment);
   const starsValid = validateStars(ratingValue);
   
-  const formButton = document.getElementById('btnForm');
+  const formButton = document.getElementById('btn-form-comment');
   if (pseudoValid && commentValid && starsValid){
     formButton.disabled = false;
   }
@@ -109,3 +119,51 @@ function validateStars(input){
     return true;
   }
 }
+
+
+// POST Comment
+//-------------------
+document.getElementById('btn-form-comment').addEventListener('click', function(event){
+  event.preventDefault();
+  spinnerContainer.classList.remove('d-none');
+
+  const form = document.getElementById('form-comment');
+  const formData = new FormData(form);
+
+  fetch('/homepage/post', {
+      method: 'POST',
+      body: formData
+  })
+  .then(response => {
+      if (!response.ok) {
+          const toast = new MyToast('Page non disponible', 'danger');
+          toast.show();
+      } else {
+          return response.json();
+      }
+  })
+  .then(data => {
+      if (data.success) {
+          const toast = new MyToast(data.message, 'success');
+          toast.show();
+      } 
+      else {
+          const toast = new MyToast('Erreur lors de l\'envoie du commentaire', 'danger');
+          toast.show();
+      }
+  })
+  .catch(error => {
+      const toast = new MyToast(`Erreur lors de l\'envoie du commentaire: ${error.message}`, 'danger');
+      toast.show();
+  })
+  .finally(() => {
+      spinnerContainer.classList.add('d-none');
+      form.addEventListener('reset',function(){
+        validateForm;
+        stars.forEach(star => {star.classList.remove('selected');});
+        formButton.disabled = true;
+
+      });
+      form.reset();
+  });
+});
