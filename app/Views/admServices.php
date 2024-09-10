@@ -28,7 +28,7 @@ use App\Database\DbUtils;
         </form>
 
         <!-- <input type="text" id="search" placeholder="Recherche..."> -->
-        <h2>Les services diffusés</h2>
+        <h2>Les services publiés</h2>
         <table id="list-service"  class="table table-hover table-responsive">
             <thead>
                 <tr class="table-primary ">
