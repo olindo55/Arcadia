@@ -6,7 +6,8 @@ use PDO;
 class Login
 {   
     function signout(){
-        $_SESSION['connected'] = false;
+        unset($_SESSION['connected']);
+        unset( $_SESSION['role']);
         $_SESSION['flash_message'] = 'Vous êtes désormais déconnecté(e)';
         $_SESSION['flash_alert'] = 'success';
         return __DIR__.'/../Views/homepage.php';
@@ -21,7 +22,11 @@ class Login
             exit();
 
         } else {
-            $query = DbUtils::getPdo()->prepare('SELECT * FROM users WHERE email = :email');
+            $query = DbUtils::getPdo()->prepare(
+                'SELECT u.id, u.name, u.forename, u.email, u.password, r.role
+                FROM users u
+                JOIN role r ON u.role_id = r.id
+                WHERE u.email = :email');
             $query->bindParam('email', $data['email']);
             $query->execute();
     
@@ -47,11 +52,17 @@ class Login
                 } else {
                     unset($user['password']);
                     $_SESSION['connected'] = true;
-                    $_SESSION['flash_message'] = 'Bonjour '. $user['forename'] . ', vous êtes désormais connecté(e)';
+                    $_SESSION['role'] = $user['role'];
+                    if (preg_match('/^[aeiouyAEIOUY]/', $_SESSION['role'])){
+                        $message = 'Bonjour '. ', vous êtes désormais connecté(e) en tant qu\''. $_SESSION['role']. '.';
+                    }else{
+                        'Bonjour '. ', vous êtes désormais connecté(e) en tant que '. $_SESSION['role']. '.';
+                    }
+                    $_SESSION['flash_message'] = $message;
                     $_SESSION['flash_alert'] = 'success';
                     echo json_encode([
                         'success' => true,
-                        'message' => 'Bonjour '. $user['forename'] . ', vous êtes désormais connecté(e)',
+                        'message' => $message,
                     ]);
                     exit();
                 }

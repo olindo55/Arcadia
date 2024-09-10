@@ -16,7 +16,9 @@
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" id="signout" href="/login/signout">Déconnexion</a></li>
         </ul>
+        <!-- <h6><?php echo $_SESSION['role'] ?></h6> -->
     </li>
+    
 <?php else : ?>
     <div class="dropdown">
         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
@@ -33,6 +35,5 @@
         </div>
         <button type="submit" class="btn btn-primary" id="login-button">Connecter</button>
     </form>
-
     </div>
 <?php endif; ?>
