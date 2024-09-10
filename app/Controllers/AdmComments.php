@@ -16,70 +16,6 @@ class AdmComments
         }
     }
 
-    public function post(array $data, $files)
-    {   
-        header('Content-Type: application/json');
-        if (isset($data['name']) &&
-            isset($data['description']) &&
-            isset($_FILES['upload']) &&
-            isset($data['alt'])) 
-            {
-                $uploadDir = 'asset/images/services/'; 
-                $uploadFile = $uploadDir . basename($files['upload']['name']);
-
-                $imageFileType = strtolower(pathinfo($uploadFile, PATHINFO_EXTENSION));
-                $check = getimagesize($files['upload']['tmp_name']);
-
-                if($check) {
-                    if (move_uploaded_file($files['upload']['tmp_name'], $uploadFile)) {
-
-                        $query = DbUtils::getPdo()->prepare('INSERT INTO service
-                            (name, description, image_url, image_alt)
-                            VALUES (
-                                :name,
-                                :description,
-                                :upload,
-                                :alt
-                            )
-                        ');
-                        $data['upload'] = '../../' . $uploadFile;
-                        $query->bindValue('name', DbUtils::protectDbData($data['name']));
-                        $query->bindValue('description', DbUtils::protectDbData($data['description']));
-                        $query->bindValue('upload', DbUtils::protectDbData($data['upload']));
-                        $query->bindValue('alt', DbUtils::protectDbData($data['alt']));
-                        
-                        if($query->execute()){
-                            echo json_encode([
-                                'success' => true,
-                                'message' => 'Le service a été créé.',
-                                'data' => $data,
-                            ]);
-                            exit();
-                        }else{
-                            echo json_encode([
-                                'success' => false,
-                                'message' => 'Une erreur est survenue lors de l\'enregistrement.',
-                                'data' => $data
-                            ]);
-                            exit();
-                        }  
-                    }
-                } else {
-                    echo json_encode([
-                        'success' => false,
-                        'message' => 'Le fichier n\'est pas une image.'
-                    ]);
-                    exit();
-                }
-            } else {
-                echo json_encode([
-                    'success' => false,
-                    'message' => 'Champs vide. Insertion impossible !'
-                ]);
-                exit();
-            }
-    }
-
     public function put()
     {
         $requestJSON = trim(file_get_contents("php://input"));
@@ -118,13 +54,13 @@ class AdmComments
         $request = json_decode($requestJSON, true);
 
         if (isset($request['id'])) {
-            $query = DbUtils::getPdo()->prepare("DELETE FROM service WHERE id = :id");
+            $query = DbUtils::getPdo()->prepare("DELETE FROM comment WHERE id = :id");
             $query->bindValue(':id', $request['id'], \PDO::PARAM_INT);
     
             if ($query->execute()) {
                 echo json_encode([
                     'success' => true,
-                    'message' => 'Service supprimé avec succès.',
+                    'message' => 'Avis supprimé avec succès.',
                 ]);
             } else {
                 echo json_encode([
