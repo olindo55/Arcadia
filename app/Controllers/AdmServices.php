@@ -5,8 +5,15 @@ use App\Database\DbUtils;
 class AdmServices
 {   
     public function view()
-    {
-        return __DIR__.'/../Views/admServices.php';
+    {   
+        if(isset($_SESSION['role']) && $_SESSION['role'] === 'administrateur'){
+                return __DIR__.'/../Views/admServices.php';
+        }
+        else{
+            $_SESSION['flash_message'] = 'Accès non autorisé';
+            $_SESSION['flash_alert'] = 'danger';
+            return __DIR__.'/../Views/homepage.php';
+        }
     }
 
     public function post(array $data, $files)

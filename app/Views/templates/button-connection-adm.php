@@ -16,7 +16,7 @@
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" id="signout" href="/login/signout">Déconnexion</a></li>
         </ul>
-        <!-- <h6><?php echo $_SESSION['role'] ?></h6> -->
+        <h6><?php echo $_SESSION['role'] ?></h6>
     </li>
     
 <?php else : ?>
