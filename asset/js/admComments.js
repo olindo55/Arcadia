@@ -1,4 +1,4 @@
-import Comment from './class/Comment.js';
+import Comment from './class/Comment.js'; // js à supprimer
 import TableSort from './class/TableSort.js';
 import MyModal from './class/MyModal.js';
 import MyToast from './class/MyToast.js';

@@ -1,11 +1,11 @@
-import Service from './class/Service.js'; // js à supprimer
+import Biome from './class/Biome.js'; // js à supprimer
 import TableSort from './class/TableSort.js';
 import MyModal from './class/MyModal.js';
 import MyToast from './class/MyToast.js';
 
 const spinnerContainer = document.getElementById('spinner-container');
 
-const table = document.getElementById('list-service');
+const table = document.getElementById('list-biome');
 
 let tableSorter;
 
@@ -22,14 +22,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // POST
-document.getElementById('addServicetButton').addEventListener('click', function(event){
+document.getElementById('addBiomeButton').addEventListener('click', function(event){
     event.preventDefault();
     spinnerContainer.classList.remove('d-none');
 
     const form = document.getElementById('serviceForm');
     const formData = new FormData(form);
 
-    fetch('/admServices/post', {
+    fetch('/admBiomes/post', {
         method: 'POST',
         body: formData
     })
@@ -63,6 +63,7 @@ document.getElementById('addServicetButton').addEventListener('click', function(
 });
 
 table.addEventListener('click', function(event) {
+
     // DELETE
     if (event.target.classList.contains('bi-trash')) {
         const id = {
@@ -121,7 +122,7 @@ table.addEventListener('click', function(event) {
         const row = event.target.closest('tr');
         const cells = row.querySelectorAll('td');
 
-        // original data in var just in case of cancel
+        // original data in variable just in case of cancel
         row.dataset.originalValues = JSON.stringify(Array.from(cells).slice(0, -1).map(cell => cell.textContent.trim()));
 
         // Cells in edition mode
@@ -155,7 +156,7 @@ table.addEventListener('click', function(event) {
             }
         });
 
-        // Hide icoons
+        // Hide icons
         const actionCell = cells[cells.length - 1]
         actionCell.querySelectorAll('.bi-pencil-square, .bi-trash').forEach(icon => {
             icon.classList.remove('hidden');
@@ -184,10 +185,11 @@ table.addEventListener('click', function(event) {
                 name: updatedData[0],
                 description: updatedData[1],
                 image_url: updatedData[2],
-                image_alt: updatedData[3]
+                image_url_hd: updatedData[3],
+                image_alt: updatedData[4]
             }
             // UPDATE - start
-            fetch('/admServices/put', {
+            fetch('/admBiomes/put', {
                 method: 'PUT',
                 headers: {
                     "Content-Type": "application/json"
@@ -220,12 +222,12 @@ table.addEventListener('click', function(event) {
                     toast.show();
                 } 
                 else {
-                    const toast = new MyToast(`Erreur lors de la modification du service: ${data.message}`, 'danger');
+                    const toast = new MyToast(`Erreur lors de la modification de l'habitat: ${data.message}`, 'danger');
                     toast.show();
                 }
             })
             .catch(error => {
-                const toast = new MyToast(`Erreur lors de la modification du service: ${error.message}`, 'danger');
+                const toast = new MyToast(`Erreur lors de la modification de l'habitat: ${error.message}`, 'danger');
                 toast.show();
             })
             .finally(() => {
@@ -238,7 +240,7 @@ table.addEventListener('click', function(event) {
 });
 
 function addLine(data) {
-    const table = document.getElementById('list-service').getElementsByTagName('tbody')[0];
+    const table = document.getElementById('list-biome').getElementsByTagName('tbody')[0];
     const newRow = table.insertRow();
 
     const nameCell = newRow.insertCell(0);

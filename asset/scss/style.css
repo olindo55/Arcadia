@@ -12460,7 +12460,7 @@ textarea.form-control-lg {
   text-align: center;
 }
 
-#serviceForm, #userForm {
+#serviceForm, #userForm, #biomeForm {
   background-color: #eaece0;
   margin-top: 30px;
   margin-bottom: 30px;
