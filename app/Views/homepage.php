@@ -40,7 +40,6 @@
     <div class="swiper swiperService">
       <div class="swiper-wrapper">
         <!-- card-service -->
-        <!-- implementer la boucle selon data base, inclure tous les services -->
         <?php include 'templates/card-service.php';?>
       </div>
       <div class="swiper-button-next"><img src="../../asset/images/logo/leaf_right.png" alt="fleche droite en forme de feuille">
@@ -57,7 +56,6 @@
     <div class="swiper swiperComment">
       <div class="swiper-wrapper">
         <!-- card-comments -->
-        <!-- implementer la boucle selon data base, tous? --> 
         <?php include 'templates/card-comments.php';?>
       </div>
     </div>

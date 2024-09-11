@@ -10,7 +10,8 @@ class Login
         unset( $_SESSION['role']);
         $_SESSION['flash_message'] = 'Vous êtes désormais déconnecté(e)';
         $_SESSION['flash_alert'] = 'success';
-        return __DIR__.'/../Views/homepage.php';
+        header('Location: /homepage/view');
+        exit();
     }
 
     function check($data){
