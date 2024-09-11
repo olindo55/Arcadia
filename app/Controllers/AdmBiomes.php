@@ -126,12 +126,6 @@ class AdmBiomes
         $requestJSON = trim(file_get_contents("php://input"));
         $request = json_decode($requestJSON, true);
 
-        // if (isset($request['id'])) {
-        //     var_dump('ID reçu : ' . $request['id']);
-        // } else {
-        //     var_dump('Aucun ID reçu');
-        // }
-
         if (isset($request['id'])) {
             // get url of images
             $query = DbUtils::getPdo()->prepare('SELECT image_url, image_url_hd FROM biome WHERE id = :id');
@@ -170,15 +164,6 @@ class AdmBiomes
     }
 
     public function test(){
-        $query = DbUtils::getPdo()->prepare('SELECT image_url, image_url_hd FROM biome WHERE id = :id');
-        $query -> bindValue(':id', 6, \PDO::PARAM_INT);
-        if ($query->execute()) {
-            $image = $query->fetch(\PDO::FETCH_ASSOC);
-        }
-        // }
-        // if ($image && !empty($image['image_url']) && file_exists(ltrim($image['image_url'], '/'))
-        //      && !empty($image['image_url_hd']) && file_exists(ltrim($image['image_url_hd'], '/')))
-        // {
         var_dump($image['image_url']);
         var_dump($image['image_url_hd']);
     }
