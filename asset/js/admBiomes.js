@@ -258,7 +258,7 @@ function addLine(data) {
     actionsCell.className = 'icon-cell';
     actionsCell.innerHTML = `
         <i class="bi bi-pencil-square"></i>
-        <i class="bi bi-trash"></i>
+        <i class="bi bi-trash" data-id="${data.id}"></i>
         <i class="bi bi-x-circle hidden"></i>
         <i class="bi bi-floppy hidden"></i>
     `;

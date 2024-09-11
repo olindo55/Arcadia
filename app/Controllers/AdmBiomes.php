@@ -56,6 +56,7 @@ class AdmBiomes
                         $query->bindValue('alt', DbUtils::protectDbData($data['alt']));
                         
                         if($query->execute()){
+                            $data['id'] = DbUtils::getPdo()->lastInsertId();
                             echo json_encode([
                                 'success' => true,
                                 'message' => 'Le service a été créé.',
