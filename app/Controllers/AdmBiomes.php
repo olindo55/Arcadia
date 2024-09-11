@@ -16,36 +16,43 @@ class AdmBiomes
         }
     }
 
-    public function post(array $data, $files, $fileHD)
+    public function post(array $data, $files)
     {   
         header('Content-Type: application/json');
         if (isset($data['name']) &&
             isset($data['description']) &&
             isset($_FILES['upload']) &&
+            isset($_FILES['upload_hd']) &&
             isset($data['alt'])) 
             {
-                $uploadDir = 'asset/images/services/'; 
+                $uploadDir = 'asset/images/biome/'; 
                 $uploadFile = $uploadDir . basename($files['upload']['name']);
-
+                $uploadFileHD = $uploadDir .'high-resolution/'. basename($files['upload_hd']['name']);
+                
                 $imageFileType = strtolower(pathinfo($uploadFile, PATHINFO_EXTENSION));
                 $check = getimagesize($files['upload']['tmp_name']);
-
-                if($check) {
-                    if (move_uploaded_file($files['upload']['tmp_name'], $uploadFile)) {
-
-                        $query = DbUtils::getPdo()->prepare('INSERT INTO ?biome
-                            (name, description, image_url, image_alt)
+                $checkHD = getimagesize($files['upload_hd']['tmp_name']);
+                
+                if($check && $checkHD) {
+                    if (move_uploaded_file($files['upload']['tmp_name'], $uploadFile)
+                        && move_uploaded_file($files['upload_hd']['tmp_name'], $uploadFileHD)) 
+                    {
+                        $query = DbUtils::getPdo()->prepare('INSERT INTO biome
+                            (name, description, image_url, image_url_hd, image_alt)
                             VALUES (
                                 :name,
                                 :description,
                                 :upload,
+                                :upload_hd,
                                 :alt
                             )
                         ');
-                        $data['upload'] = '../../' . $uploadFile;
+                        $data['upload'] = '/' . $uploadFile;
+                        $data['upload_hd'] = '/' . $uploadFileHD;
                         $query->bindValue('name', DbUtils::protectDbData($data['name']));
                         $query->bindValue('description', DbUtils::protectDbData($data['description']));
                         $query->bindValue('upload', DbUtils::protectDbData($data['upload']));
+                        $query->bindValue('upload_hd', DbUtils::protectDbData($data['upload_hd']));
                         $query->bindValue('alt', DbUtils::protectDbData($data['alt']));
                         
                         if($query->execute()){
@@ -120,14 +127,33 @@ class AdmBiomes
         $request = json_decode($requestJSON, true);
 
         if (isset($request['id'])) {
-            $query = DbUtils::getPdo()->prepare("DELETE FROM service WHERE id = :id");
+            error_log('ID reçu : ' . $request['id']);
+        } else {
+            error_log('Aucun ID reçu');
+        }
+
+        if (isset($request['id'])) {
+            // get url of images
+            $query = DbUtils::getPdo()->query('SELECT image_url, image_url_hd FROM biome Where id = :id');
+            $image = $query->fetchAll(\PDO::FETCH_ASSOC);
+              
+            $query = DbUtils::getPdo()->prepare("DELETE FROM biome WHERE id = :id");
             $query->bindValue(':id', $request['id'], \PDO::PARAM_INT);
     
             if ($query->execute()) {
+                // delete images
                 echo json_encode([
                     'success' => true,
                     'message' => 'Service supprimé avec succès.',
                 ]);
+                if ($image) {
+                    if (!empty($image['image_url']) && file_exists($image['image_url'])) {
+                        unlink($image['image_url']);
+                    }
+                    if (!empty($image['image_url_hd']) && file_exists($image['image_url_hd'])) {
+                        unlink($image['image_url_hd']); 
+                    }
+                }
             } else {
                 echo json_encode([
                     'success' => false, 

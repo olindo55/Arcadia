@@ -20,8 +20,8 @@ use App\Database\DbUtils;
                     <input class="form-control form-control-sm" id="upload" name="upload" type="file">
                 </div>
                 <div class="mb-3">
-                    <label for="uploadHd" class="form-label">Télécharger une image HD</label>
-                    <input class="form-control form-control-sm" id="uploadHd" name="uploadHd" type="file">
+                    <label for="upload_hd" class="form-label">Télécharger une image HD</label>
+                    <input class="form-control form-control-sm" id="upload_hd" name="upload_hd" type="file">
                 </div>
                 <div class="mb-3">
                     <label for="alt" class="form-label">Texte alternatif de l'image</label>

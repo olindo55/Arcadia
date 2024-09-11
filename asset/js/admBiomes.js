@@ -26,7 +26,7 @@ document.getElementById('addBiomeButton').addEventListener('click', function(eve
     event.preventDefault();
     spinnerContainer.classList.remove('d-none');
 
-    const form = document.getElementById('serviceForm');
+    const form = document.getElementById('biomeForm');
     const formData = new FormData(form);
 
     fetch('/admBiomes/post', {
@@ -44,17 +44,16 @@ document.getElementById('addBiomeButton').addEventListener('click', function(eve
     .then(data => {
         if (data.success) {
             addLine(data.data);
-            const toast = new MyToast('Service ajouté avec succès.', 'success');
+            const toast = new MyToast('Habitat ajouté avec succès.', 'success');
             toast.show();
         } 
         else {
-            const toast = new MyToast(`Erreur lors de l'ajout du service: ${data.error}`, 'danger');
+            const toast = new MyToast(`Erreur lors de l'ajout de l'habitat: ${data.error}`, 'danger');
             toast.show();
         }
     })
     .catch(error => {
-        // console.log(data);
-        const toast = new MyToast(`Erreur lors de  l'ajout du service: ${error.message}`, 'danger');
+        const toast = new MyToast(`Erreur lors de  l'ajout de l'habitat: ${error.message}`, 'danger');
         toast.show();
     })
     .finally(() => {
@@ -79,7 +78,7 @@ table.addEventListener('click', function(event) {
         document.getElementById('confirmButton').onclick = function() {
             spinnerContainer.classList.remove('d-none');
             // DELETE - start             
-            fetch('/admServices/delete', {
+            fetch('/admBiomes/delete', {
                 method: 'DELETE',
                 headers: {
                     "Content-Type": "application/json"
@@ -246,12 +245,14 @@ function addLine(data) {
     const nameCell = newRow.insertCell(0);
     const descriptionCell = newRow.insertCell(1);
     const imageUrlCell = newRow.insertCell(2);
-    const altCell = newRow.insertCell(3);
-    const actionsCell = newRow.insertCell(4);
+    const imageUrlHdCell = newRow.insertCell(3);
+    const altCell = newRow.insertCell(4);
+    const actionsCell = newRow.insertCell(5);
 
     nameCell.textContent = data.name;
     descriptionCell.textContent = data.description;
     imageUrlCell.textContent = data.upload;
+    imageUrlHdCell.textContent = data.upload_hd;
     altCell.textContent = data.alt;
 
     actionsCell.className = 'icon-cell';
