@@ -127,38 +127,33 @@ class AdmBiomes
         $request = json_decode($requestJSON, true);
 
         if (isset($request['id'])) {
-            error_log('ID reçu : ' . $request['id']);
-        } else {
-            error_log('Aucun ID reçu');
-        }
-
-        if (isset($request['id'])) {
             // get url of images
-            $query = DbUtils::getPdo()->query('SELECT image_url, image_url_hd FROM biome Where id = :id');
-            $image = $query->fetchAll(\PDO::FETCH_ASSOC);
-              
-            $query = DbUtils::getPdo()->prepare("DELETE FROM biome WHERE id = :id");
-            $query->bindValue(':id', $request['id'], \PDO::PARAM_INT);
-    
+            $query = DbUtils::getPdo()->prepare('SELECT image_url, image_url_hd FROM biome WHERE id = :id');
+            $query -> bindValue(':id', $request['id'], \PDO::PARAM_INT);
             if ($query->execute()) {
-                // delete images
-                echo json_encode([
-                    'success' => true,
-                    'message' => 'Service supprimé avec succès.',
-                ]);
-                if ($image) {
-                    if (!empty($image['image_url']) && file_exists($image['image_url'])) {
-                        unlink($image['image_url']);
-                    }
-                    if (!empty($image['image_url_hd']) && file_exists($image['image_url_hd'])) {
-                        unlink($image['image_url_hd']); 
-                    }
+                $image = $query->fetch(\PDO::FETCH_ASSOC);
+            }
+            if ($image && !empty($image['image_url']) && file_exists(ltrim($image['image_url'], '/'))
+                 && !empty($image['image_url_hd']) && file_exists(ltrim($image['image_url_hd'], '/')))
+            {
+                // delete
+                $query = DbUtils::getPdo()->prepare("DELETE FROM biome WHERE id = :id");
+                $query->bindValue(':id', $request['id'], \PDO::PARAM_INT);
+        
+                if ($query->execute()) {
+                    // delete images
+                    echo json_encode([
+                        'success' => true,
+                        'message' => 'Service supprimé avec succès.',
+                    ]);
+                    unlink(ltrim($image['image_url'], '/'));
+                    unlink(ltrim($image['image_url_hd'], '/')); 
+                } else {
+                    echo json_encode([
+                        'success' => false, 
+                        'message' => 'Erreur du serveur lors de l\'exécution de la requête',
+                    ]);
                 }
-            } else {
-                echo json_encode([
-                    'success' => false, 
-                    'message' => 'Erreur du serveur lors de l\'exécution de la requête',
-                ]);
             }
         } else {
             echo json_encode([
@@ -167,5 +162,10 @@ class AdmBiomes
             ]);
         }
     }
-}
 
+    public function test(){
+        var_dump($image['image_url']);
+        var_dump($image['image_url_hd']);
+    }
+
+}
