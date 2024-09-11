@@ -71,7 +71,7 @@ document.getElementById('addServicetButton').addEventListener('click', function(
     event.preventDefault();
     spinnerContainer.classList.remove('d-none');
 
-    const form = document.getElementById('newService');
+    const form = document.getElementById('serviceForm');
     const formData = new FormData(form);
 
     fetch('/admServices/post', {

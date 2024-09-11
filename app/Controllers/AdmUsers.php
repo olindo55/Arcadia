@@ -69,5 +69,61 @@ class AdmUsers
             ]);
         }
     }
-}
 
+    public function post($data)
+    {   
+        header('Content-Type: application/json');
+        if (isset($data['name']) &&
+            isset($data['forename']) &&
+            isset($data['email']) &&
+            isset($data['password']) &&
+            isset($data['role'])) 
+            {   
+                $query = DbUtils::getPdo()->query('SELECT * FROM role');
+                $users = $query->fetchAll(\PDO::FETCH_ASSOC);
+                $data['roles'] = $users; // I need it for update the table with js
+                
+                $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
+
+                $query = DbUtils::getPdo()->prepare('INSERT INTO users
+                    (name, forename, email, password, role_id)
+                    VALUES (
+                        :name,
+                        :forename,
+                        :email,
+                        :password,
+                        :role_id
+                    )
+                ');
+                $query->bindValue('name', DbUtils::protectDbData($data['name']));
+                $query->bindValue('forename', DbUtils::protectDbData($data['forename']));
+                $query->bindValue('email', DbUtils::protectDbData($data['email']));
+                $query->bindValue('password', DbUtils::protectDbData($data['password']));
+                $query->bindValue('role_id', DbUtils::protectDbData($data['role']));
+                
+                if($query->execute()){
+                    $newUserId = DbUtils::getPdo()->lastInsertId();
+                    echo json_encode([
+                        'success' => true,
+                        'message' => 'L\'utilisateur a été créé.',
+                        'data' => array_merge($data, ['id' => $newUserId]),
+                    ]);
+                    exit();
+                }else{
+                    echo json_encode([
+                        'success' => false,
+                        'message' => 'Une erreur est survenue lors de l\'enregistrement.',
+                        'data' => $data
+                    ]);
+                    exit();
+                }  
+            }
+            else {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Champs vide. Insertion impossible !'
+            ]);
+            exit();
+        }
+    }
+}
