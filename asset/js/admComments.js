@@ -133,6 +133,12 @@ table.addEventListener('click', function(event) {
             })
             .then(data => {
                 if (data.success) {
+                    if (data.data) {
+                        const validateurCell = row.querySelector('td:nth-child(7)');
+                        if (validateurCell) {
+                            validateurCell.textContent = data.data;
+                        }
+                    }
                     const toast = new MyToast(data.message, 'success');
                     toast.show();
                 } 

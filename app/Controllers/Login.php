@@ -53,6 +53,9 @@ class Login
                     unset($user['password']);
                     $_SESSION['connected'] = true;
                     $_SESSION['role'] = $user['role'];
+                    $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['name'] = $user['name'];
+                    $_SESSION['forename'] = $user['forename'];
                     if (preg_match('/^[aeiouyAEIOUY]/', $_SESSION['role'])){
                         $message = 'Bonjour '. ', vous êtes désormais connecté(e) en tant qu\''. $_SESSION['role']. '.';
                     }else{
