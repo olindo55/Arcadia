@@ -144,7 +144,7 @@ class AdmBiomes
                     // delete images
                     echo json_encode([
                         'success' => true,
-                        'message' => 'Service supprimé avec succès.',
+                        'message' => 'Habitat supprimé avec succès.',
                     ]);
                     unlink(ltrim($image['image_url'], '/'));
                     unlink(ltrim($image['image_url_hd'], '/')); 
