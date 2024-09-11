@@ -25,14 +25,16 @@ class AdmComments
             $id = $request['id'];
             $published = $request['published'];
             
-            $query = DbUtils::getPdo()->prepare("UPDATE comment SET published = :published WHERE id = :id");
+            $query = DbUtils::getPdo()->prepare("UPDATE comment SET published = :published, user_id = :user_id WHERE id = :id");
             $query->bindValue('id', DbUtils::protectDbData($request['id']));
             $query->bindValue('published', DbUtils::protectDbData($request['published']));
+            $query->bindValue('user_id', DbUtils::protectDbData($_SESSION['user_id']));
             $query->execute();
 
             echo json_encode([
                 'success' => true,
                 'message' => $published ? 'Avis publié' : 'Avis est désormais non publié',
+                'data' => $_SESSION['name'] . ' ' . $_SESSION['forename'],
             ]);
         } else {
             echo json_encode([

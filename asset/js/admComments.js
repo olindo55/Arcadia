@@ -1,4 +1,4 @@
-import Comment from './class/Comment.js';
+import Comment from './class/Comment.js'; // js à supprimer
 import TableSort from './class/TableSort.js';
 import MyModal from './class/MyModal.js';
 import MyToast from './class/MyToast.js';
@@ -133,6 +133,12 @@ table.addEventListener('click', function(event) {
             })
             .then(data => {
                 if (data.success) {
+                    if (data.data) {
+                        const validateurCell = row.querySelector('td:nth-child(7)');
+                        if (validateurCell) {
+                            validateurCell.textContent = data.data;
+                        }
+                    }
                     const toast = new MyToast(data.message, 'success');
                     toast.show();
                 } 

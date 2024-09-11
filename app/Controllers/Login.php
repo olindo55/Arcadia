@@ -10,7 +10,8 @@ class Login
         unset( $_SESSION['role']);
         $_SESSION['flash_message'] = 'Vous êtes désormais déconnecté(e)';
         $_SESSION['flash_alert'] = 'success';
-        return __DIR__.'/../Views/homepage.php';
+        header('Location: /homepage/view');
+        exit();
     }
 
     function check($data){
@@ -53,6 +54,9 @@ class Login
                     unset($user['password']);
                     $_SESSION['connected'] = true;
                     $_SESSION['role'] = $user['role'];
+                    $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['name'] = $user['name'];
+                    $_SESSION['forename'] = $user['forename'];
                     if (preg_match('/^[aeiouyAEIOUY]/', $_SESSION['role'])){
                         $message = 'Bonjour '. ', vous êtes désormais connecté(e) en tant qu\''. $_SESSION['role']. '.';
                     }else{
