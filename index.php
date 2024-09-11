@@ -128,13 +128,13 @@ if (isset($_SESSION['flash_message'])) {
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="modalBasicLabel">Confirmation</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                            <button type="button" class="btn-close" id="modal-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
                         </div>
                         <div class="modal-body">
                             ...
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Annuler</button>
+                            <button type="button" class="btn btn-outline-primary" id="cancelButton" data-bs-dismiss="modal">Annuler</button>
                             <button type="button" class="btn btn-danger" id="confirmButton">...</button>
                         </div>
                     </div>
