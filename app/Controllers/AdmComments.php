@@ -21,24 +21,18 @@ class AdmComments
         $requestJSON = trim(file_get_contents("php://input"));
         $request = json_decode($requestJSON, true);
         
-        if (isset($request['id'], $request['name'], $request['description'], $request['image_url'], $request['image_alt'])) {
+        if (isset($request['id'], $request['published'])) {
             $id = $request['id'];
-            $name = $request['name'];
-            $description = $request['description'];
-            $url = $request['image_url'];
-            $alt = $request['image_alt'];
-
-            $query = DbUtils::getPdo()->prepare("UPDATE service SET name = :name , description = :description , image_url = :image_url , image_alt = :image_alt WHERE id = :id");
+            $published = $request['published'];
+            
+            $query = DbUtils::getPdo()->prepare("UPDATE comment SET published = :published WHERE id = :id");
             $query->bindValue('id', DbUtils::protectDbData($request['id']));
-            $query->bindValue('name', DbUtils::protectDbData($request['name']));
-            $query->bindValue('description', DbUtils::protectDbData($request['description']));
-            $query->bindValue('image_url', DbUtils::protectDbData($request['image_url']));
-            $query->bindValue('image_alt', DbUtils::protectDbData($request['image_alt']));
+            $query->bindValue('published', DbUtils::protectDbData($request['published']));
             $query->execute();
 
             echo json_encode([
                 'success' => true,
-                'message' => 'Service modifié avec succès.',
+                'message' => $published ? 'Avis publié' : 'Avis est désormais non publié',
             ]);
         } else {
             echo json_encode([

@@ -19,7 +19,7 @@ export default class TableSort {
         const rows = Array.from(tbody.rows);
 
         const icon = document.getElementById(iconId);
-        let ascending = icon.classList.contains('bi-sort-alpha-down');
+        let ascending = icon.classList.contains('bi-sort-down');
 
         const firstCell = rows[0].cells[columnIndex].textContent.trim().toLowerCase();
         let dataType = 'string';
@@ -54,11 +54,11 @@ export default class TableSort {
         rows.forEach(row => tbody.appendChild(row));
 
         if (ascending) {
-            icon.classList.remove('bi-sort-alpha-down');
-            icon.classList.add('bi-sort-alpha-down-alt');
+            icon.classList.remove('bi-sort-down');
+            icon.classList.add('bi-sort-down-alt');
         } else {
-            icon.classList.remove('bi-sort-alpha-down-alt');
-            icon.classList.add('bi-sort-alpha-down');
+            icon.classList.remove('bi-sort-down-alt');
+            icon.classList.add('bi-sort-down');
         }
     }
 }

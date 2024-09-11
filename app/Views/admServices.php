@@ -29,32 +29,34 @@ use App\Database\DbUtils;
 
         <!-- <input type="text" id="search" placeholder="Recherche..."> -->
         <h2>Les services publiés</h2>
-        <table id="list-service"  class="table table-hover table-responsive">
-            <thead>
-                <tr class="table-primary ">
-                    <th id="sort-name"><i id="sort-icon" class="bi bi-sort-alpha-down"></i> Nom</th> 
-                    <th>Description</th>
-                    <th>Image</th>
-                    <th>Alt</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody >
-                <!--injection via php--> 
-                <?php
-                $query = DbUtils::getPdo()->query('SELECT * FROM service');
-                $services = $query->fetchAll(\PDO::FETCH_ASSOC);
+        <div class="table-responsive">
+            <table id="list-service"  class="table table-hover table-responsive">
+                <thead>
+                    <tr class="table-primary ">
+                        <th id="sort-name"><i id="sort-icon" class="bi bi-sort-alpha-down"></i> Nom</th> 
+                        <th>Description</th>
+                        <th>Image</th>
+                        <th>Alt</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <!--injection via php--> 
+                    <?php
+                    $query = DbUtils::getPdo()->query('SELECT * FROM service');
+                    $services = $query->fetchAll(\PDO::FETCH_ASSOC);
 
-                foreach ($services as $service) {
-                    echo '<tr data-id="' . $service['id'] . '">';
-                    echo '<td>' . $service['name'] . '</td>';
-                    echo '<td>' . $service['description'] . '</td>';
-                    echo '<td>' . $service['image_url']. '</td>';
-                    echo '<td>' . $service['image_alt'] . '</td>';
-                    echo '<td class="icon-cell">' .'<i class="bi bi-pencil-square"></i>'.'<i class="bi bi-trash" data-id="' . $service['id'] . '"></i>'.'<i class="bi bi-x-circle hidden"></i>'.'<i class="bi bi-floppy hidden"></i>' . '</td>';
-                    echo '</tr>';
-                }
-                ?>
-            </tbody>
-        </table> 
+                    foreach ($services as $service) {
+                        echo '<tr data-id="' . $service['id'] . '">';
+                        echo '<td>' . $service['name'] . '</td>';
+                        echo '<td>' . $service['description'] . '</td>';
+                        echo '<td>' . $service['image_url']. '</td>';
+                        echo '<td>' . $service['image_alt'] . '</td>';
+                        echo '<td class="icon-cell">' .'<i class="bi bi-pencil-square"></i>'.'<i class="bi bi-trash" data-id="' . $service['id'] . '"></i>'.'<i class="bi bi-x-circle hidden"></i>'.'<i class="bi bi-floppy hidden"></i>' . '</td>';
+                        echo '</tr>';
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>

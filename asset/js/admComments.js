@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const table = document.getElementById('list-comment');
 table.addEventListener('click', function(event) {
+
     // DELETE
     if (event.target.classList.contains('bi-trash')) {
         const id = {
@@ -57,7 +58,7 @@ table.addEventListener('click', function(event) {
         // Clic on confirm button (modal)
         document.getElementById('confirmButton').onclick = function() {
             spinnerContainer.classList.remove('d-none');
-            // DELETE - start             
+
             fetch('/admComments/delete', {
                 method: 'DELETE',
                 headers: {
@@ -91,132 +92,77 @@ table.addEventListener('click', function(event) {
             .finally(() => {
                 spinnerContainer.classList.add('d-none');
             });
-            // DELETE - end
             deleteModal.hide()
         }
     }
+   
+    // UPDATE
+    else if (event.target.classList.contains('form-check-input')) {
+        const row = event.target.closest('tr');
+        const commentId = row.querySelector('.bi-trash').getAttribute('data-id');
+        const published = event.target.checked;
+        const initialPublishedState = !published;
+
+        // Modal show
+        const updateModal = new MyModal(published ? 'Êtes-vous sûr de vouloir publier cet avis ?' : 'Êtes-vous sûr de vouloir retirer de la publication cet avis ?', 'Modifier');
+        updateModal.show()
+
+        // Clic on confirm button (modal)
+        document.getElementById('confirmButton').onclick = function() {
+            spinnerContainer.classList.remove('d-none');
+
+            const data = {
+                id: commentId,
+                published: published,
+            }
+            // UPDATE - start
+            fetch('/admComments/put', {
+                method: 'PUT',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    const toast = new MyToast('Page non disponible', 'danger');
+                    toast.show();
+                } else {
+                    return response.json();
+                }
+            })
+            .then(data => {
+                if (data.success) {
+                    const toast = new MyToast(data.message, 'success');
+                    toast.show();
+                } 
+                else {
+                    const toast = new MyToast(data.message, 'danger');
+                    toast.show();
+                }
+            })
+            .catch(error => {
+                const toast = new MyToast(`Erreur lors de la publication de l'avis: ${error.message}`, 'danger');
+                toast.show();
+            })
+            .finally(() => {
+                spinnerContainer.classList.add('d-none');
+            });
+            updateModal.hide()
+        }
+
+        // Clic on cancel button (modal)
+        document.getElementById('cancelButton').onclick = function() {
+            event.target.checked = initialPublishedState;
+            updateModal.hide();
+        }
+        // Clic on cross (modal)
+        document.getElementById('modal-close').onclick = function() {
+            event.target.checked = initialPublishedState;
+            updateModal.hide();
+        }
+    }
 });
-    
-//     // UPDATE edition
-//     else if (event.target.classList.contains('bi-pencil-square')){
-//         const row = event.target.closest('tr');
-//         const cells = row.querySelectorAll('td');
-
-//         // original data in var just in case of cancel
-//         row.dataset.originalValues = JSON.stringify(Array.from(cells).slice(0, -1).map(cell => cell.textContent.trim()));
-
-//         // Cells in edition mode
-//         cells.forEach((cell, index) => {
-//             if (index < cells.length - 1) { // Exclude the last columne
-//                 const text = cell.textContent;
-//                 cell.innerHTML = `<input class=" col-12 edit-mode" type="text" value="${text}" />`;
-//             }
-//         });
-
-//         // Hide the other icons
-//         const actionCell = cells[cells.length - 1]
-//         actionCell.querySelectorAll('.bi-pencil-square, .bi-trash').forEach(icon => {
-//             icon.classList.add('hidden');
-//         });
-//         actionCell.querySelectorAll('.bi-x-circle, .bi-floppy').forEach(icon => {
-//             icon.classList.remove('hidden');
-//         });
-//     } 
-//     // UPDATE cancel
-//     else if (event.target.classList.contains('bi-x-circle')){
-//         const row = event.target.closest('tr');
-//         const cells = row.querySelectorAll('td');
-
-//         const originalValues = JSON.parse(row.dataset.originalValues);
-
-//         // Cells view mode
-//         cells.forEach((cell, index) => {
-//             if (index < cells.length - 1) { // Exclude the last column
-//                 cell.textContent = originalValues[index];
-//             }
-//         });
-
-//         // Hide icoons
-//         const actionCell = cells[cells.length - 1]
-//         actionCell.querySelectorAll('.bi-pencil-square, .bi-trash').forEach(icon => {
-//             icon.classList.remove('hidden');
-//         });
-//         actionCell.querySelectorAll('.bi-x-circle, .bi-floppy').forEach(icon => {
-//             icon.classList.add('hidden');
-//         });
-//     } 
-//     // UPDATE !
-//     else if (event.target.classList.contains('bi-floppy')) {
-//         const row = event.target.closest('tr');
-//         const cells = row.querySelectorAll('td');
-//         const inputs = row.querySelectorAll('input');
-//         const updatedData = Array.from(inputs).map(input => input.value);
-//         const serviceId = row.querySelector('.bi-trash').getAttribute('data-id');
-
-//         // Modal show
-//         const updateModal = new MyModal('Êtes-vous sûr de vouloir modifier ce service ?', 'Modifier');
-//         updateModal.show()
-
-//         // Clic on confirm button (modal)
-//         document.getElementById('confirmButton').onclick = function() {
-//             spinnerContainer.classList.remove('d-none');
-//             const data = {
-//                 id: serviceId,
-//                 name: updatedData[0],
-//                 description: updatedData[1],
-//                 image_url: updatedData[2],
-//                 image_alt: updatedData[3]
-//             }
-//             // UPDATE - start
-//             fetch('/admServices/put', {
-//                 method: 'PUT',
-//                 headers: {
-//                     "Content-Type": "application/json"
-//                 },
-//                 body: JSON.stringify(data)
-//             })
-//             .then(response => {
-//                 if (!response.ok) {
-//                     const toast = new MyToast('Page non disponible', 'danger');
-//                     toast.show();
-//                 } else {
-//                     return response.json();
-//                 }
-//             })
-//             .then(data => {
-//                 if (data.success) {
-//                     // Update the cells with the new datas
-//                     inputs.forEach((input, index) => {
-//                         cells[index].textContent = input.value;
-//                     });
-//                     // Hide and show the icons
-//                     const actionCell = cells[cells.length - 1];
-//                     actionCell.querySelectorAll('.bi-x-circle, .bi-floppy').forEach(icon => {
-//                         icon.classList.add('hidden');
-//                     });
-//                     actionCell.querySelectorAll('.bi-pencil-square, .bi-trash').forEach(icon => {
-//                         icon.classList.remove('hidden');
-//                     });
-//                     const toast = new MyToast(data.message, 'success');
-//                     toast.show();
-//                 } 
-//                 else {
-//                     const toast = new MyToast(`Erreur lors de la modification du service: ${data.message}`, 'danger');
-//                     toast.show();
-//                 }
-//             })
-//             .catch(error => {
-//                 const toast = new MyToast(`Erreur lors de la modification du service: ${error.message}`, 'danger');
-//                 toast.show();
-//             })
-//             .finally(() => {
-//                 spinnerContainer.classList.add('d-none');
-//             });
-//             // UPDATE - end
-//             updateModal.hide()
-//         }
-//     }    
-// });
 
 
 
