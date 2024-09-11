@@ -118,19 +118,30 @@ class AdmServices
         $request = json_decode($requestJSON, true);
 
         if (isset($request['id'])) {
-            $query = DbUtils::getPdo()->prepare("DELETE FROM service WHERE id = :id");
-            $query->bindValue(':id', $request['id'], \PDO::PARAM_INT);
-    
+            // get url of images
+            $query = DbUtils::getPdo()->prepare('SELECT image_url FROM service WHERE id = :id');
+            $query -> bindValue(':id', $request['id'], \PDO::PARAM_INT);
             if ($query->execute()) {
-                echo json_encode([
-                    'success' => true,
-                    'message' => 'Service supprimé avec succès.',
-                ]);
-            } else {
-                echo json_encode([
-                    'success' => false, 
-                    'message' => 'Erreur du serveur lors de l\'exécution de la requête',
-                ]);
+                $image = $query->fetch(\PDO::FETCH_ASSOC);
+            }
+            if ($image && !empty($image['image_url']) && file_exists(ltrim($image['image_url'], '/')))
+            {
+                // delete
+                $query = DbUtils::getPdo()->prepare("DELETE FROM service WHERE id = :id");
+                $query->bindValue(':id', $request['id'], \PDO::PARAM_INT);
+        
+                if ($query->execute()) {
+                    echo json_encode([
+                        'success' => true,
+                        'message' => 'Service supprimé avec succès.',
+                    ]);
+                    unlink(ltrim($image['image_url'], '/')); // delete image
+                } else {
+                    echo json_encode([
+                        'success' => false, 
+                        'message' => 'Erreur du serveur lors de l\'exécution de la requête',
+                    ]);
+                }
             }
         } else {
             echo json_encode([
