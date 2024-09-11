@@ -14,6 +14,12 @@ export default class TableSort {
         return cell.querySelector('input[type="checkbox"]') !== null;
     }
 
+    isSelectColumn(columnIndex) {
+        const firstRow = this.table.tBodies[0].rows[0];
+        const cell = firstRow.cells[columnIndex];
+        return cell.querySelector('select') !== null;
+    }
+
     sortColumn(columnIndex, iconId) {
         const tbody = this.table.tBodies[0];
         const rows = Array.from(tbody.rows);
@@ -27,12 +33,21 @@ export default class TableSort {
         if (this.isNumeric(firstCell)) {
             dataType = 'number';
         } else if (this.isCheckboxColumn(columnIndex)) {
-            dataType = 'checkbox'; 
+            dataType = 'checkbox';
+        } else if (this.isSelectColumn(columnIndex)) {
+            dataType = 'select';
         }
 
         rows.sort((a, b) => {
-            const cellA = a.cells[columnIndex].textContent.trim().toLowerCase();
-            const cellB = b.cells[columnIndex].textContent.trim().toLowerCase();
+            let cellA, cellB;
+
+            if (dataType === 'select') {
+                cellA = a.cells[columnIndex].querySelector('select').selectedOptions[0].textContent.toLowerCase();
+                cellB = b.cells[columnIndex].querySelector('select').selectedOptions[0].textContent.toLowerCase();
+            } else {
+                cellA = a.cells[columnIndex].textContent.trim().toLowerCase();
+                cellB = b.cells[columnIndex].textContent.trim().toLowerCase();
+            }
 
             if (dataType === 'number') {
                 const numA = parseFloat(cellA);
@@ -46,6 +61,8 @@ export default class TableSort {
                 } else {
                     return checkboxA === checkboxB ? 0 : checkboxA ? -1 : 1;
                 }
+            } else if (dataType === 'select') {
+                return ascending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
             } else {
                 return ascending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
             }

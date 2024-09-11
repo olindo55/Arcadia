@@ -69,29 +69,4 @@ class Login
             }
         }  
     }
-
-    // public function check($data)
-    // {
-    //     $query = DbConnection::getPdo()->prepare('SELECT * FROM user WHERE username = :username');
-    //     $query->bindParam('username', $_POST['username']);
-    //     $query->execute();
-
-    //     $_SESSION['connected'] = false;
-    //     echo json_encode([
-    //         'success' => false,
-    //         'message' => 'Email ou mot de passe incorrect',
-    //     ]);
-
-    //     foreach ($users as $user) {
-    //         if($user['email'] === $data['email'] && password_verify($data['password'], $user['password']))
-    //         {
-    //             $_SESSION['connected'] = true;
-    //             echo json_encode([
-    //                 'success' => true,
-    //                 'message' => 'Bonjour '. $user['forename'] . ', vous êtes désormais connecté(e)',
-    //             ]);
-    //             break;
-    //         }
-    //     }
-    // }
 }  
