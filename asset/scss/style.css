@@ -12869,6 +12869,15 @@ header .my-burger-menu.open {
 header nav {
   display: none;
 }
+header #admMenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+header #admMenu h6, header #admMenu .h6 {
+  padding-top: 8px;
+}
 header .dropdown {
   all: unset;
 }

@@ -187,7 +187,16 @@ header {
     nav {
         display: none;
     }
+    #admMenu{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
+        h6{
+            padding-top: 8px;
+        }
+    }
     .dropdown{
         all: unset;
         .myConnection{
@@ -196,7 +205,6 @@ header {
             justify-content: center;
         }        
     }
-    
 }
 
 // Footer
