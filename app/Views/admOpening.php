@@ -7,7 +7,7 @@ $days = $query->fetchAll(\PDO::FETCH_ASSOC);
 
     <div class="container-fluid col-md-10 col-lg-8 adm d-flex flex-column">
         <h1>Horaires d'ouverture</h1>
-        <form method="POST" id="openingForm">
+        <form method="POST" id="admForm">
             <table id="list-opening"  class="table table-hover table-responsive">
                 <thead>
                     <tr class="table-primary ">
