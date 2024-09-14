@@ -7,7 +7,7 @@ $days = $query->fetchAll(\PDO::FETCH_ASSOC);
 
     <div class="container-fluid col-md-10 col-lg-8 adm d-flex flex-column">
         <h1>Horaires d'ouverture</h1>
-        <form method="POST" id="admForm">
+        <form method="POST">
             <table id="list-opening"  class="table table-hover table-responsive">
                 <thead>
                     <tr class="table-primary ">
@@ -21,7 +21,7 @@ $days = $query->fetchAll(\PDO::FETCH_ASSOC);
                     <?php
                     foreach ($days as $day) {
                         echo '<tr name="'. $day['id'] .'" data-id="' . $day['id'] . '">';
-                        echo '<td>' . $day['day'] . '</td>';
+                        echo '<td>' . $day['day_name'] . '</td>';
                         $disabled = $day['closure'] ? 'disabled' : '';
                         // opening
                         echo '<td>';
