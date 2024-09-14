@@ -6,6 +6,7 @@
         }
     },
     "require": {
-
+        "leroy-merlin-br/mongolid": "^3.7",
+        "mongodb/mongodb": "^1.15"
     }
 }

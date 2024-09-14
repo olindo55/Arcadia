@@ -165,8 +165,8 @@ class AdmBiomes
     }
 
     public function test(){
-        var_dump($image['image_url']);
-        var_dump($image['image_url_hd']);
+        // var_dump($image['image_url']);
+        // var_dump($image['image_url_hd']);
     }
 
 }

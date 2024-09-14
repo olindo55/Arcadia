@@ -20,7 +20,7 @@ class Contact
             <p><b>Email : </b>' . $post['email'] . '<br>
             <b>Message : </b>' . htmlspecialchars($post['message']) . '</p>';
             
-            $emailToSend = mail('julien.martinati@gmail.com', htmlspecialchars($post['subject']), $message, $entete);
+            $emailToSend = mail('julien.martinati@gmail.com', htmlspecialchars($post['subject']), $message, $header);
             if(!$emailToSend){
                 echo json_encode([
                     'success' => false,
