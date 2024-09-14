@@ -15,61 +15,62 @@ class AdmOpening
             return __DIR__.'/../Views/homepage.php';
         }
     }
+
+    public function put()
+    {
+        // echo $requestJSON;die;
+        $requestJSON = trim(file_get_contents("php://input"));
+        $request = json_decode($requestJSON, true);
+        // echo $request;die;
+        $success = false;
+        // if (isset($request['id'])) {
+            $query = DbUtils::getPdo()->prepare("UPDATE opening SET 
+                        opening_hour = :opening_hour, 
+                        opening_minute = :opening_minute, 
+                        closing_hour = :closing_hour, 
+                        closing_minute = :closing_minute, 
+                        closure = :closure
+                        WHERE id = :id");
+           
+            $id = 1; // Exemple d'ID
+            $opening_hour = 9;
+            $opening_minute = 0;
+            $closing_hour = 17;
+            $closing_minute = 30;
+            $closure = true;
+
+            foreach ($request as $id) {     
+                if (isset($id) && $id !== null){                         
+                    $query->bindValue('id', $id['id']);
+                    $query->bindValue('opening_hour', DbUtils::protectDbData($id['opening_hour']));
+                    $query->bindValue('opening_minute', DbUtils::protectDbData($id['opening_minute']));
+                    $query->bindValue('closing_hour', DbUtils::protectDbData($id['closing_hour']));
+                    $query->bindValue('closing_minute', DbUtils::protectDbData($id['closing_minute']));
+                    $query->bindValue('closure', DbUtils::protectDbData($id['closure']));
+                    if($query->execute()){
+                        $success = true;
+                    }else{
+                        $success = false;
+                    }
+                }
+            }
+
+            if ($success){
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Horaires modifiées',
+                ]);
+            } else {
+                echo json_encode([
+                    'success' => false, 
+                    'message' => 'Erreur du serveur lors de l\'exécution de la requête',
+                ]);
+            }
+        // } else {
+        //     echo json_encode([
+        //         'success' => false, 
+        //         'message' => 'Erreur pas de datas',
+        //     ]);
+        // }
+    }
 }
-//     public function put()
-//     {
-//         $requestJSON = trim(file_get_contents("php://input"));
-//         $request = json_decode($requestJSON, true);
-        
-//         if (isset($request['id'], $request['published'])) {
-//             $id = $request['id'];
-//             $published = $request['published'];
-            
-//             $query = DbUtils::getPdo()->prepare("UPDATE comment SET published = :published, user_id = :user_id WHERE id = :id");
-//             $query->bindValue('id', DbUtils::protectDbData($request['id']));
-//             $query->bindValue('published', DbUtils::protectDbData($request['published']));
-//             $query->bindValue('user_id', DbUtils::protectDbData($_SESSION['user_id']));
-//             $query->execute();
-
-//             echo json_encode([
-//                 'success' => true,
-//                 'message' => $published ? 'Avis publié' : 'Avis est désormais non publié',
-//                 'data' => $_SESSION['name'] . ' ' . $_SESSION['forename'],
-//             ]);
-//         } else {
-//             echo json_encode([
-//                 'success' => false, 
-//                 'message' => 'Erreur du serveur lors de l\'exécution de la requête',
-//             ]);
-//         }
-//     }
-
-//     public function delete()
-//     {   
-//         $requestJSON = trim(file_get_contents("php://input"));
-//         $request = json_decode($requestJSON, true);
-
-//         if (isset($request['id'])) {
-//             $query = DbUtils::getPdo()->prepare("DELETE FROM comment WHERE id = :id");
-//             $query->bindValue(':id', $request['id'], \PDO::PARAM_INT);
-    
-//             if ($query->execute()) {
-//                 echo json_encode([
-//                     'success' => true,
-//                     'message' => 'Avis supprimé avec succès.',
-//                 ]);
-//             } else {
-//                 echo json_encode([
-//                     'success' => false, 
-//                     'message' => 'Erreur du serveur lors de l\'exécution de la requête',
-//                 ]);
-//             }
-//         } else {
-//             echo json_encode([
-//                 'success' => false, 
-//                 'message' => 'Paramètre manquant',
-//             ]);
-//         }
-//     }
-// }
-
