@@ -66,11 +66,5 @@ class AdmOpening
                     'message' => 'Erreur du serveur lors de l\'exécution de la requête',
                 ]);
             }
-        // } else {
-        //     echo json_encode([
-        //         'success' => false, 
-        //         'message' => 'Erreur pas de datas',
-        //     ]);
-        // }
     }
 }

@@ -161,26 +161,7 @@ if (isset($_SESSION['flash_message'])) {
             <div id="my-container">
                 <div id="opening">
                     <div id="opening-title">Horaires d'ouverture</div>
-                    <div id="opening-time">
-                        <div id="day">
-                            <div>Lundi :</div>
-                            <div>Mardi :</div>
-                            <div>Mercredi :</div>
-                            <div>Jeudi :</div>
-                            <div>vendredi :</div>
-                            <div>Samedi :</div>
-                            <div>Dimanche :</div>
-                        </div>
-                        <div id="opening-hours">
-                            <div>Fermeture</div>
-                            <div>09h00 - 18h00</div>
-                            <div>09h00 - 18h00</div>
-                            <div>09h00 - 18h00</div>
-                            <div>09h00 - 18h00</div>
-                            <div>09h00 - 18h00</div>
-                            <div>09h00 - 18h00</div>
-                        </div>
-                    </div>
+                    <?php require_once 'app/Views/templates/opening.php' ?>
                 </div>
                 
                 <address>
