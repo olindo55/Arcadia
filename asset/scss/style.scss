@@ -105,6 +105,10 @@ header {
     }
     nav li {
         padding: 20px;
+        a{
+            font-family: $font-content;
+            font-weight: 600;
+        }
     }
     #nav-buttons {
         display: flex;
@@ -152,6 +156,10 @@ header {
             justify-content: center;
             align-items: center;
             padding: 10px;
+            a{
+                font-family: $font-content;
+                font-weight: 600;
+            }
         }
         li:hover{
             background-color: $secondary;
@@ -165,6 +173,7 @@ header {
         ul {
             padding-bottom: 15px;
             padding-left: 0px;
+            
         }
         .my-divider{
             border-top: $light solid 1px;

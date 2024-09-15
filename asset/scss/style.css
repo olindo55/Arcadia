@@ -12793,6 +12793,10 @@ header nav ul .active {
 header nav li {
   padding: 20px;
 }
+header nav li a {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+}
 header #nav-buttons {
   display: flex;
   align-items: center;
@@ -12836,6 +12840,10 @@ header .my-burger-menu li {
   justify-content: center;
   align-items: center;
   padding: 10px;
+}
+header .my-burger-menu li a {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
 }
 header .my-burger-menu li:hover {
   background-color: #f8c172;
