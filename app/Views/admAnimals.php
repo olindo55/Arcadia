@@ -64,9 +64,10 @@ $biomes = $query->fetchAll(\PDO::FETCH_ASSOC);
             <table id="list-animal"  class="table table-hover table-responsive">
                 <thead>
                     <tr class="table-primary ">
-                        <th id="sort-name"><i id="sort-icon" class="bi bi-sort-down"></i>Name</th> 
-                        <th>Race</th>
-                        <th>Habitat</th>
+                        <!-- <th id="sort-name"><i id="sort-icon-name" class="bi bi-sort-down"></i>Name</th>  -->
+                        <th><i id="sort-icon-name" class="bi bi-sort-down"></i>Name</th> 
+                        <th><i id="sort-icon-breed" class="bi bi-sort-down"></i>Race</th>
+                        <th><i id="sort-icon-biome" class="bi bi-sort-down"></i>Habitat</th>
                         <th>Image</th>
                         <th>Alt</th>
                         <th></th>
