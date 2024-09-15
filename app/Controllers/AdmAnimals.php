@@ -52,7 +52,7 @@ class AdmAnimals
                         $query->bindValue('alt', DbUtils::protectDbData($data['alt']));
                         
                         if($query->execute()){
-                            // $data['id'] = DbUtils::getPdo()->lastInsertId();
+                            $data['id'] = DbUtils::getPdo()->lastInsertId();
                             echo json_encode([
                                 'success' => true,
                                 'message' => 'L\'animal a été enregistré avec success.',
