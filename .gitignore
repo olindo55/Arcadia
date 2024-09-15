@@ -1,7 +1,14 @@
 # Ignorer tous les fichiers .log
 *.log
 
+#Ignorer le fichier .env
+.env
+
 # Ignorer ces dossiers :
 /Design
 /Documentation
 /ECF
+
+# Ignorer node_modules :
+/node_modules
+/vendor/

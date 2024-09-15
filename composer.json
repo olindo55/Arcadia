@@ -1,0 +1,12 @@
+{
+    "name": "julien.martinati/arcadia",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {
+        "leroy-merlin-br/mongolid": "^3.7",
+        "mongodb/mongodb": "^1.15"
+    }
+}

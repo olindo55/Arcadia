@@ -1,0 +1,16 @@
+#error404{
+    margin: 150px 0;
+    #num-error{
+        color: red;
+        text-shadow: 2px 2px 4px $dark;
+        font-size: 60px;
+        text-align: center;
+    }
+    #text-error{
+        text-align: center;
+        color: $dark;
+        font-size: 35px;
+        text-align: center;
+    }
+}
+
