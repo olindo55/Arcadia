@@ -20,7 +20,7 @@ $diets = $query->fetchAll(\PDO::FETCH_ASSOC);
                     <div class="d-flex align-items-center">
                         <select class="form-select" name="diet">
                             <?php foreach ($diets as $diet) {
-                                    echo '<option value="' . $diet['name'] . '">' . $diet['name'] . '</option>';
+                                    echo '<option value="' . $diet['id'] . '">' . $diet['name'] . '</option>';
                                 } 
                             ?>
                         </select>

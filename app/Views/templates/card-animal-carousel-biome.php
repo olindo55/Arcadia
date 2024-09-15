@@ -38,7 +38,7 @@ foreach ($animals as $animal) { ?>
                     </p></li>
                     <!-- according with feeding -->
                     <?php
-                                    $queryFood = DbUtils::getPdo()->prepare('SELECT * FROM feeding WHERE animal_id = :animal_id LIMIT 1');
+                                    $queryFood = DbUtils::getPdo()->prepare('SELECT * FROM feeding WHERE animal_id = :animal_id ORDER BY id DESC  LIMIT 1');
                                     $queryFood->bindParam(':animal_id', $animal['id']);
                                     $queryFood->execute();
                                     $food = $queryFood->fetch(PDO::FETCH_ASSOC);
@@ -52,7 +52,7 @@ foreach ($animals as $animal) { ?>
 
                     <!-- according with vet_report -->
                     <?php 
-                        $queryScore = DbUtils::getPdo()->prepare('SELECT * FROM vet_report WHERE animal_id = :animal_id LIMIT 1');
+                        $queryScore = DbUtils::getPdo()->prepare('SELECT * FROM vet_report WHERE animal_id = :animal_id ORDER BY id DESC LIMIT 1');
                         $queryScore->bindParam(':animal_id', $animal['id']);
                         $queryScore->execute();
                         $vet_report = $queryScore->fetch(PDO::FETCH_ASSOC);
