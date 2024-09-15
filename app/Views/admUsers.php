@@ -19,7 +19,7 @@ $roles = $query->fetchAll(\PDO::FETCH_ASSOC);
 ?>
         <div class="container-fluid col-12 col-md-10 adm">
             <h1>Gestion des utilisateurs</h1>
-            <form method="post" action="" id="userForm" class="container-fluid col-12 col-lg-6 col-md-10" enctype="multipart/form-data">
+            <form method="post" action="" id="admForm" class="container-fluid col-12 col-lg-6 col-md-10" enctype="multipart/form-data">
                 <fieldset>
                 <legend>Ajouter un utilisateur</legend>
                     <div class="mb-3">

@@ -16,6 +16,7 @@
                     <li><a class="dropdown-item <?= $uriParts[1] == 'admOpening' ? 'active' : '' ?>" href="/admOpening/view">Horaires</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item <?= $uriParts[1] == 'admBiomes' ? 'active' : '' ?>" href="/admBiomes/view">Habitats</a></li>
+                    <li><a class="dropdown-item <?= $uriParts[1] == 'admBreeds' ? 'active' : '' ?>" href="/admBreeds/view">Races</a></li>
                     <li><a class="dropdown-item <?= $uriParts[1] == 'admAnimals' ? 'active' : '' ?>" href="/admAnimals/view">Animaux</a></li>
                     <li><a class="dropdown-item <?= $uriParts[1] == 'admVet' ? 'active' : '' ?>"a href="/admVet/view">Rapports vétérinaire</a></li>
                     <li><a class="dropdown-item <?= $uriParts[1] == 'admFeedings' ? 'active' : '' ?>" href="/admFeeding/view">Nourrissages</a></li>

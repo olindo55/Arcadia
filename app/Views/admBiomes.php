@@ -4,7 +4,7 @@ use App\Database\DbUtils;
 
     <div class="container-fluid col-12 col-md-10 adm">
         <h1>Gestion des habitats</h1>
-        <form method="post" action="" id="biomeForm" class="container-fluid col-12 col-lg-6 col-md-10" enctype="multipart/form-data">
+        <form method="post" action="" id="admForm" class="container-fluid col-12 col-lg-6 col-md-10" enctype="multipart/form-data">
             <fieldset>
             <legend>Ajouter un habitat</legend>
                 <div class="mb-3">
