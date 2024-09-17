@@ -65,8 +65,10 @@ if (isset($_SESSION['flash_message'])) {
     <title>Accueil - Arcadia</title>
     <meta name="description" content="Le Zoo Arcadia vous invite à explorer son site web pour en apprendre davantage sur ses animaux et leurs habitats, les services offerts par le zoo et ses horaires."/>
     <!-- Bootstrap 5.3.3 -->
-     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
-     <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+     <!-- <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+     <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css"> -->
      
      <link rel="stylesheet" href="/asset/scss/style.css">
     <!-- Swiper -->
@@ -191,7 +193,8 @@ if (isset($_SESSION['flash_message'])) {
         </footer>
 
     <!-- Script -->
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> <!-- swiper -->
     <script type="module" src="/asset/js/menu.js"></script>
     <script type="module" src="/asset/js/signin.js"></script>
