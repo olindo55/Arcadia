@@ -5,3 +5,4 @@ RewriteRule . /index.php [L]
 <FilesMatch "\.(css)$">
     Require all granted
 </FilesMatch>
+
