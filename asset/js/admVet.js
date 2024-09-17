@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
     
     // Sort
+    // ------
     tableSorter = new TableSort(table);
     const headers = table.querySelectorAll('thead th');
     headers[0].addEventListener('click', () => {
@@ -20,7 +21,39 @@ document.addEventListener('DOMContentLoaded', () => {
     headers[1].addEventListener('click', () => {
         tableSorter.sortColumn(1, 'sort-icon-date');
     });
+
+    // Filter
+    // -------
+    const searchByName = document.getElementById('searchByAnimal');
+    const searchByDate = document.getElementById('searchByDate');
+
+    function applyFilters() {
+        const inputName = searchByName.value.toLowerCase(); 
+        const inputDate = searchByDate.value; 
+
+        const rows = document.querySelectorAll('#list-vet tbody tr'); 
+
+        rows.forEach(function(row) {
+            const animalName = row.querySelector('.animal-name').textContent.toLowerCase(); 
+            const fullDateReport = row.querySelector('.date-report').textContent.trim(); 
+            const dateOnly = fullDateReport.split(' ')[0]; 
+
+            const matchName = animalName.indexOf(inputName) > -1 || inputName === '';
+            const matchDate = dateOnly === inputDate || inputDate === '';
+
+            if (matchName && matchDate) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    searchByName.addEventListener('keyup', applyFilters);
+    searchByDate.addEventListener('change', applyFilters);
 });
+
+
 
 
 // // POST
