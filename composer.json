@@ -8,5 +8,12 @@
     "require": {
         "leroy-merlin-br/mongolid": "^3.7",
         "mongodb/mongodb": "^1.15"
-    }
+    },
+    "scripts": {
+        "start": "php -S 0.0.0.0:{$PORT} -t public"
+    },
+    "require-dev": {
+        "heroku/heroku-buildpack-php": "*"
+     }
+
 }
