@@ -25,18 +25,21 @@ Arcadia, un zoo situé près de la forêt de Brocéliande en Bretagne, souhaite 
 ### Prérequis :
 Votre machine doit avoir ces logiciels installés :
 - git
-- docker
+- docker (démarré)
 - éditeur de texte
 
 ### Procédure :
-1. Créer un repertoire "Arcadia" sur votre machine
+1. Créer un repertoire sur votre machine
 2. Dans un terminal, positionnez vous dans ce repertoire, exemple de commande :
     ```shell
-    cd Arcadia
+    cd monRepertoire
 3. Cloner le dépot GitHub dans un répertoire local 
    ```shell
     git clone https://github.com/olindo55/Arcadia.git  
-4. Depuis un éditeur de texte, modifier les variables d'environement du fichier `.env`, remplacer le texte entre chevrons `<>` par vos paramêtres et modifier les ports selon votre installation.
+4. Positionnez vous dans le repertoire `Arcadia` :
+    ```shell
+    cd Arcadia
+5. Créez, à la racine du dossier `Arcadia`, un fichier nommé `.env`. Avec un éditeur de texte, collez les informations ci-dessous et modifier les variables d'environement. Remplacez le texte entre chevrons `<>` par vos propres paramêtres et modifiez, éventuellement, les ports selon votre installation.
    ```Plain Text
    # MySQL
     MYSQL_ROOT_PASSWORD=<motDePasseRoot> # Mot de passe pour l'utilisateur root
@@ -51,8 +54,9 @@ Votre machine doit avoir ces logiciels installés :
 
     # Application
     SERVER_PORT=8000 # Port d'accès à l'application
-5. De retour sur le terminal, lancer cette commande :
+6. De retour sur le terminal, lancer cette commande :
    ```shell
    docker-compose up --build
-6. Une fois le build executé, accedez à l'application via votre navigateur à l'adresse : `http://localhost:8000`. Bien entendu, changez le port par celui que vous avez choisi dans `SERVER_PORT` du le fichier `.env` 
+7. Une fois le build executé (ca peux prendre plusieurs minutes),  accedez à l'application via votre navigateur à l'adresse : `http://localhost:8000`. Bien entendu, changez le port par celui que vous avez choisi dans `SERVER_PORT` du le fichier `.env` 
+8. Vous pouvez accéder aussi à PhpMyAdmin : `http://localhost:8899` (ou selon le port si vous avez changer la variable d'environement `PMA_PORT`)
 
