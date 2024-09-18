@@ -6,12 +6,12 @@
 
 # Ignorer ces dossiers :
 /Design
-/Documentation
+# /Documentation
 /ECF
 /Docker
 
 # Ignorer node_modules :
 /node_modules
-/vendor/
+# /vendor/
 /mysql-data/
-/init-scripts/
+# /init-scripts/
