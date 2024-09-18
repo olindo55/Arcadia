@@ -18,6 +18,10 @@ COPY . /var/www/html
 # Définir les permissions si nécessaire
 RUN chown -R www-data:www-data /var/www/html
 
+# Lancer composer install dans le répertoire du projet
+WORKDIR /var/www/html
+RUN composer install --no-interaction --optimize-autoloader
+
 # Exposer le port
 EXPOSE 80
 
