@@ -6,29 +6,48 @@ use PDO;
 
 class DbUtils
 {
-    const DSN = 'mysql:host=localhost;dbname=olindo55_arcadia;port=3306';
-    const USER = 'root';
-    const PASSWORD = '';
-    // const DSN = 'mysql:host=mysql-olindo55.alwaysdata.net;dbname=olindo55_arcadia;port=3306';
-    // const USER = 'olindo55_zoo_adm';
-    // const PASSWORD = 'Z00_@dmin';
-
-    // définition de notre variable qui stockera notre PDO
     static ?PDO $pdo = null;
 
-    public static function getPdo(): PDO
+    public static function getPdo(): PDO    
     {
-        // si pdo existe et a déjà été rempli avec le new PDO on le retourne directement pour éviter
-        // d'enregistrer x pdo et ouvrir x connexion à notre bdd
+        // Singleton design pattern
         if (self::$pdo !== null) {
             return self::$pdo;
         }
+        self::$pdo = new \PDO(self::getDSN(), self::getUser(), self::getPassword());
 
-        // ici seulement si self::pdo n'est pas défini on ouvre notre connexion à la base
-        self::$pdo = new \PDO(self::DSN, self::USER, self::PASSWORD);
-
-        // et on retourne la valeur
         return self::$pdo;
+    }
+
+    private static function getEnv($key, $default = null)
+    {
+        if (isset($_ENV[$key])) {
+            return $_ENV[$key];
+        }
+        
+        $value = getenv($key);
+        if ($value !== false) {
+            return $value;
+        }
+        
+        return $default;
+    }
+
+    public static function getDSN()
+    {
+        $host = 'mysql';
+        $dbname = self::getEnv('MYSQL_DATABASE');
+        $port = '3306';
+        return "mysql:host={$host};dbname={$dbname};port={$port}";
+    }
+    public static function getUser()
+    {
+        return self::getEnv('MYSQL_USER');
+    }
+
+    public static function getPassword()
+    {
+        return self::getEnv('MYSQL_PASSWORD');
     }
 
     public static function protectDbData($value)

@@ -1,0 +1,25 @@
+# Utilisation de l'image PHP avec Apache
+FROM php:8.2-apache
+
+RUN apt-get update && apt-get upgrade -y
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+RUN docker-php-ext-enable mysqli pdo pdo_mysql
+
+# Activer mod_rewrite
+RUN a2enmod rewrite
+RUN service apache2 restart
+
+# Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Copier l'application
+COPY . /var/www/html
+
+# Définir les permissions si nécessaire
+RUN chown -R www-data:www-data /var/www/html
+
+# Exposer le port
+EXPOSE 80
+
+# Lancer Apache
+CMD ["apache2-foreground"]
