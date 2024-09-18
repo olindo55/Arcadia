@@ -378,6 +378,3 @@ INSERT INTO dietary (name) VALUES
 ('Detritivore'),
 ('Coprophage'),
 ('Hématophage');
-
-
--- source C:\Env\Workspace\Arcadia\Documentation\Database\arcadia.sql
