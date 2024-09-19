@@ -1,6 +1,5 @@
 <?php if(isset($_SESSION['connected']) && $_SESSION['connected']) : ?>
     <li class="nav-item dropdown" id="admMenu">
-        <h6> </h6>
         <div>
             <button type="button" class="btn btn-secondary">Administration</button>
             <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">

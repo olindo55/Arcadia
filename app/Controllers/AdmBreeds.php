@@ -20,13 +20,21 @@ class AdmBreeds
     {   
         header('Content-Type: application/json');
         if (isset($data['name']) && isset($data['diet'])) 
-            {                
+            {    
+                $dietQuery = DbUtils::getPdo()->prepare("SELECT name FROM dietary WHERE id = :dietId");
+                $dietQuery->bindValue(':dietId', DbUtils::protectDbData($data['diet']));
+                $dietQuery->execute();
+                
+                $dietResult = $dietQuery->fetch(\PDO::FETCH_ASSOC);
+                
+
                 $query = DbUtils::getPdo()->prepare('INSERT INTO breed (name, diet) VALUES (:name, :diet)');
                 $query->bindValue('name', DbUtils::protectDbData($data['name']));
-                $query->bindValue('diet', DbUtils::protectDbData($data['diet']));
+                $query->bindValue('diet', DbUtils::protectDbData($dietResult['name']));
                 
                 if($query->execute()){
                     $data['id'] = DbUtils::getPdo()->lastInsertId();
+                    $data['diet'] = $dietResult['name'];
                     echo json_encode([
                         'success' => true,
                         'message' => 'La race a été créée avec success.',
@@ -56,6 +64,7 @@ class AdmBreeds
         $request = json_decode($requestJSON, true);
         
         if (isset($request['id'], $request['name'], $request['diet'])) {
+
             $query = DbUtils::getPdo()->prepare("UPDATE breed SET name = :name, diet = :diet WHERE id = :id");
             
             $query->bindValue(':id', DbUtils::protectDbData($request['id']));
@@ -75,6 +84,7 @@ class AdmBreeds
             ]);
         }
     }
+    
 
     public function delete()
     {   
