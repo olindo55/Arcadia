@@ -172,7 +172,7 @@ SELECT 'Torvalds', '/asset/images/animals/lezard_cornes.jpg', 'Lézard à cornes
        (SELECT id FROM biome WHERE name = 'désert'), 
        (SELECT id FROM breed WHERE name = 'Lézard à cornes')
 UNION ALL
-SELECT 'Foo', '/asset/images/animals/hibou_neiges.jpg', 'Hibou des neiges', 
+SELECT 'Foo', '/asset/images/animals/hibou_neige.jpg', 'Hibou des neiges', 
        (SELECT id FROM biome WHERE name = 'désert'), 
        (SELECT id FROM breed WHERE name = 'Hibou des neiges');
 
