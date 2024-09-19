@@ -111,7 +111,7 @@ if (isset($_SESSION['flash_message'])) {
                     <li class="<?= $uriParts[1] == 'contact' ? 'active' : '' ?>"><a href="/contact/view">Contactez-nous</a></li>
                     <hr>
                     <!-- Connection button -->
-                    <?php require 'app/Views/templates/button-connection-adm.php' ?>
+                    <?php require 'app/Views/templates/button-connection-adm-bgr.php' ?>
                 </ul>
             </div>
             <!-- end burger menu-->

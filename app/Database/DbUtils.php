@@ -14,7 +14,8 @@ class DbUtils
         if (self::$pdo !== null) {
             return self::$pdo;
         }
-        self::$pdo = new \PDO(self::getDSN(), self::getUser(), self::getPassword());
+        // self::$pdo = new \PDO(self::getDSN(), self::getUser(), self::getPassword());
+        self::$pdo = new \PDO('mysql:host=localhost;dbname=olindo55_arcadia;port=3306', 'root', '');
 
         return self::$pdo;
     }
