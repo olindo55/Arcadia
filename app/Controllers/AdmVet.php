@@ -16,39 +16,87 @@ class AdmVet
         }
     }
 
-    // public function post(array $data)
-    // {   
-    //     header('Content-Type: application/json');
-    //     if (isset($data['name']) && isset($data['diet'])) 
-    //         {                
-    //             $query = DbUtils::getPdo()->prepare('INSERT INTO breed (name, diet) VALUES (:name, :diet)');
-    //             $query->bindValue('name', DbUtils::protectDbData($data['name']));
-    //             $query->bindValue('diet', DbUtils::protectDbData($data['diet']));
+    public function post(array $data)
+    {   
+        header('Content-Type: application/json');
+        if (isset($data['animal_id']) && isset($data['new-report-animal']) && trim($data['new-report-animal']) !== '' && isset($data['health-score'])) 
+            {   
+                $message = '';
+
+                $animalQuery = DbUtils::getPdo()->prepare("SELECT name FROM animal WHERE id = :id");
+                $animalQuery->bindValue(':id', DbUtils::protectDbData($data['animal_id']));
+                $animalQuery->execute();
+                $animalResult = $animalQuery->fetch(\PDO::FETCH_ASSOC);
+
+                $query = DbUtils::getPdo()->prepare('
+                    INSERT INTO vet_report (date_report, comment, score, user_id, animal_id) 
+                    VALUES (:date_report, :comment, :score, :user_id, :animal_id)
+                    ');
+                $query->bindValue('date_report',  date('Y-m-d H:i:s'));
+                $query->bindValue('comment', DbUtils::protectDbData($data['new-report-animal']));
+                $query->bindValue('score', DbUtils::protectDbData($data['health-score']));
+                $query->bindValue('user_id', $_SESSION['user_id']);
+                $query->bindValue('animal_id', DbUtils::protectDbData($data['animal_id']));
                 
-    //             if($query->execute()){
-    //                 $data['id'] = DbUtils::getPdo()->lastInsertId();
-    //                 echo json_encode([
-    //                     'success' => true,
-    //                     'message' => 'La race a été créée avec success.',
-    //                     'data' => $data,
-    //                 ]);
-    //                 exit();
-    //             }else{
-    //                 echo json_encode([
-    //                     'success' => false,
-    //                     'message' => 'Une erreur est survenue lors de l\'enregistrement.',
-    //                     'data' => $data
-    //                 ]);
-    //                 exit();
-    //             }  
-    //         } else {
-    //             echo json_encode([
-    //                 'success' => false,
-    //                 'message' => 'Champs vide. Insertion impossible !'
-    //             ]);
-    //             exit();
-    //         }
-    // }
+                if($query->execute()){
+                    $data['id'] = DbUtils::getPdo()->lastInsertId();
+                    $data['date'] = date('Y-m-d H:i:s');
+                    $data['animal_name'] = $animalResult['name'];
+
+                    if (isset($data['new-report-biome']) && trim($data['new-report-biome']) !== '' && isset($data['biome-score'])) 
+                    {   
+                        $queryId = DbUtils::getPdo()->prepare('SELECT biome_id FROM animal WHERE id = :animal_id');
+                        $queryId->bindValue(':animal_id', $data['animal_id']);
+                        $queryId->execute();
+                        $biomeResult = $queryId->fetch(\PDO::FETCH_ASSOC);
+                        $biome_id = $biomeResult['biome_id'];
+
+                        $queryBiome = DbUtils::getPdo()->prepare('
+                            INSERT INTO biome_report (date_report, comment, score, user_id, biome_id) 
+                            VALUES (:date_report, :comment, :score, :user_id, :biome_id)
+                            
+                        ');
+                        $queryBiome->bindValue('date_report',  date('Y-m-d H:i:s'));
+                        $queryBiome->bindValue('comment', DbUtils::protectDbData($data['new-report-biome']));
+                        $queryBiome->bindValue('score', DbUtils::protectDbData($data['biome-score']));
+                        $queryBiome->bindValue('user_id', $_SESSION['user_id']);
+                        $queryBiome->bindValue('biome_id', DbUtils::protectDbData($biome_id));
+
+                        if($queryBiome->execute()){
+                            $message = ' Ainsi que rapport d\'habitat.';
+                            // exit();
+                        }
+                        else{
+                            echo json_encode([
+                                'success' => false,
+                                'message' => 'Une erreur est survenue lors de l\'enregistrement du rapport d\'habitat',
+                                'data' => $data
+                            ]);
+                            exit();
+                        }  
+                    }
+                    echo json_encode([
+                        'success' => true,
+                        'message' => 'Le rapport vétérinaire a été créé avec success.'. $message,
+                        'data' => $data,
+                    ]);
+                    exit();
+                }else{
+                    echo json_encode([
+                        'success' => false,
+                        'message' => 'Une erreur est survenue lors de l\'enregistrement.',
+                        'data' => $data
+                    ]);
+                    exit();
+                }  
+            } else {
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Champs vide. Insertion impossible !'
+                ]);
+                exit();
+            }
+    }
 
     // public function put()
     // {

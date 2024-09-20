@@ -42,6 +42,8 @@ h1{
         border-radius: 30px;
         margin-bottom: 20px;
 
+        background-color: $light;
+
     
         .animal{
             display: flex;
@@ -67,6 +69,9 @@ h1{
                     box-shadow: 0 4px 4px #00000025;
                 }
             }
+            .hearts i{
+                padding-left: 6px;
+            }
         }
         .group{
             width: 100%;
@@ -77,12 +82,13 @@ h1{
             position: relative;
             h3{
                 position: absolute;
-                top: -10px;
+                top: -12px;
                 left: 15px;
-                background-color: white;
+                background-color: $dark;
                 font-size:medium;
-                padding-left: 4px;
-                padding-right: 4px;
+                padding: 2px 8px 2px 8px;
+                border-radius: 5px;
+                color: white;
             }
             .first{
                 margin-top: 10px;
