@@ -62,14 +62,23 @@ if (isset($_SESSION['flash_message'])) {
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil - Arcadia</title>
+    <title><?= ucfirst($uriParts[1]) ?> - Arcadia</title>
     <meta name="description" content="Le Zoo Arcadia vous invite à explorer son site web pour en apprendre davantage sur ses animaux et leurs habitats, les services offerts par le zoo et ses horaires."/>
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="asset/images/logo/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="asset/images/logo/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="asset/images/logo/favicon/favicon-16x16.png">
+    <link rel="manifest" href="asset/images/logo/favicon/site.webmanifest">
+    <link rel="mask-icon" href="asset/images/logo/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+ 
+    
     <!-- Bootstrap 5.3.3 -->
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
      <!-- <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
      <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css"> -->
-     
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
      <link rel="stylesheet" href="/asset/scss/style.css">
     <!-- Swiper -->
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
@@ -111,7 +120,7 @@ if (isset($_SESSION['flash_message'])) {
                     <li class="<?= $uriParts[1] == 'contact' ? 'active' : '' ?>"><a href="/contact/view">Contactez-nous</a></li>
                     <hr>
                     <!-- Connection button -->
-                    <?php require 'app/Views/templates/button-connection-adm.php' ?>
+                    <?php require 'app/Views/templates/button-connection-adm-bgr.php' ?>
                 </ul>
             </div>
             <!-- end burger menu-->

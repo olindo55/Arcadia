@@ -172,7 +172,7 @@ SELECT 'Torvalds', '/asset/images/animals/lezard_cornes.jpg', 'Lézard à cornes
        (SELECT id FROM biome WHERE name = 'désert'), 
        (SELECT id FROM breed WHERE name = 'Lézard à cornes')
 UNION ALL
-SELECT 'Foo', '/asset/images/animals/hibou_neiges.jpg', 'Hibou des neiges', 
+SELECT 'Foo', '/asset/images/animals/hibou_neige.jpg', 'Hibou des neiges', 
        (SELECT id FROM biome WHERE name = 'désert'), 
        (SELECT id FROM breed WHERE name = 'Hibou des neiges');
 
@@ -340,7 +340,7 @@ INSERT INTO comment (pseudo, comment, date_comment, score, published, user_id) V
 ('FamilyOuting', 'Le zoo est bien conçu pour les familles, mais les prix des snacks sont un peu élevés.',  '2024-08-23 12:45:00', 4, TRUE, 1),
 ('OccasionalVisitor', 'Je trouve que les animaux ne semblent pas très actifs. Peut-être qu\'il faudrait plus d\'enrichissement.',  '2024-08-24 09:00:00', 2, FALSE, 1);
 
-
+-- table opening
 CREATE TABLE opening (
     id INT AUTO_INCREMENT PRIMARY KEY,
     day_name VARCHAR(10) NOT NULL,        
@@ -360,6 +360,7 @@ INSERT INTO opening (day_name, opening_hour, opening_minute, closing_hour, closi
 ('Samedi', 10, 0, 14, 0, 0),   
 ('Dimanche', 0, 0, 0, 0, 1);   
 
+-- table diatery
 CREATE TABLE dietary (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL

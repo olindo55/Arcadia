@@ -44,6 +44,44 @@ document.getElementById('login-button')
         });
     });
 
+    // signin burger
+    document.getElementById('login-button-bgr')
+    .addEventListener('click', function(event){
+        event.preventDefault();
+        spinnerContainer.classList.remove('d-none');
+
+        const form = document.getElementById('login-form-bgr');
+        const formData = new FormData(form);
+    
+        fetch('/login/check', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                const toast = new MyToast('Page non disponible', 'danger');
+                toast.show();
+            } else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            if (data.success) {
+                window.location.href = '/homepage/view';
+            } 
+            else {
+                const toast = new MyToast(data.message, 'danger');
+                toast.show();
+            }
+        })
+        .catch(error => {
+            const toast = new MyToast(`Erreur lors de  la connexion`, 'danger');
+            toast.show();
+        })
+        .finally(() => {
+            spinnerContainer.classList.add('d-none');
+        });
+    });
 
 // // // token
 // // const tokenCookieName = "accesstoken";

@@ -12706,6 +12706,109 @@ table .hidden {
     display: block;
   }
 }
+h1, .h1 {
+  text-align: center;
+}
+
+.contents {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.contents .report .search .myButtonAdd {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: #f8c172;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1450980392);
+  margin-top: 20px;
+}
+.contents .report .search .myButtonAdd .bi-clipboard-plus {
+  font-size: 30px;
+  color: white;
+}
+.contents .vet-report {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #2e353a;
+  border-radius: 30px;
+  margin-bottom: 20px;
+  background-color: #eaece0;
+}
+.contents .vet-report .animal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.contents .vet-report .animal .bloc-img-animal {
+  margin-top: 20px;
+  width: 150px;
+  height: 150px;
+}
+.contents .vet-report .animal .bloc-img-animal .img-animal {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1450980392);
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.contents .vet-report .animal .bloc-img-animal span {
+  margin-left: -34px;
+  margin-top: 16px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1450980392);
+}
+.contents .vet-report .animal .hearts i {
+  padding-left: 6px;
+}
+.contents .vet-report .group {
+  width: 100%;
+  border: 1px solid #2e353a;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  padding: 10px;
+  position: relative;
+}
+.contents .vet-report .group h3, .contents .vet-report .group .h3 {
+  position: absolute;
+  top: -12px;
+  left: 15px;
+  background-color: #2e353a;
+  font-size: medium;
+  padding: 2px 8px 2px 8px;
+  border-radius: 5px;
+  color: white;
+}
+.contents .vet-report .group .first {
+  margin-top: 10px;
+}
+.contents .vet-report .group .stars {
+  text-align: center;
+}
+.contents .vet-report .group .stars .star {
+  font-size: 40px;
+  cursor: pointer;
+  background-color: #565656;
+  color: transparent;
+  text-shadow: 0px 1px 1px #fffdba;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  transition: color 0.1s ease-in-out;
+}
+.contents .vet-report .group .stars .star.selected {
+  color: #fff500;
+  text-shadow: 0px 1px 1px #565656;
+}
+
 * {
   margin: 0;
   padding: 0;

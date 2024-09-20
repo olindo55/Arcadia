@@ -14,6 +14,7 @@ class DbUtils
         if (self::$pdo !== null) {
             return self::$pdo;
         }
+        // self::$pdo = new \PDO(self::getDSN(), self::getUser(), self::getPassword());
         self::$pdo = new \PDO(self::getDSN(), self::getUser(), self::getPassword());
 
         return self::$pdo;
