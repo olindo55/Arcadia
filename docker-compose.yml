@@ -28,7 +28,7 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       INIT_SQL_FILE: ${INIT_SQL_FILE}
     ports:
-      - 3307:3306
+      - ${MYSQL_PORT}:3306
     volumes:
       - ./mysql-data:/var/lib/mysql
       - ./init-scripts:/docker-entrypoint-initdb.d
@@ -43,5 +43,4 @@ services:
       PMA_USER: root
       PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
-      - 8898:80
-
+      - ${PMA_PORT}:80
