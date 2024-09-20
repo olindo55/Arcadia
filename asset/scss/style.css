@@ -12766,6 +12766,9 @@ h1, .h1 {
   margin-top: 16px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1450980392);
 }
+.contents .vet-report .animal .hearts i {
+  padding-left: 6px;
+}
 .contents .vet-report .group {
   width: 100%;
   border: 1px solid #2e353a;
