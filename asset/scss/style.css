@@ -12739,6 +12739,7 @@ h1, .h1 {
   border: 1px solid #2e353a;
   border-radius: 30px;
   margin-bottom: 20px;
+  background-color: #eaece0;
 }
 .contents .vet-report .animal {
   display: flex;
@@ -12775,12 +12776,13 @@ h1, .h1 {
 }
 .contents .vet-report .group h3, .contents .vet-report .group .h3 {
   position: absolute;
-  top: -10px;
+  top: -12px;
   left: 15px;
-  background-color: white;
+  background-color: #2e353a;
   font-size: medium;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding: 2px 8px 2px 8px;
+  border-radius: 5px;
+  color: white;
 }
 .contents .vet-report .group .first {
   margin-top: 10px;
