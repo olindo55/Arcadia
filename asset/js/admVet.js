@@ -87,6 +87,14 @@ document.querySelectorAll('.bi-eye').forEach(icon => {
     });
 });
 
+const animalSelect = document.getElementById('animal-select');
+const biomeDisplay = document.getElementById('biome-by-animal');
+
+animalSelect.addEventListener('change', function () {
+    const selectedOption = animalSelect.options[animalSelect.selectedIndex];
+    const biome = selectedOption.getAttribute('data-bio');
+    biomeDisplay.textContent = biome.charAt(0).toUpperCase() + biome.slice(1).toLowerCase();;
+});
 
 
 // // POST

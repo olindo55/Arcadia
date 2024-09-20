@@ -36,6 +36,15 @@ $query = DbUtils::getPdo()->query('
     ');
 $vet_reports = $query->fetchAll(\PDO::FETCH_ASSOC);
 
+$query = DbUtils::getPdo()->query('
+    SELECT 
+        a.id AS animal_id, a.name AS animal_name,
+        b.id AS biome_id, b.name AS biome_name
+    FROM animal a
+    JOIN biome b ON b.id = a.biome_id
+    ');
+$animals = $query->fetchAll(\PDO::FETCH_ASSOC);
+
 $id = isset($_SESSION['selected_id']) ? $_SESSION['selected_id'] : 0;
 unset($_SESSION['selected_id']);
 ?>
@@ -53,7 +62,7 @@ unset($_SESSION['selected_id']);
                 <!-- search -->
                 <div class="searchBy container-fluid col-12 col-md-6">
                     <label for="searchByAnimal" class="form-label">Animal</label>
-                    <input type="text" class="form-control mb-3" id="searchByAnimal" placeholder="Rechercher par animal...">
+                    <input type="search" class="form-control mb-3" id="searchByAnimal" placeholder="Rechercher par animal...">
             
                     <label for="searchByDate" class="form-label">Date de rapport</label>
                     <input type="date" class="form-control mb-3" id="searchByDate" >
@@ -145,4 +154,60 @@ unset($_SESSION['selected_id']);
                 </p>
             </div>
         </div>
+    </div>
+
+    
+    <!-- Modal add report -->
+    <div class="container-fluid col-12 col-md-10 adm">
+        <h1>Nouveaux rapport</h1>
+        <form method="post" action="" id="admForm" class="container-fluid col-12 col-lg-6 col-md-10" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="animal" class="form-label">Animal</label>
+                <div class="d-flex align-items-center">
+                    <select class="form-select" id="animal-select" name="biome">
+                        <?php foreach ($animals as $animal) {
+                                 echo '<option value="' . $animal['animal_id'] . '" data-bio="' . $animal['biome_name'] . '">' . $animal['animal_name'] . '</option>';
+                            } 
+                        ?>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="new-report-animal" class="form-label">Commentaires</label>
+                <textarea name="new-report" class="form-control" id="new-report-animal" name="new-report-animal" rows="4" cols="50" placeholder="Écrivez votre texte ici..." required>
+                </textarea>
+            </div>
+            <div class="mb-3">
+                <label for="health-score" class="form-label">Note sur 5</label>
+                <div class="d-flex align-items-center">
+                    <select class="form-select" name="health-score">
+                        <?php for($j = 1; $j <=5; $j++) {
+                                echo '<option value="' . $j . '">' . $j . '</option>';
+                            } 
+                        ?>
+                    </select>
+                </div>
+            </div>
+            <hr>
+            <h5 id="biome-by-animal">Sélectionnez un animal pour voir son habitat</h5>
+            <div class="mb-3">
+                <label for="new-report-biome" class="form-label">Commentaires</label>
+                <textarea name="new-report" class="form-control" id="new-report-biome" name="new-report-biome" rows="4" cols="50" placeholder="Écrivez votre texte ici..." required>
+                </textarea>
+            </div>
+            <div class="mb-3">
+                <label for="biome-score" class="form-label">Note sur 5</label>
+                <div class="d-flex align-items-center">
+                    <select class="form-select" name="biome-score">
+                        <?php for($j = 1; $j <=5; $j++) {
+                                echo '<option value="' . $j . '">' . $j . '</option>';
+                            } 
+                        ?>
+                    </select>
+                </div>
+            </div>
+
+
+            <button type="submit" id="addBiomeButton" class="btn btn-primary">Ajouter</button>
+        </form>
     </div>
