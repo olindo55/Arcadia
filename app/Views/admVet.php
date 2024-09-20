@@ -28,10 +28,10 @@ $query = DbUtils::getPdo()->query('
     JOIN animal a ON a.id = vr.animal_id
     JOIN breed b ON  b.id = a.breed_id
     JOIN users v ON v.id = vr.user_id 
-    JOIN latest_feeding lf ON lf.animal_id = a.id
-    JOIN users s ON s.id = lf.user_id
+    LEFT JOIN latest_feeding lf ON lf.animal_id = a.id
+    LEFT JOIN users s ON s.id = lf.user_id
     JOIN biome bi ON bi.id = a.biome_id
-    JOIN latest_biome_report lbr ON lbr.biome_id = a.biome_id
+    LEFT JOIN latest_biome_report lbr ON lbr.biome_id = a.biome_id
     ORDER BY vr.date_report DESC;
     ');
 $vet_reports = $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -47,6 +47,12 @@ $animals = $query->fetchAll(\PDO::FETCH_ASSOC);
 
 $id = isset($_SESSION['selected_id']) ? $_SESSION['selected_id'] : 0;
 unset($_SESSION['selected_id']);
+
+// echo '<pre>'; // Formate l'affichage
+// var_dump($vet_reports);
+// echo '</pre>';
+
+// echo $_SESSION['user_id']
 ?>
 
     <!-- title -->
@@ -100,7 +106,7 @@ unset($_SESSION['selected_id']);
                 </div>
             </div>
         </div>
-        <!-- Report -->
+        <!-- Report List -->
         <div class="container-fluid col-11 col-md-6 col-xl-4 vet-report">
             <div class="animal">
                 <div class="bloc-img-animal position-relative">
@@ -174,7 +180,7 @@ unset($_SESSION['selected_id']);
                             <div class="mb-3">
                                 <label for="animal" class="form-label">Animal</label>
                                 <div class="d-flex align-items-center">
-                                    <select class="form-select" id="animal-select" name="biome">
+                                    <select class="form-select" id="animal-select" name="animal_id">
                                         <?php foreach ($animals as $animal) {
                                                 echo '<option value="' . $animal['animal_id'] . '" data-bio="' . $animal['biome_name'] . '">' . $animal['animal_name'] . '</option>';
                                             } 
@@ -184,7 +190,7 @@ unset($_SESSION['selected_id']);
                             </div>
                             <div class="mb-3">
                                 <label for="new-report-animal" class="form-label">Commentaires</label>
-                                <textarea name="new-report" class="form-control" id="new-report-animal" name="new-report-animal" rows="4" placeholder="Écrivez votre texte ici..." required>
+                                <textarea class="form-control" id="new-report-animal" name="new-report-animal" rows="4" placeholder="Écrivez votre texte ici..." required>
                                 </textarea>
                             </div>
                             <div class="mb-3">
@@ -202,7 +208,7 @@ unset($_SESSION['selected_id']);
                             <h5 id="biome-by-animal">Sélectionnez un animal pour voir son habitat</h5>
                             <div class="mb-3">
                                 <label for="new-report-biome" class="form-label">Commentaires</label>
-                                <textarea name="new-report" class="form-control" id="new-report-biome" name="new-report-biome" rows="4" cols="50" placeholder="Écrivez votre texte ici..." required>
+                                <textarea class="form-control" id="new-report-biome" name="new-report-biome" rows="4" cols="50" placeholder="Écrivez votre texte ici..." required>
                                 </textarea>
                             </div>
                             <div class="mb-3">

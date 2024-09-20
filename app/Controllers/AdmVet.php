@@ -19,17 +19,30 @@ class AdmVet
     public function post(array $data)
     {   
         header('Content-Type: application/json');
-        if (isset($data['name']) && isset($data['diet'])) 
-            {                
-                $query = DbUtils::getPdo()->prepare('INSERT INTO breed (name, diet) VALUES (:name, :diet)');
-                $query->bindValue('name', DbUtils::protectDbData($data['name']));
-                $query->bindValue('diet', DbUtils::protectDbData($data['diet']));
+        if (isset($data['animal_id']) && isset($data['new-report-animal']) && trim($data['new-report-animal']) !== '' && isset($data['health-score'])) 
+            {        
+                $animalQuery = DbUtils::getPdo()->prepare("SELECT name FROM animal WHERE id = :id");
+                $animalQuery->bindValue(':id', DbUtils::protectDbData($data['animal_id']));
+                $animalQuery->execute();
+                $animalResult = $animalQuery->fetch(\PDO::FETCH_ASSOC);
+
+                $query = DbUtils::getPdo()->prepare('
+                    INSERT INTO vet_report (date_report, comment, score, user_id, animal_id) 
+                    VALUES (:date_report, :comment, :score, :user_id, :animal_id)
+                    ');
+                $query->bindValue('date_report',  date('Y-m-d H:i:s'));
+                $query->bindValue('comment', DbUtils::protectDbData($data['new-report-animal']));
+                $query->bindValue('score', DbUtils::protectDbData($data['health-score']));
+                $query->bindValue('user_id', $_SESSION['user_id']);
+                $query->bindValue('animal_id', DbUtils::protectDbData($data['animal_id']));
                 
                 if($query->execute()){
                     $data['id'] = DbUtils::getPdo()->lastInsertId();
+                    $data['date'] = date('Y-m-d H:i:s');
+                    $data['animal_name'] = $animalResult['name'];
                     echo json_encode([
                         'success' => true,
-                        'message' => 'La race a été créée avec success.',
+                        'message' => 'Le rapport vétérinaire a été créé avec success.',
                         'data' => $data,
                     ]);
                     exit();

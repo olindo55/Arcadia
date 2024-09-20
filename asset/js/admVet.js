@@ -99,6 +99,10 @@ document.querySelector('.myButtonAdd').addEventListener('click', function() {
         const form = document.getElementById('admForm');
         const formData = new FormData(form);
 
+        // for (const [key, value] of formData.entries()) {
+        //     console.log(`${key}: ${value}`);
+        // }
+
         fetch('/admVet/post', {
             method: 'POST',
             body: formData
@@ -116,6 +120,7 @@ document.querySelector('.myButtonAdd').addEventListener('click', function() {
                 addLine(data.data);
                 const toast = new MyToast(data.message, 'success');
                 toast.show();
+                form.reset();
                 modal.hide();
             } 
             else {
@@ -358,21 +363,16 @@ animalSelect.addEventListener('change', function () {
 //     }    
 // });
 
-// function addLine(data) {
-//     const table = document.getElementById('list-breed').getElementsByTagName('tbody')[0];
-//     const newRow = table.insertRow();
+function addLine(data) {
+    const table = document.getElementById('list-vet').getElementsByTagName('tbody')[0];
+    const newRow = table.insertRow();
 
-//     const nameCell = newRow.insertCell(0);
-//     const dietCell = newRow.insertCell(1);
-//     const actionsCell = newRow.insertCell(2);
-//     nameCell.textContent = data.name;
-//     dietCell.textContent = data.diet;
+    const nameCell = newRow.insertCell(0);
+    const dateCell = newRow.insertCell(1);
+    const actionsCell = newRow.insertCell(2);
+    nameCell.textContent = data.animal_name;
+    dateCell.textContent = data.date;
 
-//     actionsCell.className = 'icon-cell';
-//     actionsCell.innerHTML = `
-//         <i class="bi bi-pencil-square"></i>
-//         <i class="bi bi-trash" data-id="${data.id}"></i>
-//         <i class="bi bi-x-circle hidden"></i>
-//         <i class="bi bi-floppy hidden"></i>
-//     `;
-// }
+    actionsCell.className = 'icon-cell';
+    actionsCell.innerHTML = `<i class="bi bi-eye" data-id="${data.id}">${data.id}</i>`;
+}
