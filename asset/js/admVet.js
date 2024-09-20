@@ -121,7 +121,11 @@ document.querySelector('.myButtonAdd').addEventListener('click', function() {
                 const toast = new MyToast(data.message, 'success');
                 toast.show();
                 form.reset();
-                modal.hide();
+                // modal.hide();
+                setTimeout(() => {
+                    location.reload();
+                  }, 2000);
+                
             } 
             else {
                 const toast = new MyToast(data.message, 'danger');
@@ -365,6 +369,7 @@ animalSelect.addEventListener('change', function () {
 
 function addLine(data) {
     const table = document.getElementById('list-vet').getElementsByTagName('tbody')[0];
+    const rowCount = table.rows.length;
     const newRow = table.insertRow();
 
     const nameCell = newRow.insertCell(0);
@@ -374,5 +379,10 @@ function addLine(data) {
     dateCell.textContent = data.date;
 
     actionsCell.className = 'icon-cell';
-    actionsCell.innerHTML = `<i class="bi bi-eye" data-id="${data.id}">${data.id}</i>`;
+    actionsCell.innerHTML = `<i class="bi bi-eye" data-id="${rowCount}"></i>`;
+
+
+
+
+
 }
