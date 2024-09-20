@@ -63,10 +63,10 @@ function validateForm(){
   
   const formButton = document.getElementById('btnForm');
   if (emailValid && subjectValid && messageValid){
-    formButton.disabled = false;
+    formButton.disabled = true; /// changer
   }
   else {
-    formButton.disabled = true;
+    formButton.disabled = false;
   }
 }
 

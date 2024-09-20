@@ -3,7 +3,7 @@
         <label for="email" class="form-label" method="post">Votre email</label>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend">@</span>
-          <input type="email" class="form-control" id="email" aria-describedby="inputGroupPrepend" required="">
+          <input type="email" class="form-control" id="email" aria-describedby="inputGroupPrepend" required>
           <div class="valid-feedback">
               ok!
           </div>
@@ -14,7 +14,7 @@
     </div>
     <div class="col-10 pb-3">
       <label for="subject" class="form-label">Objet</label>
-      <input type="text" class="form-control" id="subject">
+      <input type="text" class="form-control" id="subject" required>
       <div class="valid-feedback">
         ok!
       </div>
@@ -24,7 +24,7 @@
     </div>
     <div class="col-10 pb-3">
       <label for="message" class="form-label">Message</label>
-      <textarea class="form-control" id="message" style="height: 200px"></textarea>
+      <textarea class="form-control" id="message" style="height: 200px" requuired></textarea>
       <div class="valid-feedback">
         ok!
       </div>

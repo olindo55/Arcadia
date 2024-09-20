@@ -14,6 +14,7 @@ return array(
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Psr\\Clock\\' => array($vendorDir . '/psr/clock/src'),
+    'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'Mongolid\\' => array($vendorDir . '/leroy-merlin-br/mongolid/src'),
     'MongoDB\\' => array($vendorDir . '/mongodb/mongodb/src'),
     'Jean85\\' => array($vendorDir . '/jean85/pretty-package-versions/src'),

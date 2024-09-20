@@ -10,7 +10,10 @@ class Contact
     }
     public function managePostForm($post)
     {
-        if (isset($post['email']) || isset($post['message'])) {
+        header('Content-Type: application/json');
+
+        if (isset($post['email']) && isset($post['message']) && filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
+
             $header  = 'MIME-Version: 1.0' . "\r\n";
             $header .= 'Content-type: text/html; charset=utf-8' . "\r\n";
             $header .= 'From: emailform@olindo-arcadia.fr' . "\r\n";
@@ -30,10 +33,17 @@ class Contact
             }else{
                 echo json_encode([
                     'success' => true,
-                    'message' => 'Votre message pas été  avec succés.',
+                    'message' => 'Votre message a été envoyé avec succés.',
                 ]);
                 exit();
             }
-          }
+        }
+        else{
+            echo json_encode([
+                'success' => false,
+                'message' => 'Probleme : Veuillez verifier que tous les champs sont correctement renseignés.',
+            ]);
+            exit(); 
+        } 
     }
 }

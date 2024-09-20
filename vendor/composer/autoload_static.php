@@ -33,6 +33,7 @@ class ComposerStaticInitc64c197f6c4cdcf10d9883f0cbaf9548
             'Psr\\SimpleCache\\' => 16,
             'Psr\\Container\\' => 14,
             'Psr\\Clock\\' => 10,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
         array (
@@ -96,6 +97,10 @@ class ComposerStaticInitc64c197f6c4cdcf10d9883f0cbaf9548
         'Psr\\Clock\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/clock/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Mongolid\\' => 
         array (
