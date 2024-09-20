@@ -53,6 +53,39 @@ document.addEventListener('DOMContentLoaded', () => {
     searchByDate.addEventListener('change', applyFilters);
 });
 
+document.querySelectorAll('.bi-eye').forEach(icon => {
+    icon.addEventListener('click', function() {
+        spinnerContainer.classList.remove('d-none');
+
+        const id = this.getAttribute('data-id');
+        console.log('ID à envoyer:', id);
+        // stock ID in session
+        fetch('/app/Database/set_session.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded', 
+            },
+            body: `id=${encodeURIComponent(id)}`
+        })
+        .then(response => {
+            if (response.ok) {
+                // Recharger la page
+                location.reload();
+            }
+        })
+        .then(data => {
+            console.log('Réponse du serveur:', data);
+            if (data.status === 'success') {
+                location.reload();
+            } else {
+                console.error('Erreur:', data.message);
+            }
+        })
+        .finally(() => {
+            spinnerContainer.classList.add('d-none');
+        });
+    });
+});
 
 
 

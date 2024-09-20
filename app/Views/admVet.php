@@ -34,12 +34,12 @@ $query = DbUtils::getPdo()->query('
     JOIN latest_biome_report lbr ON lbr.biome_id = a.biome_id
     ORDER BY vr.date_report DESC;
     ');
-
- 
-    
-
 $vet_reports = $query->fetchAll(\PDO::FETCH_ASSOC);
+
+$id = isset($_SESSION['selected_id']) ? $_SESSION['selected_id'] : 0;
+unset($_SESSION['selected_id']);
 ?>
+
     <!-- title -->
     <h1>Gestion des rapports vétérinaires</h1>
     <div class="contents">
@@ -72,14 +72,15 @@ $vet_reports = $query->fetchAll(\PDO::FETCH_ASSOC);
                         <tbody >
                             <!--injection via php--> 
                             <?php
+                            $i = -1;
                             foreach ($vet_reports as $vet_report) {
-                                
+                                $i++;
                                 echo '<tr data-id="' . $vet_report['id'] . '">';
                                 echo '<td class="animal-name">' . $vet_report['animal_name'] . '</td>';
                                 echo '<td class="date-report">' . $vet_report['date_report'] . '</td>';
                                 echo '<td class="icon-cell">' 
-                                    . '<i class="bi bi-eye" data-id="' . $vet_report['id'] . '"></i>'
-                                    . '</td>';
+                                    . '<i class="bi bi-eye" data-id="' . $i . '"></i>'
+                                    .'</td>';
                                 echo '</tr>';
                             }
                             ?>
@@ -92,18 +93,18 @@ $vet_reports = $query->fetchAll(\PDO::FETCH_ASSOC);
         <div class="container-fluid col-11 col-md-6 col-xl-4 vet-report">
             <div class="animal">
                 <div class="bloc-img-animal position-relative">
-                    <img src=<?php echo  $vet_reports[0]['img']?> alt=<?php echo  $vet_reports[0]['alt']?>  class="img-animal">
+                    <img src=<?php echo  $vet_reports[$id]['img']?> alt=<?php echo  $vet_reports[$id]['alt']?>  class="img-animal">
                     <h4><span class="translate-middle badge rounded-pill bg-danger position-absolute top-0 start-100">
                         103
                     </span></h4>
                 </div>
-                <h2><?php echo  $vet_reports[0]['animal_name']?></h2>
-                <p>Race : <?php echo  $vet_reports[0]['breed']?></p>
+                <h2><?php echo  $vet_reports[$id]['animal_name']?></h2>
+                <p>Race : <?php echo  $vet_reports[$id]['breed']?></p>
                 <p>Etat de santé : 
                     <span class="hearts">
                         <?php 
                         for ($i = 1; $i <= 5; $i++) {
-                            if ($i <= $vet_reports[0]['score']) {
+                            if ($i <= $vet_reports[$id]['score']) {
                                 echo '<i class="bi bi-heart-fill"></i>';
                             } else {
                                 echo '<i class="bi bi-heart"></i>';
@@ -114,26 +115,26 @@ $vet_reports = $query->fetchAll(\PDO::FETCH_ASSOC);
             </div>
             <div class="group">
                 <h3>Vétérinaire</h3>
-                <p class="first"><strong>Vétérinaire : </strong>Dr <?php echo  $vet_reports[0]['vet_name']?> <?php echo  $vet_reports[0]['vet_forename']?></p>
-                <p><strong>Date de visite : </strong> <?php echo  $vet_reports[0]['date_report']?></p>
-                <p><strong>Commentaire général : </strong> <?php echo  $vet_reports[0]['comment']?> </p>
+                <p class="first"><strong>Vétérinaire : </strong>Dr <?php echo  $vet_reports[$id]['vet_name']?> <?php echo  $vet_reports[$id]['vet_forename']?></p>
+                <p><strong>Date de visite : </strong> <?php echo  $vet_reports[$id]['date_report']?></p>
+                <p><strong>Commentaire général : </strong> <?php echo  $vet_reports[$id]['comment']?> </p>
             </div>
             <div class="group">
                 <h3>Nourriture</h3>
-                <p class="first"><strong>Date : </strong> <?php echo  $vet_reports[0]['date_food']?></p>
-                <p><strong>Type : </strong><?php echo  $vet_reports[0]['food']?></p>
-                <p><strong>Quantité en gr : </strong><?php echo  $vet_reports[0]['quantity']?>gr</p>
-                <p><strong>Soigneur : </strong> <?php echo  $vet_reports[0]['emp_forename']?> <?php echo  $vet_reports[0]['emp_name']?> </p>
+                <p class="first"><strong>Date : </strong> <?php echo  $vet_reports[$id]['date_food']?></p>
+                <p><strong>Type : </strong><?php echo  $vet_reports[$id]['food']?></p>
+                <p><strong>Quantité en gr : </strong><?php echo  $vet_reports[$id]['quantity']?>gr</p>
+                <p><strong>Soigneur : </strong> <?php echo  $vet_reports[$id]['emp_forename']?> <?php echo  $vet_reports[$id]['emp_name']?> </p>
             </div>
             <div class="group">
                 <h3>Habitat</h3>
-                <p class="first"><strong>Type : </strong><?php echo  $vet_reports[0]['biome_name']?></p>
-                <p><strong>Commentaire : </strong><?php echo  $vet_reports[0]['biome_comment']?></p>
+                <p class="first"><strong>Type : </strong><?php echo  $vet_reports[$id]['biome_name']?></p>
+                <p><strong>Commentaire : </strong><?php echo  $vet_reports[$id]['biome_comment']?></p>
                 <p class="stars"><strong>Etat : </strong> 
                     <span>
                         <?php
                         for ($i = 1; $i <= 5; $i++) {
-                            if ($i <= $vet_reports[0]['biome_score']) {
+                            if ($i <= $vet_reports[$id]['biome_score']) {
                                 echo '<span class="star selected">★</span>';
                             } else {
                                 echo '<span class="star">★</span>';
