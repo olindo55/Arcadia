@@ -50,15 +50,17 @@ unset($_SESSION['selected_id']);
 ?>
 
     <!-- title -->
-    <h1>Gestion des rapports vétérinaires</h1>
+    <h1>Rapports vétérinaires</h1>
     <div class="contents">
         <!-- reporting -->
         <div class="report container-fluid col-12 col-md-6">   
             <div class="search">
                     <!-- add button -->
-                <div class="myButtonAdd container-fluid">
-                    <i class="bi bi-clipboard-plus"></i>
-                </div>
+                <?php if ($_SESSION['role'] == 'vétérinaire') { ?>
+                    <div class="myButtonAdd container-fluid">
+                        <i class="bi bi-clipboard-plus"></i>
+                    </div>
+                <?php } ?>
                 <!-- search -->
                 <div class="searchBy container-fluid col-12 col-md-6">
                     <label for="searchByAnimal" class="form-label">Animal</label>
@@ -156,69 +158,68 @@ unset($_SESSION['selected_id']);
         </div>
     </div>
 
-    
-    <!-- Modal add report -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Nouveau Rapport</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-                <div class="container-fluid" id="modal-form">
-                    <form method="post" action="" id="admForm" class="container-fluid col-12" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="animal" class="form-label">Animal</label>
-                            <div class="d-flex align-items-center">
-                                <select class="form-select" id="animal-select" name="biome">
-                                    <?php foreach ($animals as $animal) {
-                                            echo '<option value="' . $animal['animal_id'] . '" data-bio="' . $animal['biome_name'] . '">' . $animal['animal_name'] . '</option>';
-                                        } 
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="new-report-animal" class="form-label">Commentaires</label>
-                            <textarea name="new-report" class="form-control" id="new-report-animal" name="new-report-animal" rows="4" cols="50" placeholder="Écrivez votre texte ici..." required>
-                            </textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="health-score" class="form-label">Note sur 5</label>
-                            <div class="d-flex align-items-center">
-                                <select class="form-select" name="health-score">
-                                    <?php for($j = 1; $j <=5; $j++) {
-                                            echo '<option value="' . $j . '">' . $j . '</option>';
-                                        } 
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <hr>
-                        <h5 id="biome-by-animal">Sélectionnez un animal pour voir son habitat</h5>
-                        <div class="mb-3">
-                            <label for="new-report-biome" class="form-label">Commentaires</label>
-                            <textarea name="new-report" class="form-control" id="new-report-biome" name="new-report-biome" rows="4" cols="50" placeholder="Écrivez votre texte ici..." required>
-                            </textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="biome-score" class="form-label">Note sur 5</label>
-                            <div class="d-flex align-items-center">
-                                <select class="form-select" name="biome-score">
-                                    <?php for($j = 1; $j <=5; $j++) {
-                                            echo '<option value="' . $j . '">' . $j . '</option>';
-                                        } 
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-
-
-                        <button type="submit" id="addBiomeButton" class="btn btn-primary">Ajouter</button>
-                    </form>
+    <?php if ($_SESSION['role'] == 'vétérinaire') { ?>
+        <!-- Modal add report -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nouveau Rapport</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body">
+
+                    <div class="container-fluid" id="modal-form">
+                        <form method="post" action="" id="admForm" class="container-fluid col-12" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="animal" class="form-label">Animal</label>
+                                <div class="d-flex align-items-center">
+                                    <select class="form-select" id="animal-select" name="biome">
+                                        <?php foreach ($animals as $animal) {
+                                                echo '<option value="' . $animal['animal_id'] . '" data-bio="' . $animal['biome_name'] . '">' . $animal['animal_name'] . '</option>';
+                                            } 
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-report-animal" class="form-label">Commentaires</label>
+                                <textarea name="new-report" class="form-control" id="new-report-animal" name="new-report-animal" rows="4" placeholder="Écrivez votre texte ici..." required>
+                                </textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="health-score" class="form-label">Note sur 5</label>
+                                <div class="d-flex align-items-center">
+                                    <select class="form-select" name="health-score">
+                                        <?php for($j = 1; $j <=5; $j++) {
+                                                echo '<option value="' . $j . '">' . $j . '</option>';
+                                            } 
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
+                            <h5 id="biome-by-animal">Sélectionnez un animal pour voir son habitat</h5>
+                            <div class="mb-3">
+                                <label for="new-report-biome" class="form-label">Commentaires</label>
+                                <textarea name="new-report" class="form-control" id="new-report-biome" name="new-report-biome" rows="4" cols="50" placeholder="Écrivez votre texte ici..." required>
+                                </textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="biome-score" class="form-label">Note sur 5</label>
+                                <div class="d-flex align-items-center">
+                                    <select class="form-select" name="biome-score">
+                                        <?php for($j = 1; $j <=5; $j++) {
+                                                echo '<option value="' . $j . '">' . $j . '</option>';
+                                            } 
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" id="addReportButton" class="btn btn-primary">Ajouter</button>
+                        </form>
+                    </div>
+            </div>
         </div>
-    </div>
+    <?php } ?>
 </div>

@@ -90,6 +90,47 @@ document.querySelectorAll('.bi-eye').forEach(icon => {
 document.querySelector('.myButtonAdd').addEventListener('click', function() {
     const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
     modal.show();
+
+    // POST
+    document.getElementById('addReportButton').addEventListener('click', function(event){
+        event.preventDefault();
+        spinnerContainer.classList.remove('d-none');
+
+        const form = document.getElementById('admForm');
+        const formData = new FormData(form);
+
+        fetch('/admVet/post', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                const toast = new MyToast('Page non disponible', 'danger');
+                toast.show();
+            } else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            if (data.success) {
+                addLine(data.data);
+                const toast = new MyToast(data.message, 'success');
+                toast.show();
+                modal.hide();
+            } 
+            else {
+                const toast = new MyToast(data.message, 'danger');
+                toast.show();
+            }
+        })
+        .catch(error => {
+            const toast = new MyToast(`Erreur lors de  l'ajout du rapport: ${error.message}`, 'danger');
+            toast.show();
+        })
+        .finally(() => {
+            spinnerContainer.classList.add('d-none');
+        });
+    });
 });
 
 const animalSelect = document.getElementById('animal-select');
@@ -102,45 +143,7 @@ animalSelect.addEventListener('change', function () {
 });
 
 
-// // POST
-// document.getElementById('addBreedButton').addEventListener('click', function(event){
-//     event.preventDefault();
-//     spinnerContainer.classList.remove('d-none');
 
-//     const form = document.getElementById('admForm');
-//     const formData = new FormData(form);
-
-//     fetch('/admBreeds/post', {
-//         method: 'POST',
-//         body: formData
-//     })
-//     .then(response => {
-//         if (!response.ok) {
-//             const toast = new MyToast('Page non disponible', 'danger');
-//             toast.show();
-//         } else {
-//             return response.json();
-//         }
-//     })
-//     .then(data => {
-//         if (data.success) {
-//             addLine(data.data);
-//             const toast = new MyToast(data.message, 'success');
-//             toast.show();
-//         } 
-//         else {
-//             const toast = new MyToast(data.message, 'danger');
-//             toast.show();
-//         }
-//     })
-//     .catch(error => {
-//         const toast = new MyToast(`Erreur lors de  l'ajout de l'animal: ${error.message}`, 'danger');
-//         toast.show();
-//     })
-//     .finally(() => {
-//         spinnerContainer.classList.add('d-none');
-//     });
-// });
 
 // table.addEventListener('click', function(event) {
 

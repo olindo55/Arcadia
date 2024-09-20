@@ -16,39 +16,39 @@ class AdmVet
         }
     }
 
-    // public function post(array $data)
-    // {   
-    //     header('Content-Type: application/json');
-    //     if (isset($data['name']) && isset($data['diet'])) 
-    //         {                
-    //             $query = DbUtils::getPdo()->prepare('INSERT INTO breed (name, diet) VALUES (:name, :diet)');
-    //             $query->bindValue('name', DbUtils::protectDbData($data['name']));
-    //             $query->bindValue('diet', DbUtils::protectDbData($data['diet']));
+    public function post(array $data)
+    {   
+        header('Content-Type: application/json');
+        if (isset($data['name']) && isset($data['diet'])) 
+            {                
+                $query = DbUtils::getPdo()->prepare('INSERT INTO breed (name, diet) VALUES (:name, :diet)');
+                $query->bindValue('name', DbUtils::protectDbData($data['name']));
+                $query->bindValue('diet', DbUtils::protectDbData($data['diet']));
                 
-    //             if($query->execute()){
-    //                 $data['id'] = DbUtils::getPdo()->lastInsertId();
-    //                 echo json_encode([
-    //                     'success' => true,
-    //                     'message' => 'La race a été créée avec success.',
-    //                     'data' => $data,
-    //                 ]);
-    //                 exit();
-    //             }else{
-    //                 echo json_encode([
-    //                     'success' => false,
-    //                     'message' => 'Une erreur est survenue lors de l\'enregistrement.',
-    //                     'data' => $data
-    //                 ]);
-    //                 exit();
-    //             }  
-    //         } else {
-    //             echo json_encode([
-    //                 'success' => false,
-    //                 'message' => 'Champs vide. Insertion impossible !'
-    //             ]);
-    //             exit();
-    //         }
-    // }
+                if($query->execute()){
+                    $data['id'] = DbUtils::getPdo()->lastInsertId();
+                    echo json_encode([
+                        'success' => true,
+                        'message' => 'La race a été créée avec success.',
+                        'data' => $data,
+                    ]);
+                    exit();
+                }else{
+                    echo json_encode([
+                        'success' => false,
+                        'message' => 'Une erreur est survenue lors de l\'enregistrement.',
+                        'data' => $data
+                    ]);
+                    exit();
+                }  
+            } else {
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Champs vide. Insertion impossible !'
+                ]);
+                exit();
+            }
+    }
 
     // public function put()
     // {
