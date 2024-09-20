@@ -32,12 +32,12 @@ class AdmOpening
                         closure = :closure
                         WHERE id = :id");
            
-            $id = 1; // Exemple d'ID
-            $opening_hour = 9;
-            $opening_minute = 0;
-            $closing_hour = 17;
-            $closing_minute = 30;
-            $closure = true;
+            // $id = 1; // Exemple d'ID
+            // $opening_hour = 9;
+            // $opening_minute = 0;
+            // $closing_hour = 17;
+            // $closing_minute = 30;
+            // $closure = true;
 
             foreach ($request as $id) {     
                 if (isset($id) && $id !== null){                         
