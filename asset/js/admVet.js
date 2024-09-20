@@ -87,6 +87,11 @@ document.querySelectorAll('.bi-eye').forEach(icon => {
     });
 });
 
+document.querySelector('.myButtonAdd').addEventListener('click', function() {
+    const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+    modal.show();
+});
+
 const animalSelect = document.getElementById('animal-select');
 const biomeDisplay = document.getElementById('biome-by-animal');
 
