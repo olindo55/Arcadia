@@ -110,6 +110,11 @@ table.addEventListener('click', function(event) {
         // Clic on confirm button (modal)
         document.getElementById('confirmButton').onclick = function() {
             spinnerContainer.classList.remove('d-none');
+            
+            // let published = 0
+            // if (checkbox.checked) {
+            //     published = 1
+            // }
 
             const data = {
                 id: commentId,
