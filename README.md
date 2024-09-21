@@ -2,7 +2,7 @@
 Cette application web a été créée dans le cadre de l'ECF (Evaluation en Cours de Formation) organisé par le centre de formation [STUDI](https://www.studi.com/fr).
 Elle a pour but de préparer à l’examen pour l’obtention du Titre Professionnel Développeur Web et Web Mobile ([RNCP 37674](https://www.francecompetences.fr/recherche/rncp/37674/)).
 
-Retrouvez la version [en ligne](www.google.com)
+Retrouvez la version [en ligne](http://193.108.55.172)
 
 ## Le sujet
 Arcadia, un zoo situé près de la forêt de Brocéliande en Bretagne, souhaite développer une application web pour améliorer l'expérience des visiteurs et promouvoir son engagement écologique. Dirigé par José, fier de l'indépendance énergétique du zoo, l'objectif est de créer une plateforme reflétant ces valeurs. Le zoo est organisé en habitats (savane, jungle, marais) avec des animaux répartis par environnement. Les vétérinaires effectuent des contrôles réguliers sur la santé des animaux, et ces informations doivent être accessibles via l'application ainsi que l'administration du site web et des informations relatives à la nourritures données aux animaux.
