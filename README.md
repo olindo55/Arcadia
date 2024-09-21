@@ -63,3 +63,4 @@ Votre machine doit avoir ces logiciels installés :
 8. Une fois le build executé (ca peux prendre plusieurs minutes),  accedez à l'application via votre navigateur à l'adresse : `http://localhost:8000`. Bien entendu, changez le port par celui que vous avez choisi dans `SERVER_PORT` du le fichier `.env` 
 9. Vous pouvez accéder aussi à PhpMyAdmin : `http://localhost:8899` (ou selon le port si vous avez changer la variable d'environement `PMA_PORT`)
 
+## Enjoy !
