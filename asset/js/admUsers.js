@@ -174,7 +174,7 @@ document.getElementById('addUserButton').addEventListener('click', function(even
     event.preventDefault();
     spinnerContainer.classList.remove('d-none');
 
-    const form = document.getElementById('userForm');
+    const form = document.getElementById('admForm');
     const formData = new FormData(form);
 
     fetch('/admUsers/post', {
@@ -249,6 +249,6 @@ function addLine(data) {
 
     actionsCell.className = 'icon-cell';
     actionsCell.innerHTML = `
-        <i class="bi bi-trash"></i>
+        <i class="bi bi-trash" data-id="${data.id}"></i>
     `;
 }

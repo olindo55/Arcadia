@@ -26,7 +26,7 @@ document.getElementById('addBiomeButton').addEventListener('click', function(eve
     event.preventDefault();
     spinnerContainer.classList.remove('d-none');
 
-    const form = document.getElementById('biomeForm');
+    const form = document.getElementById('admForm');
     const formData = new FormData(form);
 
     fetch('/admBiomes/post', {

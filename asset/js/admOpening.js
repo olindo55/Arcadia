@@ -54,9 +54,9 @@ document.getElementById('openingButton').addEventListener('click', function(even
                 const closingHour = row.querySelector(`select[name="closing_hour_${rowId}"]`).value;
                 const closingMinute = row.querySelector(`select[name="closing_minute_${rowId}"]`).value;
                 const radio = row.querySelector(`input[name="opening_${rowId}"][value="closed"]`);
-                let closureStatus = false
+                let closureStatus = 0
                 if (radio.checked) {
-                    closureStatus = true
+                    closureStatus = 1
                 }
 
                 data[rowId] = {
