@@ -6,17 +6,6 @@ use PDO;
 
 class DbUtils
 {
-    // const DSN = 'mysql:host=localhost;dbname=olindo55_arcadia;port=3306';
-    // const USER = 'root';
-    // const PASSWORD = '';
-    // const DSN = 'mysql:host=mysql-olindo55.alwaysdata.net;dbname=olindo55_arcadia;port=3306';
-    // const USER = 'olindo55_zoo_adm';
-    // const PASSWORD = 'Z00_@dmin';
-    const DSN = 'mysql:host=mysql;dbname=olindo55_arcadia;port=3306';
-    const USER = 'olindo55_zoo_adm';
-    const PASSWORD = 'Z00_@dmin';
-
-    // définition de notre variable qui stockera notre PDO
     static ?PDO $pdo = null;
 
     public static function getPdo(): PDO    
@@ -25,8 +14,7 @@ class DbUtils
         if (self::$pdo !== null) {
             return self::$pdo;
         }
-        // self::$pdo = new \PDO(self::getDSN(), self::getUser(), self::getPassword());
-        self::$pdo = new \PDO('mysql:host=localhost;dbname=olindo55_arcadia;port=3306', 'root', '');
+        self::$pdo = new \PDO(self::getDSN(), self::getUser(), self::getPassword());
 
         return self::$pdo;
     }

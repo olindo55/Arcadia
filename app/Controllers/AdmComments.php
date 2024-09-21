@@ -23,11 +23,12 @@ class AdmComments
         
         if (isset($request['id'], $request['published'])) {
             $id = $request['id'];
-            $published = $request['published'];
+            // $published = $request['published'];
+            $published = isset($request['published']) ? 1 : 0;
             
             $query = DbUtils::getPdo()->prepare("UPDATE comment SET published = :published, user_id = :user_id WHERE id = :id");
             $query->bindValue('id', DbUtils::protectDbData($request['id']));
-            $query->bindValue('published', DbUtils::protectDbData($request['published']));
+            $query->bindValue('published', DbUtils::protectDbData($published));
             $query->bindValue('user_id', DbUtils::protectDbData($_SESSION['user_id']));
             $query->execute();
 

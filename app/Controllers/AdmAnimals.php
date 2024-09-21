@@ -26,9 +26,29 @@ class AdmAnimals
             isset($data['alt'])) 
             {
                 $uploadDir = 'asset/images/animals/'; 
-                $uploadFile = $uploadDir . basename($files['upload']['name']);
-                
-                $imageFileType = strtolower(pathinfo($uploadFile, PATHINFO_EXTENSION));
+                $fileExtension = strtolower(pathinfo($files['upload']['name'], PATHINFO_EXTENSION));
+                $newFileName = uniqid() . '.' . $fileExtension;
+                $uploadFile = $uploadDir . $newFileName;
+
+                $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+                $maxFileSize = 5 * 1024 * 1024; // 5 MB
+
+                if (!in_array($fileExtension, $allowedTypes)) {
+                    echo json_encode([
+                        'success' => false,
+                        'message' => 'Type de fichier non autorisé. Utilisez JPG, JPEG, PNG ou GIF.'
+                    ]);
+                    exit();
+                }
+
+                if ($files['upload']['size'] > $maxFileSize) {
+                    echo json_encode([
+                        'success' => false,
+                        'message' => 'Le fichier est trop volumineux. Taille maximale : 5 MB.'
+                    ]);
+                    exit();
+                }
+
                 $check = getimagesize($files['upload']['tmp_name']);
                 
                 if($check) {

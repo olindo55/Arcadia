@@ -43,20 +43,23 @@ Votre machine doit avoir ces logiciels installés :
    ```Plain Text
    # MySQL
     MYSQL_ROOT_PASSWORD=<motDePasseRoot> # Mot de passe pour l'utilisateur root
-    MYSQL_DATABASE=<nomDataBase> # Nom de la Database
+    MYSQL_DATABASE=olindo55_arcadia # Nom de la Database
     MYSQL_USER=<nomUser> # Nom de l'utilisateur
     MYSQL_PASSWORD=<motDePasseUser> # Mot de passe de l'utilisateur
-    MYSQL_PORT=3307 # Port pour MySQL
+    MYSQL_PORT=3306 # Port pour MySQL
     INIT_SQL_FILE=arcadia.sql # Pour initialisation de la base de données
 
     # PhpMyAdmin
-    PMA_PORT=8899 # Port d'accès à PhpMyAdmin
+    PMA_PORT=8898 # Port d'accès à PhpMyAdmin
 
     # Application
     SERVER_PORT=8000 # Port d'accès à l'application
-6. De retour sur le terminal, lancer cette commande :
+6. Pour les possesseur de Mac et Linux, tapez cette commande :
+   ```shell
+   chmod +x init-scripts/init.sh
+7. De retour sur le terminal, lancer cette commande :
    ```shell
    docker-compose up --build
-7. Une fois le build executé (ca peux prendre plusieurs minutes),  accedez à l'application via votre navigateur à l'adresse : `http://localhost:8000`. Bien entendu, changez le port par celui que vous avez choisi dans `SERVER_PORT` du le fichier `.env` 
-8. Vous pouvez accéder aussi à PhpMyAdmin : `http://localhost:8899` (ou selon le port si vous avez changer la variable d'environement `PMA_PORT`)
+8. Une fois le build executé (ca peux prendre plusieurs minutes),  accedez à l'application via votre navigateur à l'adresse : `http://localhost:8000`. Bien entendu, changez le port par celui que vous avez choisi dans `SERVER_PORT` du le fichier `.env` 
+9. Vous pouvez accéder aussi à PhpMyAdmin : `http://localhost:8899` (ou selon le port si vous avez changer la variable d'environement `PMA_PORT`)
 
