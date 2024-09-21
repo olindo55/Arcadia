@@ -98,9 +98,10 @@ table.addEventListener('click', function(event) {
    
     // UPDATE
     else if (event.target.classList.contains('form-check-input')) {
+        const checkbox = event.target;
         const row = event.target.closest('tr');
         const commentId = row.querySelector('.bi-trash').getAttribute('data-id');
-        const published = event.target.checked;
+        const published = checkbox.checked;
         const initialPublishedState = !published;
 
         // Modal show
@@ -110,11 +111,6 @@ table.addEventListener('click', function(event) {
         // Clic on confirm button (modal)
         document.getElementById('confirmButton').onclick = function() {
             spinnerContainer.classList.remove('d-none');
-            
-            // let published = 0
-            // if (checkbox.checked) {
-            //     published = 1
-            // }
 
             const data = {
                 id: commentId,

@@ -36,7 +36,7 @@ use App\Database\DbUtils;
 
                         echo '<td>';
                         echo '<div class="form-check form-switch">';
-                        echo '<input class="form-check-input" type="checkbox" name="published" value="1" ' . ($comment['published'] ? 'checked' : '') . '>';
+                        echo '<input class="form-check-input" id="checkbox" type="checkbox" name="published" value="1" ' . ($comment['published'] ? 'checked' : '') . '>';
                         // echo '<input class="form-check-input" type="checkbox" ' . ($comment['published'] ? 'checked' : '') . '>';
                         echo '</div>';
                         echo '</td>';
