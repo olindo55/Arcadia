@@ -53,7 +53,18 @@ class AdmAnimals
                 
                 if($check) {
                     if (move_uploaded_file($files['upload']['tmp_name'], $uploadFile)) 
-                    {
+                    {   
+                        $queryBreed = DbUtils::getPdo()->prepare('SELECT name FROM breed WHERE id = :breed_id');
+                        $queryBreed->bindValue('breed_id', DbUtils::protectDbData($data['breed']));
+                        $queryBreed->execute();
+                        $breedResult = $queryBreed->fetch(\PDO::FETCH_ASSOC);
+
+                        $queryBiome = DbUtils::getPdo()->prepare('SELECT name FROM biome WHERE id = :biome_id');
+                        $queryBiome->bindValue('biome_id', DbUtils::protectDbData($data['biome']));
+                        $queryBiome->execute();
+                        $biomeResult = $queryBiome->fetch(\PDO::FETCH_ASSOC);
+
+
                         $query = DbUtils::getPdo()->prepare('INSERT INTO animal
                             (name, breed_id, biome_id, image_url, image_alt)
                             VALUES (
@@ -73,6 +84,8 @@ class AdmAnimals
                         
                         if($query->execute()){
                             $data['id'] = DbUtils::getPdo()->lastInsertId();
+                            $data['breed_name'] = $breedResult['name'];
+                            $data['biome_name'] = $biomeResult['name'];
                             echo json_encode([
                                 'success' => true,
                                 'message' => 'L\'animal a été enregistré avec success.',

@@ -26,12 +26,6 @@ class AdmBiomes
             isset($data['alt'])) 
             {
                 $uploadDir = 'asset/images/biome/'; 
-                // $uploadFile = $uploadDir . basename($files['upload']['name']);
-                // $uploadFileHD = $uploadDir .'high-resolution/'. basename($files['upload_hd']['name']);
-                
-                // $imageFileType = strtolower(pathinfo($uploadFile, PATHINFO_EXTENSION));
-                // $check = getimagesize($files['upload']['tmp_name']);
-                // $checkHD = getimagesize($files['upload_hd']['tmp_name']);
 
                 // Low resolution
                 $fileExtension = strtolower(pathinfo($files['upload']['name'], PATHINFO_EXTENSION));

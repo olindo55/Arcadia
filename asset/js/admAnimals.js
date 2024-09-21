@@ -315,15 +315,15 @@ function addLine(data) {
     const newRow = table.insertRow();
 
     const nameCell = newRow.insertCell(0);
-    const breedCell = newRow.insertCell(1);
-    const biomeCell = newRow.insertCell(2);
+    const breedNameCell = newRow.insertCell(1);
+    const biomeNameCell = newRow.insertCell(2);
     const imageUrlCell = newRow.insertCell(3);
     const altCell = newRow.insertCell(4);
     const actionsCell = newRow.insertCell(5);
 
     nameCell.textContent = data.name;
-    breedCell.textContent = data.breed;
-    biomeCell.textContent = data.biome;
+    breedNameCell.textContent = data.breed_name;
+    biomeNameCell.textContent = data.biome_name;
     imageUrlCell.textContent = data.upload;
     altCell.textContent = data.alt;
 

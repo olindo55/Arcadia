@@ -1,4 +1,4 @@
-@import url("../../node_modules/bootstrap-icons/font/bootstrap-icons.css");
+// @import url("../../node_modules/bootstrap-icons/font/bootstrap-icons.css"); 
 @import 'custom';
 @import './css/404';
 @import './css/home';
@@ -13,14 +13,8 @@
 *{
     margin: 0;
     padding: 0;
-    // text-decoration: none;
     list-style-type: none;
 }
-
-// html{
-//     position: relative;
-//     min-height: 100%;
-// }
 
 body{
     height: 100%;
