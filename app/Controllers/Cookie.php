@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class Cookie 
+class Cookie
 {
     public function view()
     {

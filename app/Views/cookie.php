@@ -1,5 +1,3 @@
-<!-- <?php require_once 'app/config/config.php' ?> -->
-
     <div id="cookie">
         <h1>Politique de gestion des cookies</h1>
         <p><strong>Dernière mise à jour :</strong> 23/08/2024</p>
