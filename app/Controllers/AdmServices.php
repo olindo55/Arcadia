@@ -24,12 +24,36 @@ class AdmServices
             isset($_FILES['upload']) &&
             isset($data['alt'])) 
             {
-                $uploadDir = 'asset/images/services/'; 
-                $uploadFile = $uploadDir . basename($files['upload']['name']);
+                // $uploadDir = 'asset/images/services/'; 
+                // $fileExtension = strtolower(pathinfo($files['upload']['name'], PATHINFO_EXTENSION));
+                // $newFileName = uniqid() . '.' . $fileExtension;
+                // $uploadFile = $uploadDir . $newFileName;
 
-                $imageFileType = strtolower(pathinfo($uploadFile, PATHINFO_EXTENSION));
+                // $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+                // $maxFileSize = 5 * 1024 * 1024;
+                // $uploadFile = $uploadDir . basename($files['upload']['name']);
+
+                // $imageFileType = strtolower(pathinfo($uploadFile, PATHINFO_EXTENSION));
+                // $check = getimagesize($files['upload']['tmp_name']);
+
+                $uploadDir = 'asset/images/services/';
+                $fileExtension = strtolower(pathinfo($files['upload']['name'], PATHINFO_EXTENSION));
+                $newFileName = uniqid() . '.' . $fileExtension;
+                $uploadFile = $uploadDir . $newFileName;
+
+                $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+                $maxFileSize = 5 * 1024 * 1024; // 5 MB
+
+                if (!in_array($fileExtension, $allowedTypes)) {
+                    echo json_encode([
+                        'success' => false,
+                        'message' => 'Type de fichier non autorisé. Utilisez JPG, JPEG, PNG ou GIF.'
+                    ]);
+                    exit();
+                }
+
                 $check = getimagesize($files['upload']['tmp_name']);
-
+                
                 if($check) {
                     if (move_uploaded_file($files['upload']['tmp_name'], $uploadFile)) {
 
