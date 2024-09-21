@@ -11,7 +11,7 @@
 /Docker
 
 # Ignorer node_modules :
-/node_modules
+# /node_modules
 # /vendor/
 /mysql-data/
 # /init-scripts/
