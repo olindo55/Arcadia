@@ -15,3 +15,4 @@
 # /vendor/
 /mysql-data/
 # /init-scripts/
+/Documentation/source
