@@ -16,7 +16,6 @@ test2.php
 # /node_modules
 # /vendor/
 /mysql-data/
+/mongo-data/
 # /init-scripts/
 /Documentation/source
-/app/Database/
-/mongo-data/

@@ -233,20 +233,20 @@
         },
         {
             "name": "heroku/heroku-buildpack-php",
-            "version": "v256",
-            "version_normalized": "256.0.0.0",
+            "version": "v258",
+            "version_normalized": "258.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "6788b8c5f24a59fdda18c4923ef04be68a8f44c8"
+                "reference": "db3b49debbfbb6e0b19b0456abcdaf750b842023"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/6788b8c5f24a59fdda18c4923ef04be68a8f44c8",
-                "reference": "6788b8c5f24a59fdda18c4923ef04be68a8f44c8",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/db3b49debbfbb6e0b19b0456abcdaf750b842023",
+                "reference": "db3b49debbfbb6e0b19b0456abcdaf750b842023",
                 "shasum": ""
             },
-            "time": "2024-08-30T22:25:19+00:00",
+            "time": "2024-10-31T14:44:09+00:00",
             "bin": [
                 "bin/heroku-php-apache2",
                 "bin/heroku-php-nginx"
@@ -275,14 +275,14 @@
             ],
             "support": {
                 "issues": "https://github.com/heroku/heroku-buildpack-php/issues",
-                "source": "https://github.com/heroku/heroku-buildpack-php/tree/v256"
+                "source": "https://github.com/heroku/heroku-buildpack-php/tree/v258"
             },
             "install-path": "../heroku/heroku-buildpack-php"
         },
         {
             "name": "illuminate/collections",
-            "version": "v10.48.22",
-            "version_normalized": "10.48.22.0",
+            "version": "v10.48.23",
+            "version_normalized": "10.48.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -339,8 +339,8 @@
         },
         {
             "name": "illuminate/conditionable",
-            "version": "v10.48.22",
-            "version_normalized": "10.48.22.0",
+            "version": "v10.48.23",
+            "version_normalized": "10.48.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/conditionable.git",
@@ -388,8 +388,8 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v10.48.22",
-            "version_normalized": "10.48.22.0",
+            "version": "v10.48.23",
+            "version_normalized": "10.48.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
@@ -442,8 +442,8 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v10.48.22",
-            "version_normalized": "10.48.22.0",
+            "version": "v10.48.23",
+            "version_normalized": "10.48.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -493,8 +493,8 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v10.48.22",
-            "version_normalized": "10.48.22.0",
+            "version": "v10.48.23",
+            "version_normalized": "10.48.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -542,8 +542,8 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v10.48.22",
-            "version_normalized": "10.48.22.0",
+            "version": "v10.48.23",
+            "version_normalized": "10.48.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
@@ -1494,17 +1494,17 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v6.4.10",
-            "version_normalized": "6.4.10.0",
+            "version": "v6.4.13",
+            "version_normalized": "6.4.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "94041203f8ac200ae9e7c6a18fa6137814ccecc9"
+                "reference": "bee9bfabfa8b4045a66bf82520e492cddbaffa66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/94041203f8ac200ae9e7c6a18fa6137814ccecc9",
-                "reference": "94041203f8ac200ae9e7c6a18fa6137814ccecc9",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/bee9bfabfa8b4045a66bf82520e492cddbaffa66",
+                "reference": "bee9bfabfa8b4045a66bf82520e492cddbaffa66",
                 "shasum": ""
             },
             "require": {
@@ -1541,7 +1541,7 @@
                 "symfony/service-contracts": "^2.5|^3",
                 "symfony/yaml": "^5.4|^6.0|^7.0"
             },
-            "time": "2024-07-26T12:30:32+00:00",
+            "time": "2024-09-27T18:14:25+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1572,7 +1572,7 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/translation/tree/v6.4.10"
+                "source": "https://github.com/symfony/translation/tree/v6.4.13"
             },
             "funding": [
                 {

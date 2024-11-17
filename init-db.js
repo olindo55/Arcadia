@@ -1,57 +1,35 @@
-// Récupération des variables d'environnement
-let env = {
-  username: _getEnv('MONGO_INITDB_ROOT_USERNAME'),
-  password: _getEnv('MONGO_INITDB_ROOT_PASSWORD'),
-  database: _getEnv('MONGO_INITDB_DATABASE')
-};
-
-// Connexion initiale à admin
-db = db.getSiblingDB('admin');
-
 try {
-  db.auth(env.username, env.password);
-  
-  // Création et utilisation de la base de données spécifiée
-  db = db.getSiblingDB(env.database);
-  
-  // Création de la collection click 
-  if (!db.getCollectionNames().includes('click')) {
-    db.createCollection('click');
-  }
-  
-  // Chargement des données depuis le fichier JSON
-  let jsonContent;
-  try {
-    jsonContent = cat('/docker-entrypoint-initdb.d/arcadiaMongo.json');
-  } catch (e) {
-    throw e;
-  }
-  
+  // db = db.getSiblingDB('admin');
+  let jsonContent = fs.readFileSync('/docker-entrypoint-initdb.d/arcadiaMongo.json', 'utf8');
   let data = JSON.parse(jsonContent);
-  
-  if (data && data.length > 0) {
-    // Suppression des données existantes
-    db.click.deleteMany({});
-      
-    // Insertion des nouvelles données
-    db.click.insertMany(data);
 
-    // Création d'un utilisateur dédié pour cette base de données si nécessaire
-    db.createUser({
-      user: env.username,
-      pwd: env.password,
-      roles: [
-        {
-          role: "readWrite",
-          db: env.database
-        }
-      ]
-    });
-      
+  db = db.getSiblingDB('arcadia');
+  
+  // Création de la collection click si elle n'existe pas
+  if (!db.getCollectionNames().includes('click')) {
+      db.createCollection('click');
   } else {
-    throw new Error('Aucune donnée valide trouvée dans le fichier JSON');
   }
   
+  if (Array.isArray(data) && data.length > 0) {
+      // Suppression des données existantes
+      let deleteResult = db.click.deleteMany({});
+
+      // Insertion des nouvelles données
+      let insertResult = db.click.insertMany(data);
+
+      // Création d'index
+      db.click.createIndex({ "name": 1 }, { unique: true });
+
+      // Vérification finale
+      let count = db.click.countDocuments();
+
+  } else {
+      throw new Error('Aucune donnée valide trouvée dans le fichier JSON');
+  }
+
+
 } catch (error) {
+  printjson(error);
   throw error;
 }

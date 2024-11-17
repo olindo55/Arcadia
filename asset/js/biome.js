@@ -26,43 +26,62 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Gestionnaire de clics 
 document.addEventListener('click', function(e) {
+  const likeButton = e.target.closest('.like');
+  const thumbsUpIcon = e.target.matches('.like i.bi-hand-thumbs-up-fill');
 
-    if (e.target.matches('.carrousel-animal-card .like i.bi-hand-thumbs-up-fill') && 
-    !e.target.closest('.like').classList.contains('clicked')) {
-        e.preventDefault();
-        e.stopPropagation();
+  if (thumbsUpIcon && likeButton && !likeButton.classList.contains('clicked')) {
+      e.preventDefault();
+      e.stopPropagation();
 
-        const animalCard = e.target.closest('.carrousel-animal-card');
-        const titleElement = animalCard.querySelector('h2');
-        const animalName = titleElement.textContent.trim();
 
-        fetch(`/biome/addClick`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({name: animalName})
-        })
-        .then(response => {
-          const likeElement = e.target.closest('.like');
-          if (likeElement) {
-              likeElement.classList.add('clicked');
-          }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Données reçues:', data);
-            if (data.error) {
-                console.error('Erreur:', data.error);
-            } else {
-                e.target.classList.add('clicked');
-                setTimeout(() => {
-                    e.target.classList.remove('clicked');
-                }, 500);
-            }
-        })
-        .catch(error => {
-            console.error('Erreur:', error);
-        });
-    }
+      const carouselCard = e.target.closest('.carrousel-animal-card');
+      const accordionItem = e.target.closest('.accordion-item');
+      
+      let animalName;
+      if (carouselCard) {
+          // For carousel
+          animalName = carouselCard.querySelector('h2').textContent.trim();
+      } else if (accordionItem) {
+          // For accordion
+          animalName = accordionItem.querySelector('.accordion-button').textContent.trim();
+      }
+
+      if (animalName) {
+          fetch(`/biome/addClick`, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({name: animalName})
+          })
+          .then(response => {
+              document.querySelectorAll('.like').forEach(like => {
+                  const cardName = like.closest('.carrousel-animal-card')?.querySelector('h2')?.textContent.trim() ||
+                                 like.closest('.accordion-item')?.querySelector('.accordion-button')?.textContent.trim();
+                  
+                  if (cardName === animalName) {
+                      like.classList.add('clicked');
+                      const icon = like.querySelector('i.bi-hand-thumbs-up-fill');
+                      if (icon) {
+                          icon.classList.add('clicked');
+                          setTimeout(() => {
+                              icon.classList.remove('clicked');
+                          }, 500);
+                      }
+                  }
+              });
+              
+              return response.json();
+          })
+          .then(data => {
+              console.log('Données reçues:', data);
+              if (data.error) {
+                  console.error('Erreur:', data.error);
+              }
+          })
+          .catch(error => {
+              console.error('Erreur:', error);
+          });
+      }
+  }
 });

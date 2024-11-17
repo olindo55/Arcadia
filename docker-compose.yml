@@ -60,7 +60,7 @@ services:
       - app-network
 
   mongo:
-    image: mongo:5.0
+    image: mongo:latest
     container_name: mongo
     ports:
       - ${MONGO_PORT}:27017
@@ -69,7 +69,6 @@ services:
       - ./init-db.js:/docker-entrypoint-initdb.d/init-db.js:ro
       - ./arcadiaMongo.json:/docker-entrypoint-initdb.d/arcadiaMongo.json:ro
     environment:
-      # Correction des noms de variables
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
       MONGO_INITDB_DATABASE: ${MONGO_DATABASE}
@@ -77,7 +76,7 @@ services:
     networks:
       - app-network
     healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongosh mongodb://julienmartinati:arcadia123@localhost:27017/admin --quiet
+      test: echo 'db.runCommand("ping").ok' | mongosh mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/admin --quiet
       interval: 10s
       timeout: 5s
       retries: 3

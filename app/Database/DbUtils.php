@@ -15,7 +15,6 @@ class DbUtils
             return self::$pdo;
         }
         self::$pdo = new \PDO(self::getDSN(), self::getUser(), self::getPassword());
-        // self::$pdo = new \PDO("mysql:host=127.0.0.1;dbname=olindo55_arcadia;port=3306", 'root', '');
         return self::$pdo;
     }
 
