@@ -3,7 +3,7 @@
         'name' => 'julien.martinati/arcadia',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '9692663a0ffcfd2d03c4b423ba45e734a906b8c9',
+        'reference' => 'f02833ce7abf2fb9eff52cf1288cff526a70962a',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -103,7 +103,7 @@
         'julien.martinati/arcadia' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '9692663a0ffcfd2d03c4b423ba45e734a906b8c9',
+            'reference' => 'f02833ce7abf2fb9eff52cf1288cff526a70962a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

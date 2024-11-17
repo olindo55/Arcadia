@@ -3,6 +3,8 @@
 
 #Ignorer le fichier .env
 .env
+test.php
+test2.php
 
 # Ignorer ces dossiers :
 /Design
@@ -16,3 +18,5 @@
 /mysql-data/
 # /init-scripts/
 /Documentation/source
+/app/Database/
+/mongo-data/

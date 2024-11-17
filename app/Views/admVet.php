@@ -1,5 +1,10 @@
 <?php 
 use App\Database\DbUtils;
+use App\Database\Mongo;
+
+$mongo = new Mongo();
+$clickCount = null;
+
 $query = DbUtils::getPdo()->query('
     WITH latest_feeding AS (
         SELECT f1.animal_id, f1.date_feeding, f1.type_food, f1.quantity,f1.user_id
@@ -112,7 +117,7 @@ unset($_SESSION['selected_id']);
                 <div class="bloc-img-animal position-relative">
                     <img src=<?php echo  $vet_reports[$id]['img']?> alt=<?php echo  $vet_reports[$id]['alt']?>  class="img-animal">
                     <h4><span class="translate-middle badge rounded-pill bg-danger position-absolute top-0 start-100">
-                        103
+                        <?php $mongo->nbClick($vet_reports[$id]['animal_name']);?>
                     </span></h4>
                 </div>
                 <h2><?php echo  $vet_reports[$id]['animal_name']?></h2>
