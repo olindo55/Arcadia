@@ -15,7 +15,6 @@ class DbUtils
             return self::$pdo;
         }
         self::$pdo = new \PDO(self::getDSN(), self::getUser(), self::getPassword());
-
         return self::$pdo;
     }
 

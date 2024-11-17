@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 use App\Database\DbUtils;
+use App\Database\Mongo;
 
 class AdmAnimals
 {   
@@ -86,6 +87,12 @@ class AdmAnimals
                             $data['id'] = DbUtils::getPdo()->lastInsertId();
                             $data['breed_name'] = $breedResult['name'];
                             $data['biome_name'] = $biomeResult['name'];
+
+                            // add in Mongo
+                            $mongo = new Mongo();
+                            $mongo->addAnimal($data['name']);
+                            // 
+
                             echo json_encode([
                                 'success' => true,
                                 'message' => 'L\'animal a été enregistré avec success.',
@@ -123,6 +130,17 @@ class AdmAnimals
         $request = json_decode($requestJSON, true);
         
         if (isset($request['id'], $request['name'], $request['breed'], $request['biome'], $request['image_url'], $request['image_alt'])) {
+            
+            // get name for mongo
+            $nameQuery = DbUtils::getPdo()->prepare("SELECT name FROM animal WHERE id = :id");
+            $nameQuery ->bindValue(':id', $request['id'], \PDO::PARAM_INT);
+            $nameQuery->execute();
+            $nameResult = $nameQuery->fetch(\PDO::FETCH_ASSOC);
+
+            $mongo = new Mongo();
+            $mongo->updateAnimal($nameResult['name'], $request['name']);
+
+
             $query = DbUtils::getPdo()->prepare("UPDATE animal SET name = :name , breed_id = :breed, biome_id = :biome , image_url = :image_url, image_alt = :image_alt WHERE id = :id");
             
             $query->bindValue(':id', DbUtils::protectDbData($request['id']));
@@ -133,6 +151,7 @@ class AdmAnimals
             $query->bindValue(':image_alt', DbUtils::protectDbData($request['image_alt']));
     
             $query->execute();
+            
 
             echo json_encode([
                 'success' => true,
@@ -160,12 +179,25 @@ class AdmAnimals
             }
             if ($image && !empty($image['image_url']) && file_exists(ltrim($image['image_url'], '/')))
             {
+                // get name for mongo
+                $nameQuery = DbUtils::getPdo()->prepare("SELECT name FROM animal WHERE id = :id");
+                $nameQuery ->bindValue(':id', $request['id'], \PDO::PARAM_INT);
+                $nameQuery->execute();
+                $nameResult = $nameQuery->fetch(\PDO::FETCH_ASSOC);
                 // delete
                 $query = DbUtils::getPdo()->prepare("DELETE FROM animal WHERE id = :id");
                 $query->bindValue(':id', $request['id'], \PDO::PARAM_INT);
         
                 if ($query->execute()) {
                     // delete images
+
+
+                    // add in Mongo
+
+                    $mongo = new Mongo();
+                    $mongo->deleteAnimal($nameResult['name']);
+                    // 
+                    
                     echo json_encode([
                         'success' => true,
                         'message' => 'Enregistrement de l\'animal supprimé avec succès.',
@@ -200,10 +232,4 @@ class AdmAnimals
             'data' => $data,
         ]);
     }
-    
-    public function test(){
-        // var_dump($image['image_url']);
-        // var_dump($image['image_url_hd']);
-    }
-
 }

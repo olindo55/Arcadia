@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   php:
     image: php:8.2-apache
@@ -14,8 +16,16 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_PORT=${MYSQL_PORT}
+      - MONGO_HOST=${MONGO_HOST}
+      - MONGO_PORT=${MONGO_PORT}
+      - MONGO_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
+      - MONGO_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+      - MONGO_DATABASE=${MONGO_DATABASE}
     depends_on:
       - mysql
+      - mongo
+    networks:
+      - app-network
   
   mysql:
     image: mysql:8.0
@@ -33,6 +43,8 @@ services:
       - ./mysql-data:/var/lib/mysql
       - ./init-scripts:/docker-entrypoint-initdb.d
       - ./arcadia.sql:/arcadia.sql
+    networks:
+      - app-network
 
   phpmyadmin:
     image: phpmyadmin:latest
@@ -44,3 +56,35 @@ services:
       PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
       - ${PMA_PORT}:80
+    networks:
+      - app-network
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - ${MONGO_PORT}:27017
+    volumes:
+      - ./mongo-data:/data/db
+      - ./init-db.js:/docker-entrypoint-initdb.d/init-db.js:ro
+      - ./arcadiaMongo.json:/docker-entrypoint-initdb.d/arcadiaMongo.json:ro
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE}
+    command: mongod --auth
+    networks:
+      - app-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/admin --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+    restart: always
+    depends_on:
+      - mysql
+
+networks:
+  app-network:
+    driver: bridge

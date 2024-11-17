@@ -79,6 +79,9 @@
                                 <p>Pas de rapport vétérinaire disponible.</p>
                             <?php } ?>
                             </li>
+                            <li class="like">
+                                <i class="bi bi-hand-thumbs-up-fill"></i>
+                            </li>
                         </ul>
                     </div>
                 </div>
