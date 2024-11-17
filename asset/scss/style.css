@@ -12502,6 +12502,22 @@ table .hidden {
   color: #ffffff;
 }
 
+.like.clicked i {
+  animation: pop 0.3s ease;
+  background-color: #808080;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 .accordion-biome-item .accordion-biome-card {
   cursor: pointer;
   position: relative;

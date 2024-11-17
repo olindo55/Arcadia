@@ -5,12 +5,13 @@
     text-align: center;
     text-shadow: 0px 4px 4px #00000025;
 }
-.like{
+.like {
     margin-top: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    i{
+    
+    i {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -19,7 +20,24 @@
         border-radius: 8px;
         background-color: rgb(0, 119, 255);
         font-size: 24px;
-        color:#ffffff;
+        color: #ffffff;
+    }
+}
+
+.like.clicked i { 
+    animation: pop 0.3s ease;
+    background-color: #808080;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
     }
 }
 

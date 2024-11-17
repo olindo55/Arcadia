@@ -16,7 +16,11 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_PORT=${MYSQL_PORT}
-      - MONGO_HOST=mongo
+      - MONGO_HOST=${MONGO_HOST}
+      - MONGO_PORT=${MONGO_PORT}
+      - MONGO_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
+      - MONGO_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+      - MONGO_DATABASE=${MONGO_DATABASE}
     depends_on:
       - mysql
       - mongo
