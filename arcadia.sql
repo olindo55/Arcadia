@@ -190,7 +190,7 @@ INSERT INTO role (role) VALUES
 ('vétérinaire');
 
 
--- table users
+-- table users (pwd : arcadia123)
 CREATE TABLE users(
    id INT AUTO_INCREMENT,
    name VARCHAR(50) NOT NULL,
